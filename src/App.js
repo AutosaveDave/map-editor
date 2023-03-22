@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Canvas } from "@react-three/fiber";
 
@@ -7,7 +6,7 @@ function App() {
     <>
       <section className='App-header'>
         <Canvas>
-          
+
         </Canvas>
       </section>
     </>
