@@ -8,7 +8,7 @@ function App() {
   
   return (
     <>
-      <section className='App-header'>
+      <section className='App-header' width='100vw' height='100vh'>
         <Canvas>
           
           <MapObjects />

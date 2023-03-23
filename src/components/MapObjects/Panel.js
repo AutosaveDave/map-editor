@@ -1,13 +1,12 @@
 // Component for floor and wall objects on map
 import React, { useRef } from "react";
 
-const Panel = ( {args} ) => {
+const Panel = ( {props} ) => {
     const [ x, y, z, 
             width, length, depth, 
             xRotation, yRotation, zRotation, 
-            rColor, gColor, bColor] = args;
+            rColor, gColor, bColor ] = props;
     const box = useRef();
-    console.log(rColor);
 
     return (
         <mesh ref={box} rotation={[xRotation, yRotation, zRotation]} position={[x,y,z]}>
