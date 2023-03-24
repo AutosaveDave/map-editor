@@ -12,8 +12,8 @@ function EditorGrid( { props } ) {
             for( let a = 0 ; a <= mapLength ; a += 1 ) {
                 lines.push(
                     [
-                        [value, a * tileSize, 0],
-                        [value, a * tileSize, mapHeight * tileSize]
+                        value, a * tileSize, 0,
+                        value, a * tileSize, mapHeight * tileSize
                     ]
                 )
             }

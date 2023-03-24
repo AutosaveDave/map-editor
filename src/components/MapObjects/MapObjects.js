@@ -50,7 +50,7 @@ function MapObjects() {
                 bottom={-frust/2}
                 near={1}
                 far={500}
-                position={[0, 0, 5]}
+                position={[-2, -2, 8]}
                 rotation-order='ZYX'
                 rotation-z={7*Math.PI/4}
                 rotation-x={Math.PI/4}
@@ -58,7 +58,7 @@ function MapObjects() {
         <group ref={scene}>
             <ambientLight intensity={0.5} />
             <pointLight color="white" intensity={0.6} position={[-1, -5, 12]} />
-            <EditorGrid props={[ 2, 0, 1, 30, 30, 10 ]} />
+            <EditorGrid props={[ 0, 0, 1, 30, 30, 10 ]} />
             { panels.map( ( thisPanel, i ) => (
                 <Panel props={thisPanel} key={`panel${i}`} />
             ))}
