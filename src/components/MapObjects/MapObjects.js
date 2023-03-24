@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
+
 import { OrthographicCamera } from "@react-three/drei";
 import Panel from "./Panel";
+import EditorGrid from "../EditorUI/EditorGrid"
 
 function MapObjects() {
     const scene = useRef();
+
     const [panels] = useState([
         [
             0,0,0, // x, y, z
@@ -30,6 +33,8 @@ function MapObjects() {
             0,255,0 // rColor, gColor, bColor
         ],
     ]);
+
+    // const [gridAxis] = useState([ 'x', 'y', 'z' ]);
     
     const aspectRatio = window.innerWidth/window.innerHeight;
     const frust = 16;
@@ -53,6 +58,7 @@ function MapObjects() {
         <group ref={scene}>
             <ambientLight intensity={0.5} />
             <pointLight color="white" intensity={0.6} position={[-1, -5, 12]} />
+            <EditorGrid props={[ 2, 0, 1, 30, 30, 10 ]} />
             { panels.map( ( thisPanel, i ) => (
                 <Panel props={thisPanel} key={`panel${i}`} />
             ))}
