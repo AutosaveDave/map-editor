@@ -5,64 +5,26 @@ import Panel from "./Panel";
 import EditorGrid from "../EditorUI/EditorGrid";
 import GroundPlane from "./GroundPlane";
 
-function MapObjects() {
+function MapObjects( props ) {
+    console.log('MapObjects props:');
+    console.log(props);
+
+    const { 
+        gridAxis, setGridAxis, 
+        gridValue, setGridValue, 
+        tileSize, setTileSize,
+        mapWidth, setMapWidth,
+        mapLength, setMapLength,
+        mapHeight, setMapHeight,
+        currentColor, setCurrentColor,
+        wallThickness, setWallThickness,
+        aspectRatio
+    } = props;
+
     const scene = useRef();
 
-    const [editorProperties, setEditorProperties] = useState([
-        2,      // grid axis
-        0,      // grid value
-        1,      // tileSize
-        30,     // map width (x)
-        30,     // map length (y)
-        10      // map height (z)
-    ]);
-
-    function getGridAxis() { return editorProperties[0]; }
-    function getGridValue() { return editorProperties[1]; }
-    function getTileSize() { return editorProperties[2]; }
-    function getMapWidth() { return editorProperties[3]; }
-    function getMapLength() { return editorProperties[4]; }
-    function getMapHeight() { return editorProperties[5]; }
-    
-
-    function setGridAxis( axis ) {
-        let eProps = editorProperties;
-        eProps[0] = axis;
-        setEditorProperties(eProps);
-    }
-
-    function switchGridAxis() {
-        const axis = getGridAxis();
-        if( axis < 2 ) { setGridAxis( axis + 1 ); }
-        else { setGridAxis( 0 ); }
-    }
-
-    const [panels, setPanels] = useState([
-        [
-            0,0,0,      // x, y, z
-            1,1,1,      // width, length, height
-            0,0,0,      // xRotation, yRotation, zRotation
-            255,0,255   // rColor, gColor, bColor
-        ],
-        [
-            3,0,0,      // x, y, z
-            1,1,0.3,    // width, length, height
-            0,0,0,      // xRotation, yRotation, zRotation
-            255,0,0     // rColor, gColor, bColor
-        ],
-        [
-            0,3,0,      // x, y, z
-            1,1,1,      // width, length, height
-            0,0,0,      // xRotation, yRotation, zRotation
-            255,255,0   // rColor, gColor, bColor
-        ],
-        [
-            1,1,0,      // x, y, z
-            1,1,2,      // width, length, height
-            0,0,0,      // xRotation, yRotation, zRotation
-            0,255,0     // rColor, gColor, bColor
-        ],
-    ]);
+    const [panels, setPanels] = useState( [] );
+    const [frust] = useState( 16 );
     
     function addPanel( args ) {
         const [ axis,
@@ -71,7 +33,7 @@ function MapObjects() {
                 rColor, gColor, bColor,
                 material ] = args;
         setPanels( [ ...panels, 
-                    [ x+0.5*w, y+0.5*l, z+0.5*h,
+                    [ x, y, z,
                       w, l, h,
                       0, 0, 0,
                       rColor, gColor, bColor,
@@ -79,8 +41,7 @@ function MapObjects() {
         
     }
 
-    const aspectRatio = window.innerWidth/window.innerHeight;
-    const frust = 16;
+    
 
     return (
         <>
@@ -97,13 +58,21 @@ function MapObjects() {
                 rotation-order='ZYX'
                 rotation-z={7*Math.PI/4}
                 rotation-x={Math.PI/4}
-                
+                ref={scene}
             />
-        <group ref={scene}>
+        <group ref={scene} >
             <ambientLight intensity={0.5} />
             <pointLight color="white" intensity={0.6} position={[-1, -5, 12]} />
-            <GroundPlane props={[getMapWidth()*getTileSize(), getMapLength()*getTileSize(), 0, 150, 0 ]} />
-            <EditorGrid props={editorProperties} />
+            <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, 0, 150, 0 ]} />
+            <EditorGrid
+                gridAxis={gridAxis} setGridAxis={setGridAxis}
+                gridValue={gridValue} setGridValue={setGridValue}
+                tileSize={tileSize}
+                mapWidth={mapWidth} mapLength={mapLength} mapHeight={mapHeight}
+                addPanel={addPanel}
+                currentColor={currentColor} setCurrentColor={setCurrentColor}
+                wallThickness={wallThickness} setWallThickness={setWallThickness}
+                />
             { panels.map( ( thisPanel, i ) => (
                 <Panel props={thisPanel} key={`panel${i}`} />
             ))}
