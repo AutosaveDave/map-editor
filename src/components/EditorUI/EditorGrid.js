@@ -175,7 +175,9 @@ function EditorGrid( props ) {
                     <lineBasicMaterial attach="material" color={'black'} linewidth={1} />
                 </Line>
             ))}
-            <mesh position={plane.position} rotation={plane.rotation} visible={false} onClick={(e) => {handleClick( e )}}>
+            <mesh position={plane.position} rotation={plane.rotation} visible={false} 
+                onClick={handleClick}
+            >
                 <planeGeometry  attach="geometry" args={plane.size} />
                 <meshStandardMaterial attach="material" color={`rgb(255,200,200)`}/>
             </mesh>

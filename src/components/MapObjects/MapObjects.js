@@ -1,25 +1,64 @@
 import React, { useRef, useState } from "react";
-
-import { OrthographicCamera } from "@react-three/drei";
-import Panel from "./Panel";
+import { OrthographicCamera, Sky } from "@react-three/drei";
+import AllPanels from "./AllPanels";
 import EditorGrid from "../EditorUI/EditorGrid";
 import GroundPlane from "./GroundPlane";
 
-function MapObjects( props ) {
-    console.log('MapObjects props:');
-    console.log(props);
+function MapObjects() {
 
-    const { 
-        gridAxis, setGridAxis, 
-        gridValue, setGridValue, 
-        tileSize, setTileSize,
-        mapWidth, setMapWidth,
-        mapLength, setMapLength,
-        mapHeight, setMapHeight,
-        currentColor, setCurrentColor,
-        wallThickness, setWallThickness,
-        aspectRatio
-    } = props;
+    const [gridAxis, setGridAxis] = useState(0);
+    const [gridValue, setGridValue] = useState(0);
+    const [tileSize, setTileSize] = useState(1);
+    const [mapWidth, setMapWidth] = useState(10);
+    const [mapLength, setMapLength] = useState(10);
+    const [mapHeight, setMapHeight] = useState(10);
+    const [aspectRatio, setAspectRatio] = useState( window.innerWidth / window.innerHeight );
+    
+    const [currentColor, setCurrentColor] = useState([200,130,100]);
+    const [wallThickness, setWallThickness] = useState(0.1);
+
+    const [currentId, setCurrentId] = useState( 0 );
+
+    function nextId() {
+        const cid = currentId;
+        setCurrentId( cid + 1 );
+        return cid + 1;
+    }
+
+    function switchGridAxis() {
+        if( gridAxis < 2 ) { setGridAxis( gridAxis + 1 ); }
+        else { setGridAxis( 0 ); }
+      }
+    
+      function handleWheel( e ) {
+        let limit = mapHeight;
+        if( gridAxis === 0 ) { 
+            limit = mapWidth;
+        } else if(gridAxis === 1 ) {
+            limit = mapLength;
+        }
+        if( e.deltaY > 20 ) {
+            if( gridValue < limit ) {
+                setGridValue( gridValue + 1 );
+            } else {
+                setGridValue( 0 );
+            }
+        } else if( e.deltaY < -20 ) {
+            if( gridValue > 0 ) {
+                setGridValue( gridValue - 1 );
+            } else {
+                setGridValue( limit );
+            }
+        }
+      }
+    
+      function handleMouseDown( e ) {
+        if( e.button === 1 ) {
+          switchGridAxis();
+        }
+      }
+
+    
 
     const scene = useRef();
 
@@ -31,21 +70,28 @@ function MapObjects( props ) {
                 x, y, z,
                 w, l, h,
                 rColor, gColor, bColor,
-                material ] = args;
+                material, panel_id
+        ] = [ ...args, nextId() ];
         setPanels( [ ...panels, 
                     [ x, y, z,
                       w, l, h,
                       0, 0, 0,
                       rColor, gColor, bColor,
-                      material ] ] );
-        
+                      material, panel_id ] ] );
+        console.log(panel_id);
     }
-
-    
 
     return (
         <>
-        <OrthographicCamera
+        
+        <group ref={scene} 
+            onWheel={handleWheel} 
+            onPointerDown={handleMouseDown}
+            onContextMenu={(e) => {
+                e.nativeEvent.preventDefault();
+            }}
+        > 
+            <OrthographicCamera
                 makeDefault
                 zoom={1}
                 left={-frust*aspectRatio/2}
@@ -60,9 +106,9 @@ function MapObjects( props ) {
                 rotation-x={Math.PI/4}
                 ref={scene}
             />
-        <group ref={scene} >
-            <ambientLight intensity={0.5} />
-            <pointLight color="white" intensity={0.6} position={[-1, -5, 12]} />
+        
+            <ambientLight intensity={0.1} />
+            <pointLight color="white" intensity={0.7} position={[-1, -5, 12]} />
             <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, 0, 150, 0 ]} />
             <EditorGrid
                 gridAxis={gridAxis} setGridAxis={setGridAxis}
@@ -72,11 +118,11 @@ function MapObjects( props ) {
                 addPanel={addPanel}
                 currentColor={currentColor} setCurrentColor={setCurrentColor}
                 wallThickness={wallThickness} setWallThickness={setWallThickness}
-                />
-            { panels.map( ( thisPanel, i ) => (
-                <Panel props={thisPanel} key={`panel${i}`} />
-            ))}
+            />
+            <AllPanels panels={panels} setPanels={setPanels} />
+            <Sky/>
         </group>
+        
         </>
     );
 }
