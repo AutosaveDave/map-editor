@@ -1,6 +1,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
-import { Line } from '@react-three/drei'
+import { Line } from '@react-three/drei';
+import { DoubleSide } from "three";
 
 function EditorGrid( props ) {
     const {   // mapWidth, mapLength, and mapHeight expressed in number of tiles
@@ -179,7 +180,7 @@ function EditorGrid( props ) {
                 onClick={handleClick}
             >
                 <planeGeometry  attach="geometry" args={plane.size} />
-                <meshStandardMaterial attach="material" color={`rgb(255,200,200)`}/>
+                <meshStandardMaterial attach="material" side={DoubleSide} color={`rgb(255,200,200)`}/>
             </mesh>
         </group>
         </>

@@ -13,7 +13,7 @@ const Panel = ( props ) => {
 
     function deletePanel( id ) {
         
-        let newPanels = [];
+        const newPanels = [];
         newPanels.push( ...panels );
         for( let a = 0 ; a < newPanels.length ; a+=1 ) {
             if( newPanels[ a ][ newPanels[ a ].length - 1 ] === id ) {
@@ -22,8 +22,6 @@ const Panel = ( props ) => {
             }
         }
         setPanels( newPanels );
-        console.log(id);
-        console.log(newPanels);
     }
 
     function handleRightClick( e ) {

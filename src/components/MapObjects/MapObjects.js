@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { OrthographicCamera, Sky } from "@react-three/drei";
 import AllPanels from "./AllPanels";
 import EditorGrid from "../EditorUI/EditorGrid";
@@ -17,7 +17,22 @@ function MapObjects() {
     const [currentColor, setCurrentColor] = useState([200,130,100]);
     const [wallThickness, setWallThickness] = useState(0.1);
 
+    const [cameraPosition, setCameraPosition] = useState( [-2, -2, 10] );
+    const [cameraAngle, setCameraAngle] = useState(1);          // Angle of declination
+    const [cameraSwivel, setCameraSwivel] = useState(7);        // Rotation around z-axis
+    const [cameraDistance, setCameraDistance] = useState(20);
+    const [cameraFocus, setCameraFocus] = useState([4,4,0]);    // Panel coords for where the camera is centered
+    const [frustum, setFrustum] = useState( 16 );
+    const [cameraZoom, setCameraZoom] = useState( 1 );
+    const [panels, setPanels] = useState( [] );
+
     const [currentId, setCurrentId] = useState( 0 );
+
+    const swivelIncr = 1;
+
+    useEffect( () => {
+        document.addEventListener('keydown', handleKeyDown)
+    });
 
     function nextId() {
         const cid = currentId;
@@ -62,8 +77,7 @@ function MapObjects() {
 
     const scene = useRef();
 
-    const [panels, setPanels] = useState( [] );
-    const [frust] = useState( 16 );
+    
     
     function addPanel( args ) {
         const [ axis,
@@ -78,12 +92,45 @@ function MapObjects() {
                       0, 0, 0,
                       rColor, gColor, bColor,
                       material, panel_id ] ] );
-        console.log(panel_id);
+    }
+
+    function sortPanels() {
+        
+    }
+
+    function camFocusToPos( angle, swivel ) {  // Returns approriate camera position
+        return [                // based on camera angle, swivel, and distance
+            cameraFocus[0] + cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.sin( swivel*Math.PI/4 ),
+            cameraFocus[1] - cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.cos( swivel*Math.PI/4 ),
+            cameraFocus[2] + cameraDistance * Math.cos( angle*Math.PI/4 )
+        ];
+    }
+
+    function handleKeyDown( e ) {
+        let swivel = cameraSwivel;
+        switch( e.key ) {
+            case 'q':
+                swivel += swivelIncr;
+                if( swivel >= 8 ) {
+                    swivel = swivel - 8;
+                }
+                setCameraSwivel( swivel );
+                setCameraPosition( camFocusToPos( cameraAngle, swivel ) );
+                break;
+            case 'e':
+                swivel -= swivelIncr;
+                if( swivel < 0 ) {
+                    swivel = swivel + 8;
+                }
+                setCameraSwivel( swivel );
+                setCameraPosition( camFocusToPos( cameraAngle, swivel ) );
+                break;
+                default:
+        }
     }
 
     return (
         <>
-        
         <group ref={scene} 
             onWheel={handleWheel} 
             onPointerDown={handleMouseDown}
@@ -93,17 +140,17 @@ function MapObjects() {
         > 
             <OrthographicCamera
                 makeDefault
-                zoom={1}
-                left={-frust*aspectRatio/2}
-                right={frust*aspectRatio/2}
-                top={frust/2}
-                bottom={-frust/2}
+                zoom={cameraZoom}
+                left={-frustum*aspectRatio/2}
+                right={frustum*aspectRatio/2}
+                top={frustum/2}
+                bottom={-frustum/2}
                 near={1}
                 far={500}
-                position={[-2, -2, 8]}
+                position={cameraPosition}
                 rotation-order='ZYX'
-                rotation-z={7*Math.PI/4}
-                rotation-x={Math.PI/4}
+                rotation-z={cameraSwivel*Math.PI/4}
+                rotation-x={cameraAngle*Math.PI/4}
                 ref={scene}
             />
         
