@@ -1,6 +1,7 @@
 {
   "name": "map-editor",
-  "homepage": "https://AutosaveDave.github.io/map-editor",
+  "homepage": "https://autosavedave.github.io/map-editor",
+  "main": "index.html",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
