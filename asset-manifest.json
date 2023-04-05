@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/map-editor/static/css/main.9da2677c.css",
+    "main.js": "/map-editor/static/js/main.9c27e057.js",
+    "index.html": "/map-editor/index.html",
+    "main.9da2677c.css.map": "/map-editor/static/css/main.9da2677c.css.map",
+    "main.9c27e057.js.map": "/map-editor/static/js/main.9c27e057.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9da2677c.css",
+    "static/js/main.9c27e057.js"
+  ]
+}
