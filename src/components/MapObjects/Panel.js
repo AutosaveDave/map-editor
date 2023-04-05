@@ -17,7 +17,7 @@ const Panel = ( props ) => {
         newPanels.push( ...panels );
         for( let a = 0 ; a < newPanels.length ; a+=1 ) {
             if( newPanels[ a ][ newPanels[ a ].length - 1 ] === id ) {
-                newPanels.splice( a, 1 );
+                newPanels.splice( a, 1 );   // delete panel from array
                 a = newPanels.length;
             }
         }
@@ -26,6 +26,7 @@ const Panel = ( props ) => {
 
     function handleRightClick( e ) {
         e.nativeEvent.preventDefault();
+        e.stopPropagation();
         deletePanel(panel_id);
         
     }

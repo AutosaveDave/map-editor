@@ -17,17 +17,6 @@ function EditorGrid( props ) {
     const lines = [];   // lines array to be filled with coordinates for each line => [x1,y1,z1,x2,y2,z2]
     const plane = {};
 
-    // function switchGridAxis( axis, e ) {
-    //     let newAxis = axis + 1;
-    //     if( newAxis > 2)
-    //         newAxis = 0;
-    //     setGridAxis( newAxis );
-    //     console.log('POINT:');
-    //     console.log(e.point);
-    //     console.log('UV:');
-    //     console.log(e.uv);
-    // }
-
     function clickCoords ( u, v ) {
         switch(gridAxis) {
             case 0:
