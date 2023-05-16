@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { Line } from '@react-three/drei';
 import { DoubleSide } from "three";

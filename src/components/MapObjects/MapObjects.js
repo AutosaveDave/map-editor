@@ -6,7 +6,7 @@ import GroundPlane from "./GroundPlane";
 
 function MapObjects(props) {
 
-    const { currentColor } = props;
+    const { currentColor, aspectRatio } = props;
 
     const [gridAxis, setGridAxis] = useState(0);
     const [gridValue, setGridValue] = useState(0);
@@ -14,7 +14,7 @@ function MapObjects(props) {
     const [mapWidth, setMapWidth] = useState(10);
     const [mapLength, setMapLength] = useState(10);
     const [mapHeight, setMapHeight] = useState(10);
-    const [aspectRatio, setAspectRatio] = useState( window.innerWidth / window.innerHeight );
+    // const [aspectRatio, setAspectRatio] = useState( window.innerWidth / window.innerHeight );
     
     
     const [wallThickness, setWallThickness] = useState(0.1);
@@ -158,7 +158,7 @@ function MapObjects(props) {
             />
         
             <ambientLight intensity={0.1} />
-            <pointLight color="white" intensity={0.7} position={[-1, -5, 12]} />
+            <pointLight color="white" intensity={0.8} position={[-1, -5, 12]} />
             <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, 0, 150, 0 ]} />
             <EditorGrid
                 gridAxis={gridAxis} setGridAxis={setGridAxis}
