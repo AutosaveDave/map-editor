@@ -10,7 +10,7 @@ function EditorGrid( props ) {
         tileSize, 
         mapWidth, mapLength, mapHeight, 
         addPanel, 
-        currentColor, setCurrentColor, 
+        currentColor,  
         wallThickness, setWallThickness
     } = props;  
     const gridlines = useRef();
@@ -51,7 +51,7 @@ function EditorGrid( props ) {
                     gridAxis,
                     x, y + 0.5*tileSize, z + 0.5*tileSize,
                     wallThickness*tileSize, tileSize, tileSize,
-                    ...currentColor,
+                    currentColor,
                     0
                 ]);
                 break;
@@ -60,7 +60,7 @@ function EditorGrid( props ) {
                     gridAxis,
                     x + 0.5*tileSize, y, z + 0.5*tileSize,
                     tileSize, wallThickness*tileSize, tileSize,
-                    ...currentColor,
+                    currentColor,
                     0
                 ]);
                 break;
@@ -70,7 +70,7 @@ function EditorGrid( props ) {
                     gridAxis,
                     x + 0.5*tileSize, y + 0.5*tileSize, z,
                     tileSize, tileSize, wallThickness*tileSize,
-                    ...currentColor,
+                    currentColor,
                     0
                 ]);
                 break;

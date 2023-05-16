@@ -4,7 +4,9 @@ import AllPanels from "./AllPanels";
 import EditorGrid from "../EditorUI/EditorGrid";
 import GroundPlane from "./GroundPlane";
 
-function MapObjects() {
+function MapObjects(props) {
+
+    const { currentColor } = props;
 
     const [gridAxis, setGridAxis] = useState(0);
     const [gridValue, setGridValue] = useState(0);
@@ -14,7 +16,7 @@ function MapObjects() {
     const [mapHeight, setMapHeight] = useState(10);
     const [aspectRatio, setAspectRatio] = useState( window.innerWidth / window.innerHeight );
     
-    const [currentColor, setCurrentColor] = useState([200,130,100]);
+    
     const [wallThickness, setWallThickness] = useState(0.1);
 
     const [cameraPosition, setCameraPosition] = useState( [-2, -2, 10] );
@@ -83,14 +85,14 @@ function MapObjects() {
         const [ axis,
                 x, y, z,
                 w, l, h,
-                rColor, gColor, bColor,
+                color,
                 material, panel_id
         ] = [ ...args, nextId() ];
         setPanels( [ ...panels, 
                     [ x, y, z,
                       w, l, h,
                       0, 0, 0,
-                      rColor, gColor, bColor,
+                      color,
                       material, panel_id ] ] );
     }
 
@@ -140,6 +142,7 @@ function MapObjects() {
         > 
             <OrthographicCamera
                 makeDefault
+                manual
                 zoom={cameraZoom}
                 left={-frustum*aspectRatio/2}
                 right={frustum*aspectRatio/2}
@@ -163,7 +166,7 @@ function MapObjects() {
                 tileSize={tileSize}
                 mapWidth={mapWidth} mapLength={mapLength} mapHeight={mapHeight}
                 addPanel={addPanel}
-                currentColor={currentColor} setCurrentColor={setCurrentColor}
+                currentColor={currentColor} 
                 wallThickness={wallThickness} setWallThickness={setWallThickness}
             />
             <AllPanels panels={panels} setPanels={setPanels} />

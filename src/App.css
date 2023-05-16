@@ -15,7 +15,8 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,10 +25,20 @@
   color: white;
 }
 
-Canvas {
-  width: 100in;
+.fit-window {
+  width: 100vw;
   height: 100vh;
-} 
+}
+
+.fit-tool-bar {
+  width: 100vw;
+  height: 50px;
+}
+
+.fit-canvas {
+  width: 100vw;
+  height: 100vh - 50px;
+}
 
 .App-link {
   color: #61dafb;

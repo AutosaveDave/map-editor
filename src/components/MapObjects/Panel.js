@@ -5,7 +5,7 @@ const Panel = ( props ) => {
     const [ x, y, z, 
         width, length, depth, 
         xRotation, yRotation, zRotation, 
-        rColor, gColor, bColor, material, panel_id 
+        color, material, panel_id 
     ] = props.thisPanel;
 
     const panels = props.panels;
@@ -38,7 +38,7 @@ const Panel = ( props ) => {
             onContextMenu={ handleRightClick }
         >
             <boxGeometry attach="geometry" args={[width, length, depth]} />
-            <meshStandardMaterial attach="material" color={`rgb(${rColor},${gColor},${bColor})`} />
+            <meshStandardMaterial attach="material" color={color} />
         </mesh>
     );
 };
