@@ -6,29 +6,22 @@ import GroundPlane from "./GroundPlane";
 
 function MapObjects(props) {
 
-    const { currentColor, aspectRatio } = props;
-
-    const [gridAxis, setGridAxis] = useState(0);
-    const [gridValue, setGridValue] = useState(0);
-    const [tileSize, setTileSize] = useState(1);
-    const [mapWidth, setMapWidth] = useState(10);
-    const [mapLength, setMapLength] = useState(10);
-    const [mapHeight, setMapHeight] = useState(10);
-    // const [aspectRatio, setAspectRatio] = useState( window.innerWidth / window.innerHeight );
-    
-    
-    const [wallThickness, setWallThickness] = useState(0.1);
-
-    const [cameraPosition, setCameraPosition] = useState( [-2, -2, 10] );
-    const [cameraAngle, setCameraAngle] = useState(1);          // Angle of declination
-    const [cameraSwivel, setCameraSwivel] = useState(7);        // Rotation around z-axis
-    const [cameraDistance, setCameraDistance] = useState(20);
-    const [cameraFocus, setCameraFocus] = useState([4,4,0]);    // Panel coords for where the camera is centered
-    const [frustum, setFrustum] = useState( 16 );
-    const [cameraZoom, setCameraZoom] = useState( 1 );
-    const [panels, setPanels] = useState( [] );
-
-    const [currentId, setCurrentId] = useState( 0 );
+    const { currentColor, aspectRatio,
+        gridAxis, setGridAxis,
+        gridValue, setGridValue,
+        tileSize, setTileSize,
+        mapWidth, mapLength, mapHeight,
+        wallThickness, setWallThickness,
+        cameraPosition, setCameraPosition,
+        cameraAngle, setCameraAngle,
+        cameraSwivel, setCameraSwivel,
+        cameraDistance, setCameraDistance,
+        cameraFocus, setCameraFocus,
+        frustum, setFrustum,
+        cameraZoom, setCameraZoom,
+        panels, setPanels,
+        currentId, setCurrentId
+        } = props;
 
     const swivelIncr = 1;
 
