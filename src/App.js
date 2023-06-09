@@ -23,6 +23,9 @@ function App() {
   const [canvHeightRatio, setCanvHeightRatio] = useState(canvHR);
   const [aspectRatio, setAspectRatio] = useState( window.innerWidth / (window.innerHeight * canvHR/100) );
 
+  const [mapName, setMapName] = useState("Unititled");
+  const [mapDescr, setMapDescr] = useState("No description.");
+
   const [gridAxis, setGridAxis] = useState(0);
   const [gridValue, setGridValue] = useState(0);
   const [tileSize, setTileSize] = useState(1);
@@ -40,6 +43,7 @@ function App() {
   const [panels, setPanels] = useState( [] );
   const [savedMaps,setSavedMaps] = useState( [] );
   const [savedMapRefs,setSavedMapRefs] = useState( [] );
+  const [currentMapRef,setCurrentMapRef] = useState(false);
   const [currentId, setCurrentId] = useState( 0 );
   const [groundColor, setGroundColor] = useState("#119944");
 
@@ -52,7 +56,54 @@ function App() {
     window.addEventListener('resize', handleResize);
   });
 
+  function saveCurrentMap( user ) {
+    const panelObjects = [];
+    panels.forEach( ( thisPanel ) => {
+      const panelObj = {
+        x: thisPanel[0], y: thisPanel[1], z: thisPanel[2],
+        width: thisPanel[3], length: thisPanel[4], height: thisPanel[5],
+        xRotation: thisPanel[6], yRotation: thisPanel[7], zRotation: thisPanel[8],
+        color: thisPanel[9], 
+        material: thisPanel[10], 
+        panel_id: thisPanel[11],
+      };
+      panelObjects.push( panelObj );
+    })
+    
+    const mapSaveData = {
+      name: mapName,
+      descr: mapDescr,
+      panels: panelObjects,
+      camera: {
+        angle: cameraAngle,
+        distance: cameraDistance,
+        focus: cameraFocus,
+        frustum: frustum,
+        position: cameraPosition,
+        swivel: cameraSwivel,
+        zoom: cameraZoom,
+      },
+      mapConfig: {
+        canvHeightRatio: canvHeightRatio,
+        colorPalette: colorPalette,
+        currentColor: currentColor,
+        currentId: currentId,
+        gridAxis: gridAxis,
+        gridValue: gridValue,
+        groundColor: groundColor,
+        mapDimensions: [ mapWidth, mapLength, mapHeight ],
+        tileSize: tileSize,
+        wallThickness: wallThickness,
+      },
+    };
+    saveMap( user, currentMapRef, mapSaveData )
+  }
+
   function loadMap( mapData ) {
+    console.log(mapData)
+    setMapName(mapData.name);
+    setMapDescr(mapData.descr);
+    // setCurrentMapRef(savedMapRefs[mapIndex]);
     setCameraAngle(mapData.camera.angle);
     setCameraDistance(mapData.camera.distance);
     setCameraFocus(mapData.camera.focus);
@@ -60,7 +111,17 @@ function App() {
     setCameraPosition(mapData.camera.position);
     setCameraSwivel(mapData.camera.swivel);
     setCameraZoom(mapData.camera.zoom);
-    setPanels(mapData.panels);
+    const panelsArray = [];
+    mapData.panels.forEach( ( p ) => {
+      const panelArray = [ 
+        p.x, p.y, p.z,
+        p.width, p.length, p.height,
+        p.xRotation, p.yRotation, p.zRotation,
+        p.color, p.material, p.panel_id
+      ];
+      panelsArray.push(panelArray);
+    })
+    setPanels(panelsArray);
     setCanvHeightRatio(mapData.mapConfig.canvHeightRatio);
     setColorPalette(mapData.mapConfig.colorPalette);
     setCurrentColor(mapData.mapConfig.currentColor);
@@ -73,7 +134,6 @@ function App() {
     setMapHeight(mapData.mapConfig.mapDimensions[2]);
     setTileSize(mapData.mapConfig.tileSize);
     setWallThickness(mapData.mapConfig.wallThickness);
-    
   }
 
   return (
@@ -86,7 +146,13 @@ function App() {
             setCurrentColor={setCurrentColor} 
             setShowUserModal={setShowUserModal}
             colorPalette={colorPalette}
-            setColorPalette={setColorPalette}/>
+            setColorPalette={setColorPalette}
+            currentMapRef={currentMapRef}
+            setCurrentMapRef={setCurrentMapRef}
+            mapName={mapName} setMapName={setMapName}
+            mapDescr={mapDescr} setMapDescr={setMapDescr}
+            saveCurrentMap={saveCurrentMap}
+          />
           <Canvas style={{height:`${canvHeightRatio}%`, width:"100%"}}>
             <MapObjects 
               currentColor={currentColor} aspectRatio={aspectRatio}
@@ -128,7 +194,11 @@ function App() {
               currentId={currentId} setCurrentId={setCurrentId}
               savedMaps={savedMaps} setSavedMaps={setSavedMaps}
               savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
-              loadMap={loadMap}
+              
+              loadMap={loadMap} 
+              currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
+              mapName={mapName} setMapName={setMapName}
+              mapDescr={mapDescr} setMapDescr={setMapDescr}
               />
           }
         </section>

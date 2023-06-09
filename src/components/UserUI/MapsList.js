@@ -11,7 +11,10 @@ function MapsList( props ) {
         selectedMap, setSelectedMap, 
         selectedMapData, setSelectedMapData,
         savedMaps, setSavedMaps,
-        savedMapRefs, setSavedMapRefs,
+        savedMapRefs, setSavedMapRefs, setCurrentMapRefs,
+        currentMapRef, setCurrentMapRef,
+        mapName, setMapName,
+        mapDescr, setMapDescr,
         getUserMaps, loadMap
     } = props;
     
@@ -33,7 +36,7 @@ function MapsList( props ) {
             <Container fluid className="">
                 <Button className="w-100 p-1 m-2" 
                     variant={`${listItemVariant(selectedMap,mapIndex)}`}
-                    onClick={(e)=> { e.preventDefault(); handleMapClick(thisMap, mapIndex); } }
+                    onClick={(e) => { e.preventDefault(); handleMapClick(thisMap, mapIndex); } }
                 >
                     <Row className="w-100" >
                         <Col className="text-start">
@@ -70,7 +73,10 @@ function MapsList( props ) {
 
     function handleMapClick( thisMap, mapIndex ) {
         console.log(thisMap)
-        setSelectedMap(mapIndex); setSelectedMapData(thisMap);
+        setSelectedMap(mapIndex); 
+        setSelectedMapData(thisMap); 
+        setCurrentMapRef(savedMapRefs[mapIndex])
+        loadMap(thisMap);
     }
 
     const mapListItems = ( <>
@@ -92,6 +98,7 @@ function MapsList( props ) {
             </>
         }
     </>);
+
     useEffect(() => {
         getUserMaps();
         console.log('getUserMaps() called');

@@ -32,6 +32,9 @@ function UserModal( props ) {
         currentId, setCurrentId,
         savedMaps, setSavedMaps,
         savedMapRefs, setSavedMapRefs,
+        currentMapRef, setCurrentMapRef,
+        mapName, setMapName,
+        mapDescr, setMapDescr,
         loadMap
     } = props;
 
@@ -130,11 +133,14 @@ function UserModal( props ) {
                 savedMaps={savedMaps} setSavedMaps={setSavedMaps}
                 savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
                 loadMap={loadMap}
+                currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
+                mapName={mapName} setMapName={setMapName}
+                mapDescr={mapDescr} setMapDescr={setMapDescr}
             />
 
             <Modal.Footer>
                 <Container fluid className="">
-                    <Row fluid className="">
+                    <Row className="">
                         <Col className="text-start">
 
                             { !( uiPage === "Account" ) &&

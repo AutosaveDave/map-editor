@@ -33,7 +33,10 @@ function UserInterface( props ) {
         selectedMapData, setSelectedMapData,
         savedMaps, setSavedMaps,
         savedMapRefs, setSavedMapRefs,
-        loadMap
+        loadMap,
+        currentMapRef, setCurrentMapRef,
+        mapName, setMapName,
+        mapDescr, setMapDescr,
     } = props;
 
     function getUserMaps() {
@@ -72,6 +75,10 @@ function UserInterface( props ) {
                                 savedMaps={savedMaps} setSavedMaps={setSavedMaps}
                                 savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
                                 getUserMaps={getUserMaps} loadMap={loadMap}
+                                currentMapRef={currentMapRef}
+                                setCurrentMapRef={setCurrentMapRef}
+                                mapName={mapName} setMapName={setMapName}
+                                mapDescr={mapDescr} setMapDescr={setMapDescr}
                             />
                 </Container>
             );
