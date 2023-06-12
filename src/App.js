@@ -96,7 +96,7 @@ function App() {
         wallThickness: wallThickness,
       },
     };
-    saveMap( user, currentMapRef, mapSaveData )
+    saveMap( user, currentMapRef, mapSaveData );
   }
 
   function loadMap( mapData ) {

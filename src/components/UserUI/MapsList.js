@@ -17,9 +17,6 @@ function MapsList( props ) {
         mapDescr, setMapDescr,
         getUserMaps, loadMap
     } = props;
-    
-    
-    
 
     function listItemVariant( selected, mapIndex ) {
         if( selected === mapIndex ) {
@@ -28,10 +25,15 @@ function MapsList( props ) {
         return "primary";
     }
 
-
-
     function MapListItem( props ) {
-        const { mapIndex, name, descr, lastEdited, createdOn, colorPalette, thisMap } = props;
+        const { 
+            mapIndex, 
+            name, descr, 
+            lastEdited, createdOn, 
+            colorPalette, 
+            thisMap 
+        } = props;
+
         return (
             <Container fluid className="">
                 <Button className="w-100 p-1 m-2" 

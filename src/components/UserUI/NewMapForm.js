@@ -12,7 +12,10 @@ const NewMapForm = ( props ) => {
         setSelectedMap, 
         savedMaps,
         getUserMaps,
-        loadMap
+        loadMap,
+        setPage,
+        savedMapRefs, setSavedMapRefs,
+        setCurrentMapRef
     } = props;
 
   const auth = useUserAuth();
@@ -21,36 +24,57 @@ const NewMapForm = ( props ) => {
   const [mapDescr, setMapDescr] = useState("");
   const [error, setError] = useState("");
 
-  function createMap() {
-    createNewMap( auth, mapName, mapDescr )
-        .then(result => {
-            console.log(result)
-            getUserMaps().then( () => {
-                console.log(savedMaps)
-                savedMaps.forEach( ( thisMap, i ) => {
-                if( thisMap.name === mapName ) {
-                    setSelectedMap(i);
-                }
-                });
-            })
-            
-        })
-        .catch((error) => {
-            console.log(error)
+  async function refreshMaps( newId ) {
+    let selectedIndex = -1;
+    const result = await getUserMaps()
+      .then( maprefs => {
+        console.log(maprefs)
+        maprefs.forEach( ( thisRef, i ) => {
+          if( thisRef === newId ) {
+            setSelectedMap(i);
+            setCurrentMapRef(thisRef);
+            selectedIndex = i;
+          }
         });
+        return selectedIndex;
+      })
+      .catch( error => {
+        console.log(error);
+      });
+      return result;
+  }
+
+  async function createMap() {
+    const result = await createNewMap( auth, mapName, mapDescr )
+        .then( data => {
+            const newPath = data._key.path.segments;
+            const newId = newPath[newPath.length-1];
+            
+            console.log('createNewMap()=> newId')
+            console.log(newId)
+            
+            return refreshMaps(newId);
+        })
+        .catch( (error) => {
+            console.log(error);
+        });
+        return result;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    try {
-      const newMapResult = await createNewMap(auth, mapName, mapDescr);
-      console.log("newMapResult:");
-      console.log(newMapResult);
-      setShowUserModal(false);
-    } catch (err) {
-      setError(err.message);
-    }
+    //const newMapResult = 
+    await createMap()
+      .then( result => {
+        console.log('createMap result:');
+        console.log(result);
+        loadMap(savedMaps[result]);
+        setPage('Account');
+      })
+      .catch( (err) => {
+        setError(err.message);
+      });
   };
 
   return (

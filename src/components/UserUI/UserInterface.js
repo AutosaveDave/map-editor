@@ -39,24 +39,26 @@ function UserInterface( props ) {
         mapDescr, setMapDescr,
     } = props;
 
-    function getUserMaps() {
-        queryUserMaps( user )
-            .then(result => {
-                console.log("queryUserMaps result")
-                console.log(result)
-                const userMaps = [];
-                const mapRefs = [];
-                result.forEach( (thisResult) => { 
+    async function getUserMaps() {
+        const userMaps = [];
+        const mapRefs = [];
+        const result = await queryUserMaps( user )
+            .then( result => {
+                result.forEach( thisResult => { 
                     userMaps.push(thisResult.data());
                     const pathSegs = thisResult._document.key.path.segments;
                     mapRefs.push(pathSegs[pathSegs.length-1]);
                 } );
                 setSavedMaps(userMaps);
                 setSavedMapRefs(mapRefs);
+                console.log("queryUserMaps result");
+                console.log(mapRefs);
+                return mapRefs;
             })
             .catch((error) => {
                 console.log(error)
-            });
+            })
+            return result;
       }
 
     switch( uiPage ) {
@@ -124,6 +126,9 @@ function UserInterface( props ) {
                             savedMaps={savedMaps}
                             getUserMaps={getUserMaps}
                             loadMap={loadMap}
+                            setPage={setPage}
+                            savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
+                            setCurrentMapRef={setCurrentMapRef}
                         />
                 </Container>
             );

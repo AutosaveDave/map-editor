@@ -1,4 +1,4 @@
-import { getFirestore, doc, collection, setDoc, Timestamp, updateDoc } from "firebase/firestore"; 
+import { getFirestore, doc, addDoc, collection, setDoc, Timestamp, updateDoc } from "firebase/firestore"; 
 import app from "../firebase-config";
 
 export async function addNewUser( data ) {
@@ -59,13 +59,12 @@ export async function createNewMap( data, name, descr ) {
     },
   };
 
-
-  const result = await setDoc( doc( collection( db, "Maps" ) ), mapData, {merge:false} );
-    return result;
+  return await addDoc( collection( db, "Maps" ) , mapData);
 }
 
 export async function saveMap( data, mapRef, map ) {
-  
+  console.log('saveMap() mapRef:');
+  console.log(mapRef);
   const { email } = data.email;
   const mapData = {...map, lastEdited:Timestamp.now()};
   console.log(mapData);
