@@ -101,7 +101,7 @@ function MapsList( props ) {
         }
     </>);
 
-    useEffect(() => {
+    useEffect( () => {
         getUserMaps();
         console.log('getUserMaps() called');
     },[]);

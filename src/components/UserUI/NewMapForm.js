@@ -15,13 +15,14 @@ const NewMapForm = ( props ) => {
         loadMap,
         setPage,
         savedMapRefs, setSavedMapRefs,
+        mapName, setMapName,
+        mapDescr, setMapDescr,
         setCurrentMapRef
     } = props;
 
   const auth = useUserAuth();
 
-  const [mapName, setMapName] = useState("");
-  const [mapDescr, setMapDescr] = useState("");
+  
   const [error, setError] = useState("");
 
   async function refreshMaps( newId ) {
@@ -49,10 +50,6 @@ const NewMapForm = ( props ) => {
         .then( data => {
             const newPath = data._key.path.segments;
             const newId = newPath[newPath.length-1];
-            
-            console.log('createNewMap()=> newId')
-            console.log(newId)
-            
             return refreshMaps(newId);
         })
         .catch( (error) => {
@@ -67,8 +64,6 @@ const NewMapForm = ( props ) => {
     //const newMapResult = 
     await createMap()
       .then( result => {
-        console.log('createMap result:');
-        console.log(result);
         loadMap(savedMaps[result]);
         setPage('Account');
       })

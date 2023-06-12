@@ -129,6 +129,8 @@ function UserInterface( props ) {
                             setPage={setPage}
                             savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
                             setCurrentMapRef={setCurrentMapRef}
+                            mapName={mapName} setMapName={setMapName}
+                            mapDescr={mapDescr} setMapDescr={setMapDescr}
                         />
                 </Container>
             );

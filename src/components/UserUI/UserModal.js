@@ -35,14 +35,14 @@ function UserModal( props ) {
         currentMapRef, setCurrentMapRef,
         mapName, setMapName,
         mapDescr, setMapDescr,
-        loadMap
+        loadMap,
+        uiPage, setUiPage,
+        selectedMap, setSelectedMap,
+        selectedMapData, setSelectedMapData,
+        canvHeightRatio,
     } = props;
 
     const { user } = useUserAuth();
-    
-    const [uiPage, setUiPage] = useState("Account");
-    const [selectedMap, setSelectedMap] = useState(-1);
-    const [selectedMapData, setSelectedMapData] = useState({});
 
     function handleClose() {
         setShowUserModal(false);
@@ -53,10 +53,10 @@ function UserModal( props ) {
     if( !user ) {
         return (
             <div
-                className="modal show p-2 m-2 r"
+                className="modal show p-2 m-2"
                 style={{ display: 'block', position: 'fixed' }}
             >
-                <Modal.Dialog>
+                <Modal.Dialog style={{right: 0, top:`${100-canvHeightRatio}%`}}>
                     <Container>
                         <div>
                             <Row>
@@ -98,10 +98,10 @@ function UserModal( props ) {
     }
     return (
         <div
-        className="modal show "
-        style= {{ display:'block', position:'fixed', textAlign:'center'}}
+        className="modal show"
+        style= {{ display:'block', position:'fixed' }}
         >
-        <Modal.Dialog>
+        <Modal.Dialog className="m-0 w-100" xs={{maxWidth:'100%'}} lg={{maxWidth:'60%'}} xl={{maxWidth:'40%'}} scrollable={true} style={{ display:'block', position:'absolute', right: 0, top:`${100-canvHeightRatio}%`, height:`${canvHeightRatio}%` }}>
             <Modal.Header className="justify-content-center">
                 <div className="d-block">
                     <h4 >{uiPage}</h4>
@@ -110,33 +110,35 @@ function UserModal( props ) {
                 
             </Modal.Header>
 
-            <UserInterface user={user} handleClose={handleClose} setShowUserModal={setShowUserModal} uiPage={uiPage} setPage={setPage} 
-                currentColor={currentColor} aspectRatio={aspectRatio}
-                gridAxis={gridAxis} setGridAxis={setGridAxis}
-                gridValue={gridValue} setGridValue={setGridValue}
-                tileSize={tileSize} setTileSize={setTileSize}
-                mapWidth={mapWidth} setMapWidth={setMapWidth}
-                mapLength={mapLength} setMapLength={setMapLength}
-                mapHeight={mapHeight} setMapHeight={setMapHeight}
-                wallThickness={wallThickness} setWallThickness={setWallThickness}
-                cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
-                cameraAngle={cameraAngle} setCameraAngle={setCameraAngle}
-                cameraSwivel={cameraSwivel} setCameraSwivel={setCameraSwivel}
-                cameraDistance={cameraDistance} setCameraDistance={setCameraDistance}
-                cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
-                frustum={frustum} setFrustum={setFrustum}
-                cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
-                panels={panels} setPanels={setPanels}
-                currentId={currentId} setCurrentId={setCurrentId}
-                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
-                selectedMapData={selectedMapData} setSelectedMapData={setSelectedMapData}
-                savedMaps={savedMaps} setSavedMaps={setSavedMaps}
-                savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
-                loadMap={loadMap}
-                currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
-                mapName={mapName} setMapName={setMapName}
-                mapDescr={mapDescr} setMapDescr={setMapDescr}
-            />
+            <Modal.Body>
+                <UserInterface user={user} handleClose={handleClose} setShowUserModal={setShowUserModal} uiPage={uiPage} setPage={setPage} 
+                    currentColor={currentColor} aspectRatio={aspectRatio}
+                    gridAxis={gridAxis} setGridAxis={setGridAxis}
+                    gridValue={gridValue} setGridValue={setGridValue}
+                    tileSize={tileSize} setTileSize={setTileSize}
+                    mapWidth={mapWidth} setMapWidth={setMapWidth}
+                    mapLength={mapLength} setMapLength={setMapLength}
+                    mapHeight={mapHeight} setMapHeight={setMapHeight}
+                    wallThickness={wallThickness} setWallThickness={setWallThickness}
+                    cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
+                    cameraAngle={cameraAngle} setCameraAngle={setCameraAngle}
+                    cameraSwivel={cameraSwivel} setCameraSwivel={setCameraSwivel}
+                    cameraDistance={cameraDistance} setCameraDistance={setCameraDistance}
+                    cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
+                    frustum={frustum} setFrustum={setFrustum}
+                    cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
+                    panels={panels} setPanels={setPanels}
+                    currentId={currentId} setCurrentId={setCurrentId}
+                    selectedMap={selectedMap} setSelectedMap={setSelectedMap}
+                    selectedMapData={selectedMapData} setSelectedMapData={setSelectedMapData}
+                    savedMaps={savedMaps} setSavedMaps={setSavedMaps}
+                    savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
+                    loadMap={loadMap}
+                    currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
+                    mapName={mapName} setMapName={setMapName}
+                    mapDescr={mapDescr} setMapDescr={setMapDescr}
+                />
+            </Modal.Body>
 
             <Modal.Footer>
                 <Container fluid className="">

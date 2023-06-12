@@ -47,6 +47,10 @@ function App() {
   const [currentId, setCurrentId] = useState( 0 );
   const [groundColor, setGroundColor] = useState("#119944");
 
+  const [uiPage, setUiPage] = useState("Account");
+  const [selectedMap, setSelectedMap] = useState(-1);
+  const [selectedMapData, setSelectedMapData] = useState({});
+
   // Create listener for window resize & handle resizing
   React.useEffect(() => {
     function handleResize() {
@@ -175,6 +179,7 @@ function App() {
           </Canvas>
           { showUserModal &&
             <UserModal setShowUserModal={setShowUserModal}
+              canvHeightRatio={canvHeightRatio} 
               currentColor={currentColor} aspectRatio={aspectRatio}
               gridAxis={gridAxis} setGridAxis={setGridAxis}
               gridValue={gridValue} setGridValue={setGridValue}
@@ -199,6 +204,10 @@ function App() {
               currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
               mapName={mapName} setMapName={setMapName}
               mapDescr={mapDescr} setMapDescr={setMapDescr}
+
+              uiPage={uiPage} setUiPage={setUiPage}
+              selectedMap={selectedMap} setSelectedMap={setSelectedMap}
+              selectedMapData={selectedMapData} setSelectedMapData={setSelectedMapData}
               />
           }
         </section>

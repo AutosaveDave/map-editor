@@ -58,16 +58,13 @@ export async function createNewMap( data, name, descr ) {
       zoom: 1,
     },
   };
-
-  return await addDoc( collection( db, "Maps" ) , mapData);
+  const result = await addDoc( collection( db, "Maps" ) , mapData );
+  return result;
 }
 
 export async function saveMap( data, mapRef, map ) {
-  console.log('saveMap() mapRef:');
-  console.log(mapRef);
   const { email } = data.email;
   const mapData = {...map, lastEdited:Timestamp.now()};
-  console.log(mapData);
   const db = getFirestore( app );
 
   const result = await updateDoc( doc( collection( db, "Maps" ), mapRef ), mapData )
