@@ -140,6 +140,35 @@ function App() {
     setWallThickness(mapData.mapConfig.wallThickness);
   }
 
+  const clearData = () => {
+    setCurrentColor("#EE9900");
+    setColorPalette([]);
+    setMapName("Untitled");
+    setMapDescr("No description.");
+    setGridAxis(0);
+    setGridValue(0);
+    setTileSize(1);
+    setMapWidth(10);
+    setMapLength(10);
+    setMapHeight(10);
+    setWallThickness(0.1);
+    setCameraPosition([-2,-2,10]);
+    setCameraAngle(1);
+    setCameraSwivel(7);
+    setCameraDistance(20);
+    setCameraFocus([4,4,0]);
+    setFrustum(16);
+    setCameraZoom(1);
+    setPanels([]);
+    setSavedMaps([]);
+    setSavedMapRefs([]);
+    setCurrentMapRef(false);
+    setCurrentId(0);
+    setGroundColor("#119944");
+    setSelectedMap(-1);
+    setSelectedMapData({});
+  }
+
   return (
     <>
       <UserAuthContextProvider setSavedMaps={setSavedMaps}>
@@ -207,7 +236,8 @@ function App() {
 
               uiPage={uiPage} setUiPage={setUiPage}
               selectedMap={selectedMap} setSelectedMap={setSelectedMap}
-              selectedMapData={selectedMapData} setSelectedMapData={setSelectedMapData}
+              selectedMapData={selectedMapData} setSelectedMapData={setSelectedMapData} 
+              clearData={clearData}
               />
           }
         </section>

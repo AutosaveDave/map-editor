@@ -40,6 +40,7 @@ function UserModal( props ) {
         selectedMap, setSelectedMap,
         selectedMapData, setSelectedMapData,
         canvHeightRatio,
+        clearData
     } = props;
 
     const { user } = useUserAuth();
@@ -83,7 +84,7 @@ function UserModal( props ) {
                                 >Back</Button> 
                             }
                         </Container>
-                        <LogoutButton setShowUserModal={setShowUserModal} 
+                        <LogoutButton setShowUserModal={setShowUserModal} clearData={clearData} setPage={setPage}
                             className="d-inline-block m-3 "
                         />
                         <Button className="d-inline-block mx-1 mb-3" 
@@ -154,6 +155,7 @@ function UserModal( props ) {
                         </Col>
                         <Col className="text-center">
                             <LogoutButton setShowUserModal={setShowUserModal} 
+                                clearData={clearData} setPage={setPage}
                                 className="d-inline-block m-3 justify-content-center"
                             />
 
@@ -162,15 +164,10 @@ function UserModal( props ) {
                             <Button className="d-inline-block mx-1 mb-3" 
                                 variant="secondary" 
                                 onClick={handleClose} 
-                                
                             >Close</Button>
                         </Col>
-                        
                     </Row>
                 </Container>
-                
-                
-                
             </Modal.Footer>
         </Modal.Dialog>
         </div>

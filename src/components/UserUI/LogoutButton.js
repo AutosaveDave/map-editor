@@ -4,13 +4,15 @@ import { useUserAuth } from "../../context/UserAuthContext";
 
 const LogoutButton = ( props ) => {
 
-  const { setShowUserModal } = props;
+  const { setShowUserModal, clearData, setPage } = props;
   const { logOut, user } = useUserAuth();
   
 
   function handleClick() {
+    clearData();
     logOut();
-    setShowUserModal(false);
+    
+    setPage("Account");
   }
 
   if (!user) {
