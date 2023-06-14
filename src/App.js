@@ -60,7 +60,7 @@ function App() {
     window.addEventListener('resize', handleResize);
   });
 
-  function saveCurrentMap( user ) {
+  async function saveCurrentMap( user ) {
     const panelObjects = [];
     panels.forEach( ( thisPanel ) => {
       const panelObj = {
@@ -100,7 +100,7 @@ function App() {
         wallThickness: wallThickness,
       },
     };
-    saveMap( user, currentMapRef, mapSaveData );
+    return await saveMap( user, currentMapRef, mapSaveData );
   }
 
   function loadMap( mapData ) {
