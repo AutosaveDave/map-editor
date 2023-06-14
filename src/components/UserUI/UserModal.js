@@ -62,12 +62,12 @@ function UserModal( props ) {
                             <Row>
                                 <div className='m-1 justify-content-center'>
                                     <Col>
-                                        <Login setShowUserModal={setShowUserModal}/>
+                                        <Login setShowUserModal={setShowUserModal} setPage={setPage} />
                                     </Col>
                                 </div>
                                 <div className='m-1 justify-content-center'>
                                     <Col>
-                                        <Signup setShowUserModal={setShowUserModal}/>
+                                        <Signup setShowUserModal={setShowUserModal} setPage={setPage}/>
                                     </Col>
                                 </div>
                                 

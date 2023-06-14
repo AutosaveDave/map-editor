@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Form, Alert, Button, Spinner } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext";
 
 import { auth } from "../../firebase-config";
@@ -8,22 +7,29 @@ import { auth } from "../../firebase-config";
 
 const SignupForm = ( props ) => {
 
-  const { setShowUserModal } = props;
+  const { setShowUserModal, setPage } = props;
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
+  const [signingUp, setSigningUp] = useState(false);
   const { signUp } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setSigningUp(true);
     setError("");
     try {
-      signUp(email, password);
+      await signUp(email, password)
+        .then( () => { 
+          setSigningUp(false);
+          setPage("Account"); 
+        });
     } catch (err) {
       setError(err.message);
-    }
+      setSigningUp(false);
+    } 
+    
   };
   
 
@@ -50,9 +56,19 @@ const SignupForm = ( props ) => {
           </Form.Group>
 
           <div className="d-grid gap-1">
-            <Button variant="primary" type="Submit">
-              Sign up
-            </Button>
+            { signingUp && 
+              <>
+              <div className="text-center">
+                <Spinner variant="primary" />
+              </div>
+              </>
+            }
+            { !signingUp && 
+              <Button variant="primary" type="Submit">
+                Sign up
+              </Button>
+            }
+            
           </div>
         </Form>
       </div>

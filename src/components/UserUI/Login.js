@@ -6,7 +6,7 @@ import { useUserAuth } from "../../context/UserAuthContext.js";
 
 const Login = ( props ) => {
 
-  const { setShowUserModal } = props;
+  const { setShowUserModal, setPage } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,14 +20,16 @@ const Login = ( props ) => {
     setError("");
     setLoggingIn(true);
     try {
-      await logIn(email, password);
-      setShowUserModal(false);
+      await logIn(email, password)
+        .then( () => {
+          setLoggingIn(false);
+          setPage("Account");
+        });
+      //setShowUserModal(false);
     } catch (err) {
       setError(err.message);
       setLoggingIn(false);
-    } finally {
-      setLoggingIn(false);
-    }
+    }    
   };
 
   return (

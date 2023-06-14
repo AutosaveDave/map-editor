@@ -16,13 +16,17 @@ const auth = getAuth(app);
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
-  function logIn(email, password) {
+  async function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
+  async function signUp(email, password) {
+    await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
               addNewUser(userCredential.user);
+              
+            })
+            .then((result) => {
+              return result;
             })
             .catch((error) => {
               const errorCode = error.code;
