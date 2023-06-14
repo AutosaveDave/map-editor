@@ -110,7 +110,7 @@ function UserModal( props ) {
                 
             </Modal.Header>
 
-            <Modal.Body>
+            <Modal.Body className="mt-0 pt-1">
                 <UserInterface user={user} handleClose={handleClose} setShowUserModal={setShowUserModal} uiPage={uiPage} setPage={setPage} 
                     currentColor={currentColor} aspectRatio={aspectRatio}
                     gridAxis={gridAxis} setGridAxis={setGridAxis}
@@ -140,7 +140,7 @@ function UserModal( props ) {
                 />
             </Modal.Body>
 
-            <Modal.Footer>
+            <Modal.Footer className="px-4 mx-2">
                 <Container fluid className="">
                     <Row className="">
                         <Col className="text-start">
