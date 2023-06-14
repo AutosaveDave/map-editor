@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Form, Alert, Button, Spinner } from "react-bootstrap";
+
 import { useUserAuth } from "../../context/UserAuthContext";
 import { createNewMap } from "../../utils/mutations";
 
@@ -25,12 +25,12 @@ const NewMapForm = ( props ) => {
 
   
   const [error, setError] = useState("");
+  const [awaitingCreate, setAwaitingCreate] = useState(false);
 
   async function refreshMaps( newId ) {
     let selectedIndex = -1;
     const result = await getUserMaps()
       .then( maprefs => {
-        console.log(maprefs)
         maprefs.forEach( ( thisRef, i ) => {
           if( thisRef === newId ) {
             setSelectedMap(i);
@@ -63,12 +63,15 @@ const NewMapForm = ( props ) => {
     e.preventDefault();
     setError("");
     setPanels([]);
+    setAwaitingCreate(true);
     await createMap()
       .then( result => {
+        setAwaitingCreate(false);
         loadMap(savedMaps[result]);
         setPage('Account');
       })
       .catch( (err) => {
+        setAwaitingCreate(false);
         setError(err.message);
       });
   };
@@ -95,10 +98,16 @@ const NewMapForm = ( props ) => {
             />
           </Form.Group>
 
-          <div className="d-grid gap-1" >
-            <Button variant="primary" type="Submit">
-              Create Map
-            </Button>
+          <div className="d-grid gap-1 justify-content-center" >
+            { awaitingCreate && 
+              <Spinner variant="primary" className=""/>
+            }
+            { !awaitingCreate && 
+              <Button variant="warning" type="Submit">
+                Create Map
+              </Button>
+            }
+            
           </div>
         </Form>
         <hr />
