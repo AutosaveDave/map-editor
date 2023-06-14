@@ -17,7 +17,8 @@ const NewMapForm = ( props ) => {
         savedMapRefs, setSavedMapRefs,
         mapName, setMapName,
         mapDescr, setMapDescr,
-        setCurrentMapRef
+        setCurrentMapRef,
+        setPanels
     } = props;
 
   const auth = useUserAuth();
@@ -61,7 +62,7 @@ const NewMapForm = ( props ) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    //const newMapResult = 
+    setPanels([]);
     await createMap()
       .then( result => {
         loadMap(savedMaps[result]);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useUserAuth } from "../../context/UserAuthContext.js";
-import { Stack, Container, Button, Row, Col } from 'react-bootstrap';
+import { Stack, Container, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { queryUserMaps } from "../../utils/queries.js";
 import { createNewMap } from "../../utils/mutations";
 
@@ -17,6 +17,8 @@ function MapsList( props ) {
         mapDescr, setMapDescr,
         getUserMaps, loadMap
     } = props;
+
+    const [mapListLoading, setMapListLoading] = useState(false);
 
     function listItemVariant( selected, mapIndex ) {
         if( selected === mapIndex ) {
@@ -116,22 +118,32 @@ function MapsList( props ) {
     </>);
 
     useEffect( () => {
-        getUserMaps();
+        setMapListLoading(true);
+        getUserMaps().then(() => {setMapListLoading(false)});
         console.log('getUserMaps() called');
     },[]);
 
     return (
         <Container fluid className="justify-content-center" >
             <Stack className="p-2" xs={2}>
-                <Stack className="justify-content-between mr-1 " direction='horizontal'>
-                    <h5 className='text-start'>Your Maps</h5>
-
-                    <Button className="p-2 ml-2 mb-3 mr-0"
-                        onClick={ () => { setPage("Create New Map") } }
-                        variant='warning'
-                    >Create    
-                    </Button>
+                <Stack className=" pl-3 pr-2 mb-2" direction='horizontal'>
+                    
+                    
+                    <div className="w-25 px-3 text-start">
+                        { mapListLoading && 
+                            <Spinner variant="primary" className=""/>
+                        }
+                    </div>
+                    <div className="w-75 px-2 text-end">
+                        <Button className=" p-2 m-0"
+                            onClick={ () => { setPage("Create New Map") } }
+                            variant='warning'
+                        >Create    
+                        </Button>
+                    </div>
+                    
                 </Stack>
+                
                 <div>
                     {mapListItems}
                 </div>

@@ -131,6 +131,7 @@ function UserInterface( props ) {
                             setCurrentMapRef={setCurrentMapRef}
                             mapName={mapName} setMapName={setMapName}
                             mapDescr={mapDescr} setMapDescr={setMapDescr}
+                            setPanels={setPanels}
                         />
                 </Container>
             );
