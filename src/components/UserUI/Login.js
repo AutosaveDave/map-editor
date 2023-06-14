@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Form, Alert } from "react-bootstrap";
+import { Form, Alert, Spinner } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext.js";
 
@@ -11,17 +11,22 @@ const Login = ( props ) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
   const { logIn } = useUserAuth();
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoggingIn(true);
     try {
       await logIn(email, password);
       setShowUserModal(false);
     } catch (err) {
       setError(err.message);
+      setLoggingIn(false);
+    } finally {
+      setLoggingIn(false);
     }
   };
 
@@ -48,9 +53,16 @@ const Login = ( props ) => {
           </Form.Group>
 
           <div className="d-grid gap-1" >
-            <Button variant="primary" type="Submit">
+            { loggingIn && 
+              <div className="text-center">
+                <Spinner variant="primary" />
+              </div>
+            }
+            { !loggingIn && 
+              <Button variant="primary" type="Submit">
               Log In
             </Button>
+            }
           </div>
         </Form>
         <hr />
