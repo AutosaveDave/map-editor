@@ -101,9 +101,9 @@ function UserModal( props ) {
         className="modal show"
         style= {{ display:'block', position:'fixed' }}
         >
-        <Modal.Dialog className="m-0 w-100" xs={{maxWidth:'100%'}} lg={{maxWidth:'60%'}} xl={{maxWidth:'40%'}} scrollable={true} style={{ display:'block', position:'absolute', right: 0, top:`${100-canvHeightRatio}%`, height:`${canvHeightRatio}%` }}>
-            <Modal.Header className="justify-content-center">
-                <div className="d-block">
+        <Modal.Dialog className="m-0 w-100" xs={{maxWidth:'100%'}} lg={{maxWidth:'70%'}} xl={{maxWidth:'50%'}} xxl={{maxWidth:'40%'}} scrollable={true} style={{ display:'block', position:'absolute', right: 0, top:`${100-canvHeightRatio}%`, height:`${canvHeightRatio}%` }}>
+            <Modal.Header className="justify-content-center text-center">
+                <div className="">
                     <h4 >{uiPage}</h4>
                     <h6 >{user.email}</h6>
                 </div>

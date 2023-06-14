@@ -30,7 +30,7 @@ function UserToolBar( props ) {
 
     return (
         <>
-            <Container fluid className="w-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
+            <Container fluid={true} className="w-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
                 <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
                     <Col xs={4} className="h-100" style={{ textAlign:'left' }}>
                     {user && 
