@@ -69,7 +69,7 @@ function UserToolBar( props ) {
 
                 </Row>
                 
-                <UserButton setShowUserModal={setShowUserModal}/>
+                <UserButton setShowUserModal={setShowUserModal} canvHeightRatio={canvHeightRatio}/>
             </Container>
         </>
     );

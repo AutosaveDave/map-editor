@@ -36,7 +36,7 @@ const NewMapForm = ( props ) => {
           if( key === newId ) {
             selectedId = key;
           }
-          //return selectedId;
+          return "";
         });
         if( selectedId )
           setSelectedMap(selectedId);
