@@ -102,7 +102,7 @@ function UserModal( props ) {
         className="modal show"
         style= {{ display:'block', position:'fixed' }}
         >
-        <Modal.Dialog className="m-0 w-100" xs={{maxWidth:'100%'}} lg={{maxWidth:'70%'}} xl={{maxWidth:'50%'}} xxl={{maxWidth:'40%'}} scrollable={true} style={{ display:'block', position:'absolute', right: 0, top:`${100-canvHeightRatio}%`, height:`${canvHeightRatio}%` }}>
+        <Modal.Dialog className="m-0 w-100" xs={{maxWidth:'100%'}} md={{maxWidth:'90%'}} lg={{maxWidth:'80%'}} xl={{maxWidth:'70%'}} xxl={{maxWidth:'40%'}} scrollable={true} style={{ display:'block', position:'absolute', right: 0, top:`${100-canvHeightRatio}%`, height:`${canvHeightRatio}%` }}>
             <Modal.Header className="justify-content-center text-center">
                 <div className="">
                     <h4 >{uiPage}</h4>
@@ -138,6 +138,7 @@ function UserModal( props ) {
                     currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
                     mapName={mapName} setMapName={setMapName}
                     mapDescr={mapDescr} setMapDescr={setMapDescr}
+                    clearData={clearData}
                 />
             </Modal.Body>
 

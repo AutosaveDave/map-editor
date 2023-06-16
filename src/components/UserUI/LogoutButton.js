@@ -9,16 +9,15 @@ const LogoutButton = ( props ) => {
   
 
   function handleClick() {
-    clearData();
+    clearData(true);
     logOut();
-    
     setPage("Account");
   }
 
   if (!user) {
     return (
       <>
-        <p>Not logged in.</p>
+        <div></div>
       </>
     );
   }

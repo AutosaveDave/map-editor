@@ -29,18 +29,17 @@ function MapsList( props ) {
 
     function MapListItem( props ) {
         const { 
-            mapIndex, 
+            mapId, 
             name, descr, 
             lastEdited, createdOn, 
-            colorPalette, 
-            thisMap 
+            colorPalette,
         } = props;
 
         return (
             <Container fluid={true} className="">
                 <Button className="w-100 p-1 m-1" 
-                    variant={`${listItemVariant(selectedMap,mapIndex)}`}
-                    onClick={(e) => { e.preventDefault(); handleMapClick(thisMap, mapIndex); } }
+                    variant={`${listItemVariant(selectedMap,mapId)}`}
+                    onClick={(e) => { e.preventDefault(); handleMapClick(mapId); } }
                 >
                     <Stack direction='horizontal' className="">
                         <Stack className="text-start justify-content-between" fluid={true}>
@@ -89,38 +88,44 @@ function MapsList( props ) {
         );
     }
 
-    function handleMapClick( thisMap, mapIndex ) {
-        console.log(thisMap)
-        setSelectedMap(mapIndex); 
-        setSelectedMapData(thisMap); 
-        setCurrentMapRef(savedMapRefs[mapIndex])
-        loadMap(thisMap);
+    function handleMapClick( thisMapRef ) {
+        setSelectedMap(thisMapRef); 
+        loadMap(savedMaps[thisMapRef]);
     }
 
-    const mapListItems = ( <>
-        { savedMaps.length > 0 &&
-            <>
-            { savedMaps.map( ( thisMap, i ) => ( 
-                <MapListItem className="w-100" 
-                    key={`map-list-item-${i}`} 
-                    name={thisMap.name} 
-                    mapIndex={i}
-                    descr={thisMap.descr}
-                    createdOn={`${thisMap.createdOn.toDate().toLocaleString()}`}
-                    lastEdited={`${thisMap.lastEdited.toDate().toLocaleString()}`}
-                    groundColor={thisMap.mapConfig.groundColor}
-                    colorPalette={thisMap.mapConfig.colorPalette} 
-                    thisMap={thisMap}
-                />
-            ) ) }
-            </>
-        }
-    </>);
+    const MapListItems = ( props ) => { 
+        const maps = Object.entries( { ...(props.maps) } );
+        return ( <>
+            { maps.length > 0 &&
+                <>
+                { maps.map( ( [key, value] ) =>  ( 
+                    <MapListItem className="w-100" 
+                        key={`map-list-item-${key}`} 
+                        mapId={key}
+                        name={value.name} 
+                        descr={value.descr}
+                        createdOn={`${value.createdOn.toDate().toLocaleString()}`}
+                        lastEdited={`${value.lastEdited.toDate().toLocaleString()}`}
+                        groundColor={value.mapConfig.groundColor}
+                        colorPalette={value.mapConfig.colorPalette} 
+                        thisMap={value}
+                    />
+                ) ) }
+                </>
+            }
+    </>); }
 
     useEffect( () => {
-        setMapListLoading(true);
-        getUserMaps().then(() => {setMapListLoading(false)});
-        console.log('getUserMaps() called');
+        async function getMaps() {
+            setMapListLoading(true);
+            const result = await getUserMaps().then( (maps) => { 
+                setMapListLoading(false);
+                return maps;
+            } );
+            return result;
+        }
+        
+        getMaps();
     },[]);
 
     return (
@@ -145,7 +150,7 @@ function MapsList( props ) {
                 </Stack>
                 
                 <div>
-                    {mapListItems}
+                    <MapListItems maps={savedMaps}/>
                 </div>
                 
             </Stack>

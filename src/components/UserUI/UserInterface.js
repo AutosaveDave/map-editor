@@ -37,23 +37,21 @@ function UserInterface( props ) {
         currentMapRef, setCurrentMapRef,
         mapName, setMapName,
         mapDescr, setMapDescr,
+        clearData,
     } = props;
 
     async function getUserMaps() {
-        const userMaps = [];
-        const mapRefs = [];
+        const userMaps = {};
         const result = await queryUserMaps( user )
-            .then( result => {
-                result.forEach( thisResult => { 
-                    userMaps.push(thisResult.data());
+            .then( data => {
+                data.forEach( thisResult => { 
                     const pathSegs = thisResult._document.key.path.segments;
-                    mapRefs.push(pathSegs[pathSegs.length-1]);
+                    userMaps[ `${pathSegs[ pathSegs.length - 1 ]}` ] = { ...(thisResult.data()) };
                 } );
                 setSavedMaps(userMaps);
-                setSavedMapRefs(mapRefs);
                 console.log("queryUserMaps result");
-                console.log(mapRefs);
-                return mapRefs;
+                console.log(userMaps);
+                return userMaps;
             })
             .catch((error) => {
                 console.log(error)
@@ -132,6 +130,7 @@ function UserInterface( props ) {
                             mapName={mapName} setMapName={setMapName}
                             mapDescr={mapDescr} setMapDescr={setMapDescr}
                             setPanels={setPanels}
+                            clearData={clearData}
                         />
                 </Container>
             );

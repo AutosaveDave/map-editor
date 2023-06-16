@@ -6,7 +6,7 @@ import { useUserAuth } from "../../context/UserAuthContext";
 import { createNewMap } from "../../utils/mutations";
 
 
-const NewMapForm = ( props ) => {
+const MapConfigForm = ( props ) => {
 
     const { setShowUserModal,
         setSelectedMap, 
@@ -23,24 +23,21 @@ const NewMapForm = ( props ) => {
 
   const auth = useUserAuth();
 
-  const [newName, setNewName] = useState("");
-  const [newDescr, setNewDescr] = useState("");
   const [error, setError] = useState("");
   const [awaitingCreate, setAwaitingCreate] = useState(false);
 
   async function refreshMaps( newId ) {
+    let selectedIndex = -1;
     const result = await getUserMaps()
-      .then( maps => {
-        let selectedId = "";
-        Object.entries(maps).map( ( [key, value] ) => {
-          if( key === newId ) {
-            selectedId = key;
+      .then( maprefs => {
+        maprefs.forEach( ( thisRef, i ) => {
+          if( thisRef === newId ) {
+            setSelectedMap(i);
+            setCurrentMapRef(thisRef);
+            selectedIndex = i;
           }
-          //return selectedId;
         });
-        if( selectedId )
-          setSelectedMap(selectedId);
-        return maps[selectedId];
+        return selectedIndex;
       })
       .catch( error => {
         console.log(error);
@@ -58,7 +55,7 @@ const NewMapForm = ( props ) => {
         .catch( (error) => {
             console.log(error);
         });
-      return result;
+        return result;
   }
 
   const handleSubmit = async (e) => {
@@ -70,8 +67,7 @@ const NewMapForm = ( props ) => {
       .then( result => {
         setAwaitingCreate(false);
         clearData(false);
-        console.log(result);
-        loadMap(result);
+        loadMap(savedMaps[result]);
         setPage('Account');
       })
       .catch( (err) => {
@@ -120,4 +116,4 @@ const NewMapForm = ( props ) => {
   );
 };
 
-export default NewMapForm;
+export default MapConfigForm;

@@ -31,7 +31,10 @@ function UserToolBar( props ) {
         if( !savingMap ){
             setSavingMap( true );
             saveCurrentMap( user )
-                .then( () => { setSavingMap( false ); });
+                .then( () => { setSavingMap( false ); })
+                .catch((error) => {
+                    console.log(error)
+                })
         }
     }
 

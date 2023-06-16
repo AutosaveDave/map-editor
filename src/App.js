@@ -41,15 +41,14 @@ function App() {
   const [frustum, setFrustum] = useState( 16 );
   const [cameraZoom, setCameraZoom] = useState( 1 );
   const [panels, setPanels] = useState( [] );
-  const [savedMaps,setSavedMaps] = useState( [] );
-  const [savedMapRefs,setSavedMapRefs] = useState( [] );
+  const [savedMaps,setSavedMaps] = useState( {} );
+
   const [currentMapRef,setCurrentMapRef] = useState(false);
   const [currentId, setCurrentId] = useState( 0 );
   const [groundColor, setGroundColor] = useState("#119944");
 
   const [uiPage, setUiPage] = useState("Account");
-  const [selectedMap, setSelectedMap] = useState(-1);
-  const [selectedMapData, setSelectedMapData] = useState({});
+  const [selectedMap, setSelectedMap] = useState("");
 
   // Create listener for window resize & handle resizing
   React.useEffect(() => {
@@ -100,10 +99,11 @@ function App() {
         wallThickness: wallThickness,
       },
     };
-    return await saveMap( user, currentMapRef, mapSaveData );
+    return await saveMap( user, selectedMap, mapSaveData );
   }
 
   function loadMap( mapData ) {
+    
     console.log(mapData)
     setMapName(mapData.name);
     setMapDescr(mapData.descr);
@@ -140,11 +140,16 @@ function App() {
     setWallThickness(mapData.mapConfig.wallThickness);
   }
 
-  const clearData = () => {
+  const clearData = (allData, nameDescr) => {
+    // allData : true => reset ALL data; false => reset only current map data
+    // nameDescr : true=> reset mapName & mapDescr
     setCurrentColor("#EE9900");
     setColorPalette([]);
-    setMapName("Untitled");
-    setMapDescr("No description.");
+    if(nameDescr) {
+      setMapName("");
+      setMapDescr("");
+    }
+    
     setGridAxis(0);
     setGridValue(0);
     setTileSize(1);
@@ -160,13 +165,13 @@ function App() {
     setFrustum(16);
     setCameraZoom(1);
     setPanels([]);
-    setSavedMaps([]);
-    setSavedMapRefs([]);
-    setCurrentMapRef(false);
-    setCurrentId(0);
     setGroundColor("#119944");
-    setSelectedMap(-1);
-    setSelectedMapData({});
+    setCurrentId(0);
+
+    if(allData) {
+      setSavedMaps({});
+      setSelectedMap("");
+    }
   }
 
   return (
@@ -227,7 +232,6 @@ function App() {
               panels={panels} setPanels={setPanels}
               currentId={currentId} setCurrentId={setCurrentId}
               savedMaps={savedMaps} setSavedMaps={setSavedMaps}
-              savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
               
               loadMap={loadMap} 
               currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
@@ -236,7 +240,6 @@ function App() {
 
               uiPage={uiPage} setUiPage={setUiPage}
               selectedMap={selectedMap} setSelectedMap={setSelectedMap}
-              selectedMapData={selectedMapData} setSelectedMapData={setSelectedMapData} 
               clearData={clearData}
               />
           }
