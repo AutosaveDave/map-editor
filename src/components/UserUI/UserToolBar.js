@@ -7,6 +7,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import ColorTool from "../EditorUI/Tools/ColorTool.js";
 import UserButton from "./UserButton.js";
 import { useUserAuth } from '../../context/UserAuthContext.js';
+import saveIcon from '../../assets/icons/save2.svg';
 
 
 function UserToolBar( props ) {
@@ -42,16 +43,24 @@ function UserToolBar( props ) {
         <>
             <Container fluid={true} className="w-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
                 <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
-                    <Col xs={4} className="h-100" style={{ textAlign:'left' }}>
+                    <Col xs={4} className="h-100 px-0" style={{ textAlign:'left' }}>
                     {user && 
-                        <div className="justify-content-left" >
+                        <div className="justify-content-left h-100 p-1" >
                             { savingMap && 
                                 <Spinner className="mx-3" variant="primary"/>
                             }
                             { !savingMap && 
-                                <Button
+                                <Button className="d-inline-block mx-1 px-2 h-100"
                                     onClick={handleSave}
-                                >Save</Button>
+                                    style={{
+                                        backgroundImage:`url(${saveIcon})`, 
+                                        backgroundPosition:'center', 
+                                        backgroundSize:'60%', 
+                                        backgroundRepeat:'no-repeat'
+                                      }}
+                                >
+                                    <div className="px-2 h-100"/>
+                                </Button>
                             }
                         </div>
                     }
@@ -63,7 +72,7 @@ function UserToolBar( props ) {
                             colorPalette={colorPalette}
                             setColorPalette={setColorPalette}/>
                     </Col>
-                    <Col xs={3} className="h-100 align-middle" style={{ textAlign:'right' }}>
+                    <Col xs={3} className="h-100 px-0 py-1 align-middle" style={{ textAlign:'right' }}>
                         <UserButton setShowUserModal={setShowUserModal}/>
                     </Col>
 

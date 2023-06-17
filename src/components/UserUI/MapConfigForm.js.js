@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { Form, Alert, Button, Spinner } from "react-bootstrap";
 
 import { useUserAuth } from "../../context/UserAuthContext";
-import { createNewMap } from "../../utils/mutations";
+import { saveMap } from "../../utils/mutations";
 
 
 const MapConfigForm = ( props ) => {
 
     const { setShowUserModal,
+        selectedMap,
         setSelectedMap, 
         savedMaps,
         getUserMaps,
@@ -24,54 +25,22 @@ const MapConfigForm = ( props ) => {
   const auth = useUserAuth();
 
   const [error, setError] = useState("");
-  const [awaitingCreate, setAwaitingCreate] = useState(false);
-
-  async function refreshMaps( newId ) {
-    let selectedIndex = -1;
-    const result = await getUserMaps()
-      .then( maprefs => {
-        maprefs.forEach( ( thisRef, i ) => {
-          if( thisRef === newId ) {
-            setSelectedMap(i);
-            setCurrentMapRef(thisRef);
-            selectedIndex = i;
-          }
-        });
-        return selectedIndex;
-      })
-      .catch( error => {
-        console.log(error);
-      });
-      return result;
-  }
-
-  async function createMap() {
-    const result = await createNewMap( auth, newName, newDescr )
-        .then( data => {
-            const newPath = data._key.path.segments;
-            const newId = newPath[newPath.length-1];
-            return refreshMaps(newId);
-        })
-        .catch( (error) => {
-            console.log(error);
-        });
-        return result;
-  }
+  const [awaitingSave, setAwaitingSave] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
-    setAwaitingCreate(true);
-    createMap()
+    const mapConfigData = { name: mapName, descr: mapDescr };
+    setAwaitingSave(true);
+    saveMap( auth, selectedMap, mapConfigData)
       .then( result => {
-        setAwaitingCreate(false);
+        setAwaitingSave(false);
         clearData(false);
         loadMap(savedMaps[result]);
         setPage('Account');
       })
       .catch( (err) => {
-        setAwaitingCreate(false);
+        setAwaitingSave(false);
         setError(err.message);
       });
   };
@@ -84,27 +53,29 @@ const MapConfigForm = ( props ) => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-1" controlId="formMapName">
             <Form.Control
+              value={mapName}
               type="text"
               placeholder="Map Name"
-              onChange={(e) => setNewName(e.target.value)}
+              onChange={(e) => setMapName(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className="mb-1" controlId="formMapDescr">
             <Form.Control
+              value={mapDescr}
               type="text"
               placeholder="Map Description"
-              onChange={(e) => setNewDescr(e.target.value)}
+              onChange={(e) => setMapDescr(e.target.value)}
             />
           </Form.Group>
 
           <div className="d-grid gap-1 justify-content-center" >
-            { awaitingCreate && 
+            { awaitingSave && 
               <Spinner variant="primary" className=""/>
             }
-            { !awaitingCreate && 
+            { !awaitingSave && 
               <Button variant="warning" type="Submit">
-                Create Map
+                Save Changes
               </Button>
             }
             

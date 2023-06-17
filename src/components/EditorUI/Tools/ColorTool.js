@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Form, Alert, Button, Container, Row, Col } from "react-bootstrap";
 import PaletteButton from './PaletteButton';
+import addIcon from '../../../assets/icons/plus-circle.svg';
 
 function ColorTool( props ) {
     const { currentColor, setCurrentColor, colorPalette, setColorPalette } = props;
@@ -50,10 +51,17 @@ function ColorTool( props ) {
                         <Col className="d-inline-block h-100 p-0 m-0 align-middle" xs={1}>
                             <div className="d-inline-block text-center m-0 py-1 h-100 w-100">
                                 <Button 
-                                    className="d-inline-block m-0 p-0 h-100 w-100 text-center text-align-middle" 
+                                    className="d-inline-block align-middle m-0 p-3 text-center text-align-middle" 
                                     variant="primary" 
                                     onClick={handleAddColor}
-                                >+</Button>
+                                    style={{
+                                        backgroundImage:`url(${addIcon})`, 
+                                        backgroundPosition:'center', 
+                                        backgroundSize:'70%', 
+                                        backgroundRepeat:'no-repeat',
+                                        borderRadius:'50%'
+                                      }}
+                                ></Button>
                             </div>
                         </Col>
                         <Col className="d-inline-block h-100 p-0 m-0 align-middle" xs={9}>

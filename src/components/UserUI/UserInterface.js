@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import MapsList from './MapsList.js';
 import { queryUserMaps } from '../../utils/queries';
 import NewMapForm from './NewMapForm.js';
+import MapConfigForm from "./MapConfigForm.js.js";
 
 function UserInterface( props ) {
 
@@ -82,35 +83,15 @@ function UserInterface( props ) {
                             />
                 </Container>
             );
-        case "Save Map":
+        case "Map Settings":
             return (
                 <Container className="justify-content-center" >
                     <Row>
                         <Col>
-                            
-                            {/*          
-
-                            So...
-
-                            You need to make a component that goes here.
-                            It should have text fields for name and description
-                            (user can change name/descr of map on save)
-                            Also a function here or at UserModal level called
-                            saveCurrentMap(). It should use the 
-                            saveMap( data, mapRef, map ) function from 
-                            ../../utils/mutations.
-
-                            Also, write a loadSelectedMap() function 
-                            (probably at App level).
-                            loadSelectedMap() shouldn't need 
-                            to query the server,
-                            but instead it should use the 
-                            selectedMap and 
-                            selectedMapData state values
-
-                            move uiPage and setUiPage() to App level
-                            
-                            */}
+                            <MapConfigForm
+                                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
+                                
+                            />
                         </Col>
                     </Row>
                 </Container>
