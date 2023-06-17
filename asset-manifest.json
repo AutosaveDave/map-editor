@@ -1,14 +1,16 @@
 {
   "files": {
     "main.css": "/map-editor/static/css/main.8f20e5ad.css",
-    "main.js": "/map-editor/static/js/main.944d2c9c.js",
+    "main.js": "/map-editor/static/js/main.ba84e1e5.js",
     "index.html": "/map-editor/index.html",
-    "static/media/person-circle.svg": "/map-editor/static/media/person-circle.4d147b86c6dee205e25af91319cda6c7.svg",
+    "static/media/save2.svg": "/map-editor/static/media/save2.f16d4bce303bb2e2dc59d6a669f102bf.svg",
+    "static/media/person-circle.svg": "/map-editor/static/media/person-circle.6a9dcdf0065b135356163ae1b5ba9e54.svg",
+    "static/media/plus-circle.svg": "/map-editor/static/media/plus-circle.21e7d54706c388152d468b936a08e11c.svg",
     "main.8f20e5ad.css.map": "/map-editor/static/css/main.8f20e5ad.css.map",
-    "main.944d2c9c.js.map": "/map-editor/static/js/main.944d2c9c.js.map"
+    "main.ba84e1e5.js.map": "/map-editor/static/js/main.ba84e1e5.js.map"
   },
   "entrypoints": [
     "static/css/main.8f20e5ad.css",
-    "static/js/main.944d2c9c.js"
+    "static/js/main.ba84e1e5.js"
   ]
 }
