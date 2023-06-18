@@ -1,6 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import userIcon from '../../assets/icons/person-circle.svg';
 import { useUserAuth } from "../../context/UserAuthContext";
 
@@ -30,39 +31,59 @@ const UserButton = ( props ) => {
   if (!user) {
     return (
       <>
+        <OverlayTrigger
+          key={'bottom'}
+          placement={'bottom'}
+          overlay={
+              <Tooltip id={`tooltip-login-signup`} >
+                  Login/Signup
+              </Tooltip>
+          }
+        >
         <Button className="d-inline-block text-center" variant="warning" onClick={handleClick} 
-        style={{
-          height:'94%',
-          aspectRatio:'1',
-          backgroundImage:`url(${userIcon})`, 
-          backgroundPosition:'center', 
-          backgroundSize:'70%', 
-          backgroundRepeat:'no-repeat',
-          borderRadius:'50%',
-          position:'relative',
-          top:'3%',
-          right:'3px'
-        }}
-      />
+          style={{
+            height:'94%',
+            aspectRatio:'1',
+            backgroundImage:`url(${userIcon})`, 
+            backgroundPosition:'center', 
+            backgroundSize:'70%', 
+            backgroundRepeat:'no-repeat',
+            borderRadius:'50%',
+            position:'relative',
+            top:'3%',
+            right:'3px'
+          }}
+        />
+      </OverlayTrigger>
       </>
     );
   }
   return (
     <>
-      <Button className="d-inline-block text-center" variant="primary" onClick={handleClick} 
-        style={{
-          height:'94%',
-          aspectRatio:'1',
-          backgroundImage:`url(${userIcon})`, 
-          backgroundPosition:'center', 
-          backgroundSize:'70%', 
-          backgroundRepeat:'no-repeat',
-          borderRadius:'50%',
-          position:'relative',
-          top:'3%',
-          right:'3px'
-        }}
-      />
+      <OverlayTrigger
+        key={'bottom'}
+        placement={'bottom'}
+        overlay={
+            <Tooltip id={`tooltip-user-console`} >
+                User Console
+            </Tooltip>
+        }
+      >
+        <Button className="d-inline-block text-center" variant="primary" onClick={handleClick} 
+          style={{
+            height:'94%',
+            aspectRatio:'1',
+            backgroundImage:`url(${userIcon})`, 
+            backgroundPosition:'center', 
+            backgroundSize:'70%', 
+            backgroundRepeat:'no-repeat',
+            borderRadius:'50%',
+            position:'relative',
+            top:'3%',
+            right:'3px'
+          }}
+        />
+      </OverlayTrigger>
     </>
   );
 };

@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import ColorTool from "../EditorUI/Tools/ColorTool.js";
 import UserButton from "./UserButton.js";
 import MapConfigDrop from './MapConfigDrop.js';
@@ -51,32 +53,53 @@ function UserToolBar( props ) {
                     { user && 
                         <div className="justify-content-left h-100 p-0" >
                             <Stack direction='horizontal' gap={1} className="p-0 m-0 h-100">
-                                <MapConfigDrop mapName={mapName} setMapName={setMapName}
-                                    mapDescr={mapDescr} setMapDescr={setMapDescr}
-                                    selectedMap={selectedMap}
-                                    groundColor={groundColor} setGroundColor={setGroundColor}
-                                    saveCurrentMap={saveCurrentMap}
-                                />
+                            
+                                    <MapConfigDrop mapName={mapName} setMapName={setMapName}
+                                        mapDescr={mapDescr} setMapDescr={setMapDescr}
+                                        selectedMap={selectedMap}
+                                        groundColor={groundColor} setGroundColor={setGroundColor}
+                                        saveCurrentMap={saveCurrentMap}
+                                    />
+                               
                                 { savingMap && 
-                                    <Spinner className="d-inline-block mx-3" variant="primary"/>
+                                    <OverlayTrigger
+                                        key={'bottom'}
+                                        placement={'bottom'}
+                                        overlay={
+                                            <Tooltip id={`tooltip-saving`} >
+                                                Saving Map...
+                                            </Tooltip>
+                                        }
+                                    >
+                                        <Spinner className="d-inline-block text-align-left mx-0" variant="primary"/>
+                                    </OverlayTrigger>
                                 }
                                 { !savingMap && 
-                                    <Button className="d-inline-block "
-                                        onClick={handleSave}
-                                        style={{
-                                            height:'85%',
-                                            aspectRatio:'1',
-                                            backgroundImage:`url(${saveIcon})`, 
-                                            backgroundPosition:'center', 
-                                            backgroundSize:'60%', 
-                                            backgroundRepeat:'no-repeat',
-                                            position:'relative',
-                                            align:'middle',
-                                        }}
-                                    />
+                                    <OverlayTrigger
+                                        key={'bottom'}
+                                        placement={'bottom'}
+                                        overlay={
+                                            <Tooltip id={`tooltip-save-map`} >
+                                                Save Map
+                                            </Tooltip>
+                                        }
+                                    >
+                                        <Button className="d-inline-block "
+                                            onClick={handleSave}
+                                            style={{
+                                                height:'85%',
+                                                aspectRatio:'1',
+                                                backgroundImage:`url(${saveIcon})`, 
+                                                backgroundPosition:'center', 
+                                                backgroundSize:'60%', 
+                                                backgroundRepeat:'no-repeat',
+                                                position:'relative',
+                                                align:'middle',
+                                            }}
+                                        />
+                                    </OverlayTrigger>
                                 }
                             </Stack>
-                            
                         </div>
                     }
                     </Col>
@@ -90,10 +113,7 @@ function UserToolBar( props ) {
                     <Col xs={2} className="h-100 px-0 py-0 align-middle" style={{ textAlign:'right' }}>
                         <UserButton setShowUserModal={setShowUserModal}/>
                     </Col>
-
                 </Row>
-                
-                {/* <UserButton setShowUserModal={setShowUserModal} canvHeightRatio={canvHeightRatio}/> */}
             </Container>
         </>
     );

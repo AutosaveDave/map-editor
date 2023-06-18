@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useUserAuth } from "../../context/UserAuthContext.js";
 import { Stack, Container, Button, Row, Col, Spinner } from 'react-bootstrap';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import { queryUserMaps } from "../../utils/queries.js";
 import { createNewMap } from "../../utils/mutations";
 
@@ -140,13 +142,21 @@ function MapsList( props ) {
                         }
                     </div>
                     <div className="w-75 px-2 text-end">
-                        <Button className=" p-2 m-0"
-                            onClick={ () => { setPage("Create New Map") } }
-                            variant='warning'
-                        >Create    
-                        </Button>
+                        <OverlayTrigger
+                            key={'left'}
+                            placement={'left'}
+                            overlay={
+                                <Tooltip id={`tooltip-create-map`} >
+                                    Create New Map
+                                </Tooltip>
+                            }
+                        >
+                            <Button className=" p-2 m-0"
+                                onClick={ () => { setPage("Create New Map") } }
+                                variant='warning'
+                            >Create</Button>
+                        </OverlayTrigger>
                     </div>
-                    
                 </Stack>
                 
                 <div>
