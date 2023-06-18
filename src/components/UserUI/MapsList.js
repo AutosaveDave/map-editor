@@ -23,11 +23,11 @@ function MapsList( props ) {
 
     const [mapListLoading, setMapListLoading] = useState(false);
 
-    function listItemVariant( selected, mapIndex ) {
+    function listItemStyle( selected, mapIndex ) {
         if( selected === mapIndex ) {
-            return "success";
+            return styles.button.primary;
         }
-        return "primary";
+        return styles.button.secondary;
     }
 
     function MapListItem( props ) {
@@ -41,9 +41,8 @@ function MapsList( props ) {
         return (
             <Container fluid={true} className="">
                 <Button className="w-100 p-1 m-1" 
-                    variant={`${listItemVariant(selectedMap,mapId)}`}
+                    style={{ ...(listItemStyle(selectedMap,mapId)) }}
                     onClick={(e) => { e.preventDefault(); handleMapClick(mapId); } }
-                    style={{...(styles.button.secondary)}}
                 >
                     <Stack direction='horizontal' className="">
                         <Stack className="text-start justify-content-between" fluid={true}>

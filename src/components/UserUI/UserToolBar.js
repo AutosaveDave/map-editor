@@ -56,7 +56,7 @@ function UserToolBar( props ) {
             <Container fluid={true} className="w-100 m-0 px-1 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%`, ...(styles.surface.primary) }}>
                 <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
                     <Col xs={3} className="h-100 px-0" style={{ textAlign:'left' }}>
-                    { user && 
+                    { (user && !(selectedMap==="")) && 
                         <div className="justify-content-left h-100 p-0" >
                             <Stack direction='horizontal' gap={1} className="p-0 m-0 h-100">
                             
@@ -77,7 +77,7 @@ function UserToolBar( props ) {
                                             </Tooltip>
                                         }
                                     >
-                                        <Spinner className="d-inline-block text-align-left mx-0" variant="primary"/>
+                                        <Spinner className="d-inline-block text-align-left mx-0" variant="warning"/>
                                     </OverlayTrigger>
                                 }
                                 { !savingMap && 
