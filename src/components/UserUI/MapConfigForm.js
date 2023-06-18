@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
-import { Form, Alert, Button, Spinner } from "react-bootstrap";
-
+import { Form, Alert} from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext";
-import { saveMap } from "../../utils/mutations";
 
 
 const MapConfigForm = ( props ) => {
@@ -19,26 +16,6 @@ const MapConfigForm = ( props ) => {
 
   const [error, setError] = useState("");
   const [awaitingSave, setAwaitingSave] = useState(false);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   const mapConfigData = { name: mapName, descr: mapDescr, mapConfig['groundColor']: groundColor };
-  //   setAwaitingSave(true);
-  //   console.log('MAPCONFIGFORM selectedMap');
-  //   console.log(selectedMap)
-  //   saveMap( auth, selectedMap, mapConfigData)
-  //     .then( result => {
-  //       setAwaitingSave(false);
-  //       // clearData(false);
-  //       // loadMap(savedMaps[result]);
-  //       // setPage('Account');
-  //     })
-  //     .catch( (err) => {
-  //       setAwaitingSave(false);
-  //       setError(err.message);
-  //     });
-  // };
 
   return (
     <>
@@ -79,18 +56,6 @@ const MapConfigForm = ( props ) => {
               onChange={(e) => setGroundColor(e.target.value)}
             />
           </Form.Group>
-
-          {/* <div className="d-grid gap-1 justify-content-center" >
-            { awaitingSave && 
-              <Spinner variant="primary" className=""/>
-            }
-            { !awaitingSave && 
-              <Button variant="warning" type="Submit">
-                Save Changes
-              </Button>
-            }
-            
-          </div> */}
         </Form>
         
       </div>
