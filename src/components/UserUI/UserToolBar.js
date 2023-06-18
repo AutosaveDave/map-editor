@@ -45,12 +45,12 @@ function UserToolBar( props ) {
 
     return (
         <>
-            <Container fluid={true} className="w-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
+            <Container fluid={true} className="w-100 m-0 px-1 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%`, backgroundColor:'#002299' }}>
                 <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
-                    <Col xs={4} className="h-100 px-0" style={{ textAlign:'left' }}>
+                    <Col xs={3} className="h-100 px-0" style={{ textAlign:'left' }}>
                     { user && 
-                        <div className="justify-content-left h-100 p-1" >
-                            <Stack direction='horizontal' className="p-0 m-0">
+                        <div className="justify-content-left h-100 p-0" >
+                            <Stack direction='horizontal' gap={1} className="p-0 m-0 h-100">
                                 <MapConfigDrop mapName={mapName} setMapName={setMapName}
                                     mapDescr={mapDescr} setMapDescr={setMapDescr}
                                     selectedMap={selectedMap}
@@ -58,40 +58,42 @@ function UserToolBar( props ) {
                                     saveCurrentMap={saveCurrentMap}
                                 />
                                 { savingMap && 
-                                    <Spinner className="mx-3" variant="primary"/>
+                                    <Spinner className="d-inline-block mx-3" variant="primary"/>
                                 }
                                 { !savingMap && 
-                                    <Button className="d-inline-block p-2 py-3 h-100"
+                                    <Button className="d-inline-block "
                                         onClick={handleSave}
                                         style={{
+                                            height:'85%',
+                                            aspectRatio:'1',
                                             backgroundImage:`url(${saveIcon})`, 
                                             backgroundPosition:'center', 
                                             backgroundSize:'60%', 
-                                            backgroundRepeat:'no-repeat'
+                                            backgroundRepeat:'no-repeat',
+                                            position:'relative',
+                                            align:'middle',
                                         }}
-                                    >
-                                        <div className="px-2 h-100"/>
-                                    </Button>
+                                    />
                                 }
                             </Stack>
                             
                         </div>
                     }
                     </Col>
-                    <Col xs={5} className="h-100 py-0 m-0 px-1 align-middle text-center">
+                    <Col xs={7} className="h-100 py-0 m-0 px-1 align-middle text-center">
                         <ColorTool 
                             currentColor={currentColor} 
                             setCurrentColor={setCurrentColor}
                             colorPalette={colorPalette}
                             setColorPalette={setColorPalette}/>
                     </Col>
-                    <Col xs={3} className="h-100 px-0 py-1 align-middle" style={{ textAlign:'right' }}>
+                    <Col xs={2} className="h-100 px-0 py-0 align-middle" style={{ textAlign:'right' }}>
                         <UserButton setShowUserModal={setShowUserModal}/>
                     </Col>
 
                 </Row>
                 
-                <UserButton setShowUserModal={setShowUserModal} canvHeightRatio={canvHeightRatio}/>
+                {/* <UserButton setShowUserModal={setShowUserModal} canvHeightRatio={canvHeightRatio}/> */}
             </Container>
         </>
     );

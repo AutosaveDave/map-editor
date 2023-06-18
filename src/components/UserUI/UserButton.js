@@ -30,25 +30,39 @@ const UserButton = ( props ) => {
   if (!user) {
     return (
       <>
-        <Button variant="success" onClick={handleClick}>
-          <Image fluid src={userIcon}/>
-        </Button>
+        <Button className="d-inline-block text-center" variant="warning" onClick={handleClick} 
+        style={{
+          height:'94%',
+          aspectRatio:'1',
+          backgroundImage:`url(${userIcon})`, 
+          backgroundPosition:'center', 
+          backgroundSize:'70%', 
+          backgroundRepeat:'no-repeat',
+          borderRadius:'50%',
+          position:'relative',
+          top:'3%',
+          right:'3px'
+        }}
+      />
       </>
     );
   }
   return (
     <>
-      <Button className="d-inline-block text-center h-100 mx-1 px-3" variant="primary" onClick={handleClick} 
+      <Button className="d-inline-block text-center" variant="primary" onClick={handleClick} 
         style={{
+          height:'94%',
+          aspectRatio:'1',
           backgroundImage:`url(${userIcon})`, 
           backgroundPosition:'center', 
           backgroundSize:'70%', 
           backgroundRepeat:'no-repeat',
-          borderRadius:'50%'
+          borderRadius:'50%',
+          position:'relative',
+          top:'3%',
+          right:'3px'
         }}
-      >
-        
-      </Button>
+      />
     </>
   );
 };

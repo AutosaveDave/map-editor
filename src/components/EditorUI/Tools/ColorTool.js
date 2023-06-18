@@ -48,23 +48,28 @@ function ColorTool( props ) {
                                 />
                             </div>
                         </Col>
-                        <Col className="d-inline-block h-100 p-0 m-0 align-middle" xs={1}>
-                            <div className="d-inline-block text-center m-0 py-1 h-100 w-100">
+                        <Col className="d-inline-block h-100 p-0 mx-2 my-0 align-middle" xs='auto'>
+                            <div className="d-inline-block text-center m-0 p-0 h-100 w-100">
                                 <Button 
-                                    className="d-inline-block align-middle m-0 p-3 text-center text-align-middle" 
+                                    className="d-inline-block align-middle text-center text-align-middle" 
                                     variant="primary" 
                                     onClick={handleAddColor}
                                     style={{
+                                        height:'70%',
+                                        aspectRatio:'1',
                                         backgroundImage:`url(${addIcon})`, 
                                         backgroundPosition:'center', 
                                         backgroundSize:'70%', 
                                         backgroundRepeat:'no-repeat',
-                                        borderRadius:'50%'
+                                        borderRadius:'50%',
+                                        position:'relative',
+                                        top:'15%',
+                                        
                                       }}
                                 ></Button>
                             </div>
                         </Col>
-                        <Col className="d-inline-block h-100 p-0 m-0 align-middle" xs={9}>
+                        <Col className="d-inline-block h-100 p-0 m-0 align-middle" >
                             <Container fluid className="h-100 w-100 p-0 m-0">
                                 <Row className="w-100 h-50 m-0 p-0 align-middle" >
                                     {colorPalette.map( (buttonColor) => {
@@ -74,7 +79,7 @@ function ColorTool( props ) {
                                         }
                                         return (
                                         <>
-                                            <Col className={`d-inline-block h-100 text-left p-1 m-0 ${border}`} xs={1}
+                                            <Col className={`d-inline-block h-100 text-left p-1 m-0 ${border}`} xs={3} sm={2} md={1}
                                                 onClick={ () => { setCurrentColor(buttonColor) } }
                                                 style={ { 
                                                     backgroundColor: `${buttonColor}`,
