@@ -13,6 +13,7 @@ import UserButton from "./UserButton.js";
 import MapConfigDrop from './MapConfigDrop.js';
 import { useUserAuth } from '../../context/UserAuthContext.js';
 import saveIcon from '../../assets/icons/save2.svg';
+import {styles} from '../../utils/styles.js';
 
 
 function UserToolBar( props ) {
@@ -52,7 +53,7 @@ function UserToolBar( props ) {
 
     return (
         <>
-            <Container fluid={true} className="w-100 m-0 px-1 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%`, backgroundColor:'#002299' }}>
+            <Container fluid={true} className="w-100 m-0 px-1 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%`, ...(styles.surface.primary) }}>
                 <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
                     <Col xs={3} className="h-100 px-0" style={{ textAlign:'left' }}>
                     { user && 
@@ -95,11 +96,13 @@ function UserToolBar( props ) {
                                                 height:'85%',
                                                 aspectRatio:'1',
                                                 backgroundImage:`url(${saveIcon})`, 
+                                                backgroundBlendMode:'lighten',
                                                 backgroundPosition:'center', 
                                                 backgroundSize:'60%', 
                                                 backgroundRepeat:'no-repeat',
                                                 position:'relative',
                                                 align:'middle',
+                                                ...(styles.button.secondary)
                                             }}
                                         />
                                     </OverlayTrigger>

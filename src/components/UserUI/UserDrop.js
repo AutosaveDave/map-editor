@@ -8,6 +8,7 @@ import userIcon from '../../assets/icons/person-circle.svg';
 import { useUserAuth } from "../../context/UserAuthContext";
 import LogoutButton from "./LogoutButton.js";
 import UserInterface from './UserInterface.js';
+import {styles} from '../../utils/styles.js';
 
 function UserDrop( props ) {
     const { 
@@ -51,7 +52,7 @@ function UserDrop( props ) {
     }
     if(user)
     return (
-        <Dropdown className="m-1">
+        <Dropdown className="">
             <OverlayTrigger
                 key={'bottom'}
                 placement={'bottom'}
@@ -66,18 +67,21 @@ function UserDrop( props ) {
                         maxWidth:'80px',
                         minWidth:'52px',
                         backgroundImage: `url(${userIcon})`, 
+                        backgroundBlendMode:'difference',
                         backgroundRepeat:'no-repeat',
                         backgroundSize:'auto 70%',
                         backgroundPositionY: 'center',
                         backgroundPositionX:'20%',
                         backgroundOrigin:'padding-box',
+                        ...(styles.button.primary)
                     }}
                 />
             </OverlayTrigger>
 
-            <Dropdown.Menu className=""
+            <Dropdown.Menu className="m-2"
                 style={{ 
                     width: dropWidth(),
+                    ...(styles.surface.secondary)
                 }}
             >
                 <Stack>
@@ -119,6 +123,7 @@ function UserDrop( props ) {
                                     <Button className="" 
                                         variant="primary" 
                                         onClick={ () => setPage("Account") } 
+                                        style={{...(styles.button.tertiary)}}
                                     >Back</Button> 
                                 }
                             </div>

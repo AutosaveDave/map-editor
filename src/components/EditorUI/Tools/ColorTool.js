@@ -5,6 +5,7 @@ import { Form, Alert, Button, Container, Row, Col } from "react-bootstrap";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import PaletteButton from './PaletteButton';
+import {styles} from '../../../utils/styles.js';
 import addIcon from '../../../assets/icons/plus-circle.svg';
 
 function ColorTool( props ) {
@@ -37,7 +38,7 @@ function ColorTool( props ) {
 
     return (
         <>
-                <Container fluid className="m-0 p-0 h-100 align-middle" >
+                <Container fluid className="m-0 py-0 px-1 h-100 align-middle" style={{...(styles.surface.secondary)}} >
                     <Row className="w-100 h-100 m-0 p-0 align-middle" >
                         <Col className="h-100 p-0 m-0 align-middle text-center" xs={2} >
                             <div className="w-100">
@@ -51,10 +52,15 @@ function ColorTool( props ) {
                                     }
                                 >
                                     <Form.Control
-                                        className="w-100 m-0 p-1"
+                                        className="w-100 m-0 p-0"
                                         type="color"
                                         value={currentColor}
                                         onChange={(e) => setCurrentColor(e.target.value)}
+                                        style={{
+                                            backgroundColor:currentColor,
+                                            borderColor:currentColor,
+                                            borderWidth:'3px',
+                                            borderStyle:'outset'}}
                                     />
                                 </OverlayTrigger>
                             </div>
@@ -77,14 +83,15 @@ function ColorTool( props ) {
                                         style={{
                                             height:'70%',
                                             aspectRatio:'1',
-                                            backgroundImage:`url(${addIcon})`, 
+                                            backgroundImage:`url(${addIcon})`,
+                                            backgroundBlendMode:'difference' , 
                                             backgroundPosition:'center', 
                                             backgroundSize:'70%', 
                                             backgroundRepeat:'no-repeat',
                                             borderRadius:'50%',
                                             position:'relative',
                                             top:'15%',
-                                            
+                                            ...(styles.button.primary)
                                         }}
                                     />
                                 </OverlayTrigger>

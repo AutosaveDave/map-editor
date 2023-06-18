@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Form, Alert, Button, Spinner } from "react-bootstrap";
-
+import {styles} from '../../utils/styles.js';
 import { useUserAuth } from "../../context/UserAuthContext";
 import { createNewMap } from "../../utils/mutations";
 
@@ -81,7 +81,6 @@ const NewMapForm = ( props ) => {
   return (
     <>
       <div className="p-1 pt-3 box" style={{textAlign: 'center'}}>
-        <h4 className="mb-1 ">Create New Map</h4>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-1" controlId="formMapName">
@@ -89,6 +88,7 @@ const NewMapForm = ( props ) => {
               type="text"
               placeholder="Map Name"
               onChange={(e) => setNewName(e.target.value)}
+              style={{...(styles.input.secondary)}}
             />
           </Form.Group>
 
@@ -97,15 +97,16 @@ const NewMapForm = ( props ) => {
               type="text"
               placeholder="Map Description"
               onChange={(e) => setNewDescr(e.target.value)}
+              style={{...(styles.input.secondary)}}
             />
           </Form.Group>
 
           <div className="d-grid gap-1 justify-content-center" >
             { awaitingCreate && 
-              <Spinner variant="primary" className=""/>
+              <Spinner variant="warning" className=""/>
             }
             { !awaitingCreate && 
-              <Button variant="warning" type="Submit">
+              <Button style={{...(styles.button.secondary)}} type="Submit">
                 Create Map
               </Button>
             }

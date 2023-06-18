@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Alert, Button, Spinner } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext";
+import {styles} from '../../utils/styles.js';
 
 import { auth } from "../../firebase-config";
 
@@ -45,6 +46,7 @@ const SignupForm = ( props ) => {
               type="email"
               placeholder="Email address"
               onChange={(e) => setEmail(e.target.value)}
+              style={{...(styles.input.secondary)}}
             />
           </Form.Group>
 
@@ -53,19 +55,20 @@ const SignupForm = ( props ) => {
               type="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              style={{...(styles.input.secondary)}}
             />
           </Form.Group>
 
-          <div className="d-grid gap-1">
+          <div className="d-grid gap-1 justify-content-center">
             { signingUp && 
               <>
               <div className="text-center">
-                <Spinner variant="primary" />
+                <Spinner variant="warning" />
               </div>
               </>
             }
             { !signingUp && 
-              <Button variant="primary" type="Submit">
+              <Button type="Submit" style={{...(styles.button.secondary),}}>
                 Sign up
               </Button>
             }

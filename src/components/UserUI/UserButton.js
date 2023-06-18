@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import userIcon from '../../assets/icons/person-circle.svg';
+import {styles} from '../../utils/styles.js';
 import { useUserAuth } from "../../context/UserAuthContext";
 
 const UserButton = ( props ) => {
@@ -26,7 +27,7 @@ const UserButton = ( props ) => {
             </Tooltip>
         }
       >
-      <Button className="d-inline-block text-center" variant="warning" onClick={handleClick} 
+      <Button className="d-inline-block text-center" onClick={handleClick} 
         style={{
           height:'94%',
           aspectRatio:'1',
@@ -37,7 +38,8 @@ const UserButton = ( props ) => {
           borderRadius:'50%',
           position:'relative',
           top:'3%',
-          right:'3px'
+          right:'3px',
+          ...(styles.button.tertiary)
         }}
       />
     </OverlayTrigger>

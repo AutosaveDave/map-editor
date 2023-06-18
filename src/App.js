@@ -178,7 +178,7 @@ function App() {
     <>
       <UserAuthContextProvider setSavedMaps={setSavedMaps}>
         <section style={{height:"100vh", width:"100vw"}} >
-          <UserToolBar 
+          <UserToolBar className="bg-secondary"
             canvHeightRatio={canvHeightRatio} 
             currentColor={currentColor} 
             setCurrentColor={setCurrentColor} 

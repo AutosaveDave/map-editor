@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import Login from "./Login.js";
 import Signup from "./SignupForm.js";
 import LogoutButton from "./LogoutButton.js";
-import UserInterface from './UserInterface.js';
+import {styles} from '../../utils/styles.js';
 
 function UserModal( props ) {
 
@@ -55,27 +55,30 @@ function UserModal( props ) {
     return (
         <div
             className="modal show p-2 m-2"
-            style={{ display: 'block', position: 'fixed' }}
+            style={{ display: 'block', position: 'fixed', }}
         >
-            <Modal.Dialog style={{right: 0, top:`${100-canvHeightRatio}%`}}>
-                <Container>
-                    <div>
-                        <Row>
-                            <div className='m-1 justify-content-center'>
-                                <Col>
-                                    <Login setShowUserModal={setShowUserModal} setPage={setPage} />
-                                </Col>
-                            </div>
-                            <div className='m-1 justify-content-center'>
-                                <Col>
-                                    <Signup setShowUserModal={setShowUserModal} setPage={setPage}/>
-                                </Col>
-                            </div>
-                            
-                        </Row>
-                    </div>
-                </Container>
-                <Modal.Footer className="justify-content-between">
+            <Modal.Dialog style={{right: 0, top:`${100-canvHeightRatio}%`, }}>
+                <Modal.Header style={{...(styles.surface.secondary)}}>
+                    <Container>
+                        <div>
+                            <Row>
+                                <div className='m-1 justify-content-center'>
+                                    <Col>
+                                        <Login setShowUserModal={setShowUserModal} setPage={setPage} />
+                                    </Col>
+                                </div>
+                                <div className='m-1 justify-content-center'>
+                                    <Col>
+                                        <Signup setShowUserModal={setShowUserModal} setPage={setPage}/>
+                                    </Col>
+                                </div>
+                                
+                            </Row>
+                        </div>
+                    </Container>
+                </Modal.Header>
+                
+                <Modal.Footer className="justify-content-between" style={{...(styles.surface.secondary)}}>
                     <Container className="d-inline-block w-100 h-100">
                         { !( uiPage === "Account" ) &&
                             <Button className="mx-1 mb-3" 
@@ -88,7 +91,7 @@ function UserModal( props ) {
                         className="d-inline-block m-3 "
                     />
                     <Button className="d-inline-block mx-1 mb-3" 
-                        variant="secondary" 
+                        style={{...(styles.button.tertiary)}}
                         onClick={handleClose} 
                     >Close</Button>
                 </Modal.Footer>

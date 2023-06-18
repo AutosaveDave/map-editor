@@ -5,6 +5,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { queryUserMaps } from "../../utils/queries.js";
 import { createNewMap } from "../../utils/mutations";
+import {styles} from '../../utils/styles.js';
 
 function MapsList( props ) {
     
@@ -42,6 +43,7 @@ function MapsList( props ) {
                 <Button className="w-100 p-1 m-1" 
                     variant={`${listItemVariant(selectedMap,mapId)}`}
                     onClick={(e) => { e.preventDefault(); handleMapClick(mapId); } }
+                    style={{...(styles.button.secondary)}}
                 >
                     <Stack direction='horizontal' className="">
                         <Stack className="text-start justify-content-between" fluid={true}>
@@ -148,9 +150,9 @@ function MapsList( props ) {
                                 </Tooltip>
                             }
                         >
-                            <Button className=" p-2 m-0"
+                            <Button className="p-2 m-0"
                                 onClick={ () => { setPage("Create New Map") } }
-                                variant='warning'
+                                style={{...(styles.button.primary)}}
                             >Create</Button>
                         </OverlayTrigger>
                     </div>

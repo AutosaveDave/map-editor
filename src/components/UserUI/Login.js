@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {styles} from '../../utils/styles.js';
 import { Form, Alert, Spinner } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext.js";
@@ -43,6 +43,7 @@ const Login = ( props ) => {
               type="email"
               placeholder="Email address"
               onChange={(e) => setEmail(e.target.value)}
+              style={{...(styles.input.secondary)}}
             />
           </Form.Group>
 
@@ -51,17 +52,18 @@ const Login = ( props ) => {
               type="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              style={{...(styles.input.secondary)}}
             />
           </Form.Group>
 
-          <div className="d-grid gap-1" >
+          <div className="d-grid gap-1 justify-content-center" >
             { loggingIn && 
               <div className="text-center">
-                <Spinner variant="primary" />
+                <Spinner variant="warning" />
               </div>
             }
             { !loggingIn && 
-              <Button variant="primary" type="Submit">
+              <Button className="" type="Submit" style={{...(styles.button.secondary),}}>
               Log In
             </Button>
             }

@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MapsList from './MapsList.js';
 import { queryUserMaps } from '../../utils/queries';
+import {styles} from '../../utils/styles.js';
 import NewMapForm from './NewMapForm.js';
 
 function UserInterface( props ) {

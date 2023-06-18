@@ -1,6 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import { useUserAuth } from "../../context/UserAuthContext";
+import {styles} from '../../utils/styles.js';
 
 const LogoutButton = ( props ) => {
 
@@ -24,7 +25,9 @@ const LogoutButton = ( props ) => {
   }
   return (
     <>
-      <Button variant="primary" onClick={handleClick}>Logout</Button>
+      <Button variant="primary" onClick={handleClick}
+        style={{...(styles.button.tertiary)}}
+      >Logout</Button>
     </>
   );
 };
