@@ -190,6 +190,7 @@ function App() {
             mapName={mapName} setMapName={setMapName}
             mapDescr={mapDescr} setMapDescr={setMapDescr}
             saveCurrentMap={saveCurrentMap}
+            selectedMap={selectedMap}
           />
           <Canvas style={{height:`${canvHeightRatio}%`, width:"100%"}}>
             <MapObjects 

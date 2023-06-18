@@ -8,18 +8,10 @@ import { saveMap } from "../../utils/mutations";
 
 const MapConfigForm = ( props ) => {
 
-    const { setShowUserModal,
+    const { 
         selectedMap,
-        setSelectedMap, 
-        savedMaps,
-        getUserMaps,
-        loadMap,
-        setPage,
-        savedMapRefs, setSavedMapRefs,
         mapName, setMapName,
         mapDescr, setMapDescr,
-        setCurrentMapRef,
-        setPanels, clearData
     } = props;
 
   const auth = useUserAuth();
@@ -32,12 +24,14 @@ const MapConfigForm = ( props ) => {
     setError("");
     const mapConfigData = { name: mapName, descr: mapDescr };
     setAwaitingSave(true);
+    console.log('MAPCONFIGFORM selectedMap');
+    console.log(selectedMap)
     saveMap( auth, selectedMap, mapConfigData)
       .then( result => {
         setAwaitingSave(false);
-        clearData(false);
-        loadMap(savedMaps[result]);
-        setPage('Account');
+        // clearData(false);
+        // loadMap(savedMaps[result]);
+        // setPage('Account');
       })
       .catch( (err) => {
         setAwaitingSave(false);
@@ -47,8 +41,8 @@ const MapConfigForm = ( props ) => {
 
   return (
     <>
-      <div className="p-1 pt-3 box" style={{textAlign: 'center'}}>
-        <h4 className="mb-1 ">Create New Map</h4>
+      <div className="p-1 pt-3 box" style={{textAlign: 'center', minWidth:'30vw',maxWidth:'80vw'}}>
+        <h4 className="mb-1 ">Map Settings</h4>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-1" controlId="formMapName">
@@ -81,7 +75,7 @@ const MapConfigForm = ( props ) => {
             
           </div>
         </Form>
-        <hr />
+        
       </div>
     </>
   );

@@ -65,7 +65,7 @@ export async function createNewMap( data, name, descr ) {
 }
 
 export async function saveMap( data, mapRef, map ) {
-  const { email } = data.email;
+  //const { email } = data.email;
   const mapData = {...map, lastEdited:Timestamp.now()};
   const db = getFirestore( app );
 

@@ -8,7 +8,6 @@ import Col from 'react-bootstrap/Col';
 import MapsList from './MapsList.js';
 import { queryUserMaps } from '../../utils/queries';
 import NewMapForm from './NewMapForm.js';
-import MapConfigForm from "./MapConfigForm.js.js";
 
 function UserInterface( props ) {
 
@@ -88,10 +87,7 @@ function UserInterface( props ) {
                 <Container className="justify-content-center" >
                     <Row>
                         <Col>
-                            <MapConfigForm
-                                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
-                                
-                            />
+                            
                         </Col>
                     </Row>
                 </Container>
