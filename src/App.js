@@ -190,8 +190,29 @@ function App() {
             mapName={mapName} setMapName={setMapName}
             mapDescr={mapDescr} setMapDescr={setMapDescr}
             saveCurrentMap={saveCurrentMap}
-            selectedMap={selectedMap}
+            selectedMap={selectedMap} setSelectedMap={setSelectedMap}
             groundColor={groundColor} setGroundColor={setGroundColor}
+            aspectRatio={aspectRatio}
+            gridAxis={gridAxis} setGridAxis={setGridAxis}
+            gridValue={gridValue} setGridValue={setGridValue}
+            tileSize={tileSize} setTileSize={setTileSize}
+            mapWidth={mapWidth} setMapWidth={setMapWidth} 
+            mapLength={mapLength} setMapLength={setMapLength} 
+            mapHeight={mapHeight} setMapHeight={setMapHeight}
+            wallThickness={wallThickness} setWallThickness={setWallThickness}
+            cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
+            cameraAngle={cameraAngle} setCameraAngle={setCameraAngle}
+            cameraSwivel={cameraSwivel} setCameraSwivel={setCameraSwivel}
+            cameraDistance={cameraDistance} setCameraDistance={setCameraDistance}
+            cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
+            frustum={frustum} setFrustum={setFrustum}
+            cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
+            panels={panels} setPanels={setPanels}
+            currentId={currentId} setCurrentId={setCurrentId}
+            savedMaps={savedMaps} setSavedMaps={setSavedMaps}
+            loadMap={loadMap}
+            uiPage={uiPage} setUiPage={setUiPage}
+            clearData={clearData}
           />
           <Canvas style={{height:`${canvHeightRatio}%`, width:"100%"}}>
             <MapObjects 

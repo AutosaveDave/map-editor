@@ -25,7 +25,7 @@ const Login = ( props ) => {
           setLoggingIn(false);
           setPage("Account");
         });
-      //setShowUserModal(false);
+      setShowUserModal(false);
     } catch (err) {
       setError(err.message);
       setLoggingIn(false);

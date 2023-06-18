@@ -8,16 +8,14 @@ import { createNewMap } from "../../utils/mutations";
 
 const NewMapForm = ( props ) => {
 
-    const { setShowUserModal,
+    const { 
         setSelectedMap, 
         savedMaps,
         getUserMaps,
         loadMap,
         setPage,
-        savedMapRefs, setSavedMapRefs,
         mapName, setMapName,
         mapDescr, setMapDescr,
-        setCurrentMapRef,
         setPanels, clearData
     } = props;
 

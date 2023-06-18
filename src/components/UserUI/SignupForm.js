@@ -23,7 +23,8 @@ const SignupForm = ( props ) => {
       await signUp(email, password)
         .then( () => { 
           setSigningUp(false);
-          setPage("Account"); 
+          setPage("Account");
+          setShowUserModal(false);
         });
     } catch (err) {
       setError(err.message);

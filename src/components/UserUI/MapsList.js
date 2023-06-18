@@ -117,25 +117,22 @@ function MapsList( props ) {
             }
     </>); }
 
-    useEffect( () => {
-        async function getMaps() {
-            setMapListLoading(true);
-            const result = await getUserMaps().then( (maps) => { 
-                setMapListLoading(false);
-                return maps;
-            } );
-            return result;
-        }
-        
+    async function getMaps() {
+        setMapListLoading(true);
+        const result = await getUserMaps().then( (maps) => { 
+            setMapListLoading(false);
+            return maps;
+        } );
+        return result;
+    }
+    useEffect( () => {        
         getMaps();
     },[]);
 
     return (
-        <Container fluid className="justify-content-center" >
+        <Container fluid className="justify-content-center"  >
             <Stack className="p-2" xs={2}>
                 <Stack className=" pl-3 pr-2 mb-2" direction='horizontal'>
-                    
-                    
                     <div className="w-25 px-3 text-start">
                         { mapListLoading && 
                             <Spinner variant="primary" className=""/>
@@ -159,7 +156,7 @@ function MapsList( props ) {
                     </div>
                 </Stack>
                 
-                <div>
+                <div className="" style={{overflowY:'auto', maxHeight:'60vh'}}>
                     <MapListItems maps={savedMaps}/>
                 </div>
                 

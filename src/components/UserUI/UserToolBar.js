@@ -8,6 +8,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import ColorTool from "../EditorUI/Tools/ColorTool.js";
+import UserDrop from "./UserDrop.js";
 import UserButton from "./UserButton.js";
 import MapConfigDrop from './MapConfigDrop.js';
 import { useUserAuth } from '../../context/UserAuthContext.js';
@@ -21,15 +22,19 @@ function UserToolBar( props ) {
     const { canvHeightRatio, 
         currentColor, 
         setCurrentColor, 
-        setShowUserModal, 
         colorPalette, 
         setColorPalette,
-        currentMapRef, setCurrentMapRef,
         mapName, setMapName,
         mapDescr, setMapDescr,
         saveCurrentMap,
-        selectedMap,
         groundColor, setGroundColor,
+        uiPage, setUiPage,
+        setPanels,
+        selectedMap, setSelectedMap,
+        savedMaps, setSavedMaps,
+        loadMap,
+        clearData,
+        setShowUserModal,
     } = props;
 
     const [savingMap, setSavingMap] = useState(false);
@@ -111,7 +116,34 @@ function UserToolBar( props ) {
                             setColorPalette={setColorPalette}/>
                     </Col>
                     <Col xs={2} className="h-100 px-0 py-0 align-middle" style={{ textAlign:'right' }}>
-                        <UserButton setShowUserModal={setShowUserModal}/>
+                        { user && 
+                            <UserDrop 
+                                user={user} 
+                                currentColor={currentColor} setPanels={setPanels}
+                                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
+                                savedMaps={savedMaps} setSavedMaps={setSavedMaps}
+                                loadMap={loadMap}
+                                mapName={mapName} setMapName={setMapName}
+                                mapDescr={mapDescr} setMapDescr={setMapDescr}
+                                clearData={clearData}
+                                uiPage={uiPage} setUiPage={setUiPage}
+                            />
+                        }
+                        { !user &&
+                            <UserButton 
+                                user={user} 
+                                currentColor={currentColor} setPanels={setPanels}
+                                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
+                                savedMaps={savedMaps} setSavedMaps={setSavedMaps}
+                                loadMap={loadMap}
+                                mapName={mapName} setMapName={setMapName}
+                                mapDescr={mapDescr} setMapDescr={setMapDescr}
+                                clearData={clearData}
+                                uiPage={uiPage} setUiPage={setUiPage}
+                                setShowUserModal={setShowUserModal}
+                            />
+                        }
+                        
                     </Col>
                 </Row>
             </Container>

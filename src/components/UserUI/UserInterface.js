@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext.js";
 import { getAuth } from 'firebase/auth';
-import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,29 +12,11 @@ import NewMapForm from './NewMapForm.js';
 function UserInterface( props ) {
 
     const { user, handleClose, setShowUserModal, uiPage, setPage, 
-        currentColor, aspectRatio,
-        gridAxis, setGridAxis,
-        gridValue, setGridValue,
-        tileSize, setTileSize,
-        mapWidth, setMapWidth,
-        mapLength, setMapLength,
-        mapHeight, setMapHeight,
-        wallThickness, setWallThickness,
-        cameraPosition, setCameraPosition,
-        cameraAngle, setCameraAngle,
-        cameraSwivel, setCameraSwivel,
-        cameraDistance, setCameraDistance,
-        cameraFocus, setCameraFocus,
-        frustum, setFrustum,
-        cameraZoom, setCameraZoom,
-        panels, setPanels,
-        currentId, setCurrentId,
+        setPanels,
         selectedMap, setSelectedMap,
         selectedMapData, setSelectedMapData,
         savedMaps, setSavedMaps,
-        savedMapRefs, setSavedMapRefs,
         loadMap,
-        currentMapRef, setCurrentMapRef,
         mapName, setMapName,
         mapDescr, setMapDescr,
         clearData,
@@ -63,23 +45,20 @@ function UserInterface( props ) {
         default:
         case "Account":
             return (
-                <Container className="justify-content-center p-2" >
-                            <MapsList
-                                user={user} handleClose={handleClose}
-                                setShowUserModal={setShowUserModal}
-                                uiPage={uiPage} setPage={setPage}
-                                selectedMap={selectedMap} 
-                                setSelectedMap={setSelectedMap}
-                                selectedMapData={selectedMapData} 
-                                setSelectedMapData={setSelectedMapData}
-                                savedMaps={savedMaps} setSavedMaps={setSavedMaps}
-                                savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
-                                getUserMaps={getUserMaps} loadMap={loadMap}
-                                currentMapRef={currentMapRef}
-                                setCurrentMapRef={setCurrentMapRef}
-                                mapName={mapName} setMapName={setMapName}
-                                mapDescr={mapDescr} setMapDescr={setMapDescr}
-                            />
+                <Container className="justify-content-center p-2 w-100" style={{maxHeight:'90vh'}} >
+                    <MapsList
+                        user={user} handleClose={handleClose}
+                        setShowUserModal={setShowUserModal}
+                        uiPage={uiPage} setPage={setPage}
+                        selectedMap={selectedMap} 
+                        setSelectedMap={setSelectedMap}
+                        selectedMapData={selectedMapData} 
+                        setSelectedMapData={setSelectedMapData}
+                        savedMaps={savedMaps} setSavedMaps={setSavedMaps}
+                        getUserMaps={getUserMaps} loadMap={loadMap}
+                        mapName={mapName} setMapName={setMapName}
+                        mapDescr={mapDescr} setMapDescr={setMapDescr}
+                    />
                 </Container>
             );
         case "Map Settings":
@@ -102,8 +81,6 @@ function UserInterface( props ) {
                             getUserMaps={getUserMaps}
                             loadMap={loadMap}
                             setPage={setPage}
-                            savedMapRefs={savedMapRefs} setSavedMapRefs={setSavedMapRefs}
-                            setCurrentMapRef={setCurrentMapRef}
                             mapName={mapName} setMapName={setMapName}
                             mapDescr={mapDescr} setMapDescr={setMapDescr}
                             setPanels={setPanels}
