@@ -11,7 +11,7 @@ function MapConfigDrop( props ) {
 
   const { mapName, setMapName, 
     mapDescr, setMapDescr, 
-    selectedMap, } = props;
+    selectedMap, groundColor, setGroundColor,} = props;
 
   return (
     <Dropdown className="justify-content-between m-0 p-0 ">
@@ -36,6 +36,7 @@ function MapConfigDrop( props ) {
             <MapConfigForm selectedMap={selectedMap}
               mapName={mapName} setMapName={setMapName}
               mapDescr={mapDescr} setMapDescr={setMapDescr}
+              groundColor={groundColor} setGroundColor={setGroundColor}
             />
           </Stack>
         </Container>

@@ -191,6 +191,7 @@ function App() {
             mapDescr={mapDescr} setMapDescr={setMapDescr}
             saveCurrentMap={saveCurrentMap}
             selectedMap={selectedMap}
+            groundColor={groundColor} setGroundColor={setGroundColor}
           />
           <Canvas style={{height:`${canvHeightRatio}%`, width:"100%"}}>
             <MapObjects 
@@ -210,6 +211,7 @@ function App() {
               panels={panels} setPanels={setPanels}
               currentId={currentId} setCurrentId={setCurrentId}
               showUserModal={showUserModal}
+              groundColor={groundColor}
             />
           </Canvas>
           { showUserModal &&
@@ -245,6 +247,13 @@ function App() {
               />
           }
         </section>
+        <h4 style={{ 
+          position:'absolute',
+          bottom:'0px',
+          left:'5px',
+          textAlign:'start',
+
+         }}>{mapName}</h4>
       </UserAuthContextProvider>
     </>
   );

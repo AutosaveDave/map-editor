@@ -26,7 +26,8 @@ function UserToolBar( props ) {
         mapName, setMapName,
         mapDescr, setMapDescr,
         saveCurrentMap,
-        selectedMap
+        selectedMap,
+        groundColor, setGroundColor,
     } = props;
 
     const [savingMap, setSavingMap] = useState(false);
@@ -53,6 +54,8 @@ function UserToolBar( props ) {
                                 <MapConfigDrop mapName={mapName} setMapName={setMapName}
                                     mapDescr={mapDescr} setMapDescr={setMapDescr}
                                     selectedMap={selectedMap}
+                                    groundColor={groundColor} setGroundColor={setGroundColor}
+                                    saveCurrentMap={saveCurrentMap}
                                 />
                                 { savingMap && 
                                     <Spinner className="mx-3" variant="primary"/>

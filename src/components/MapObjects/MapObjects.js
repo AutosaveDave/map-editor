@@ -20,7 +20,8 @@ function MapObjects(props) {
         frustum, setFrustum,
         cameraZoom, setCameraZoom,
         panels, setPanels,
-        currentId, setCurrentId
+        currentId, setCurrentId,
+        groundColor
         } = props;
 
     const swivelIncr = 1;
@@ -152,7 +153,7 @@ function MapObjects(props) {
         
             <ambientLight intensity={0.1} />
             <pointLight color="white" intensity={0.8} position={[-1, -5, 12]} />
-            <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, 0, 150, 0 ]} />
+            <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, groundColor ]} />
             <EditorGrid
                 gridAxis={gridAxis} setGridAxis={setGridAxis}
                 gridValue={gridValue} setGridValue={setGridValue}
