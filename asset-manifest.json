@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/map-editor/static/css/main.8f20e5ad.css",
-    "main.js": "/map-editor/static/js/main.6ef8aca0.js",
+    "main.js": "/map-editor/static/js/main.70a5559e.js",
     "static/media/gear.svg": "/map-editor/static/media/gear.bc2cf009c9ee7a0e8f42dcfab810f164.svg",
     "index.html": "/map-editor/index.html",
     "static/media/camera-reels.svg": "/map-editor/static/media/camera-reels.d5f246fc48b40db57569f533034d8e67.svg",
@@ -19,10 +19,10 @@
     "static/media/arrow-down-left.svg": "/map-editor/static/media/arrow-down-left.2c8c3270ed68c27403fe7cdbf960d376.svg",
     "static/media/arrow-up-left.svg": "/map-editor/static/media/arrow-up-left.e621a67ba828abdc3ad76f259a7fa2f1.svg",
     "main.8f20e5ad.css.map": "/map-editor/static/css/main.8f20e5ad.css.map",
-    "main.6ef8aca0.js.map": "/map-editor/static/js/main.6ef8aca0.js.map"
+    "main.70a5559e.js.map": "/map-editor/static/js/main.70a5559e.js.map"
   },
   "entrypoints": [
     "static/css/main.8f20e5ad.css",
-    "static/js/main.6ef8aca0.js"
+    "static/js/main.70a5559e.js"
   ]
 }
