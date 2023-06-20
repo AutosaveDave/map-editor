@@ -1,6 +1,7 @@
 import React from 'react';
 import Stack from 'react-bootstrap/Stack';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Container, Row, Col } from 'react-bootstrap';
+import CameraMoveTool from './CameraMoveTool.js';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
@@ -51,6 +52,15 @@ const CameraTool = ( props ) => {
         <>
         <div className="p-1" style={{ ...(styles.surface.secondary) }} >
             <Stack direction='horizontal'>
+
+                <CameraMoveTool 
+                    cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
+                    camFocusToPos={camFocusToPos}
+                    cameraSwivel={cameraSwivel}
+                    cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
+                    cameraAngle={cameraAngle}
+                />
+
                 <OverlayTrigger
                     placement={'top'}
                     overlay={

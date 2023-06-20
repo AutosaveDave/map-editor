@@ -269,7 +269,7 @@ function App() {
               />
           }
         </section>
-        <h4 style={{ ...(styles.pos.abs.br) }}>{mapName}</h4>
+        <h4 style={{ ...(styles.pos.abs.br) }}>swivel: {cameraSwivel} / {mapName}</h4>
         <div style={{ ...(styles.pos.abs.bl) }} >
           <CameraTool 
             cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}

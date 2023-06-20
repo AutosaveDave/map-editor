@@ -4,6 +4,15 @@ import mapConfigImage from "../assets/icons/gear.svg";
 import userImage from "../assets/icons/person-circle.svg";
 import addColorImage from "../assets/icons/plus-circle.svg";
 import saveImage from "../assets/icons/save2.svg";
+import arrowImageDL from "../assets/icons/arrow-down-left.svg";
+import arrowImageL from "../assets/icons/arrow-left.svg";
+import arrowImageUL from "../assets/icons/arrow-up-left.svg";
+import arrowImageU from "../assets/icons/arrow-up.svg";
+import arrowImageUR from "../assets/icons/arrow-up-right.svg";
+import arrowImageR from "../assets/icons/arrow-right.svg";
+import arrowImageDR from "../assets/icons/arrow-down-right.svg";
+import arrowImageD from "../assets/icons/arrow-down.svg";
+
 
 export const styles = { 
         button:{    // Styles for buttons
@@ -109,7 +118,63 @@ export const styles = {
                 backgroundPosition:'center', 
                 backgroundSize:'70%', 
                 backgroundRepeat:'no-repeat',
-            }
+            },
+            moveCamImage: [
+                {
+                    backgroundImage:`url(${arrowImageUL})`, 
+                    
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    backgroundImage:`url(${arrowImageU})`, 
+                    
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    backgroundImage:`url(${arrowImageUR})`, 
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    backgroundImage:`url(${arrowImageL})`, 
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    
+                },
+                {
+                    backgroundImage:`url(${arrowImageR})`, 
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    backgroundImage:`url(${arrowImageDL})`, 
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    backgroundImage:`url(${arrowImageD})`, 
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+                {
+                    backgroundImage:`url(${arrowImageDR})`, 
+                    backgroundPosition:'center', 
+                    backgroundSize:'70%', 
+                    backgroundRepeat:'no-repeat',
+                },
+            ]
+            
         },
         pos: {      // Styles for positioning
             abs: {  //      absolute position
