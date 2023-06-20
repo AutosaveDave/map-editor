@@ -52,8 +52,6 @@ function MapsList( props ) {
                                     <div className="">
                                         <p className="mb-0" style={{ verticalAlign:'end' }}>{descr}</p>
                                     </div>
-                                    
-
                         </Stack>
                         <Stack className="text-end justify-content-between" fluid={true} >
                                     <div className="">

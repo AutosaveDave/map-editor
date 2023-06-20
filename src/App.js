@@ -1,13 +1,14 @@
 
 import React, { useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-//import { Routes, Route } from "react-router-dom";
 import './App.css';
 import MapObjects from "./components/MapObjects/MapObjects.js";
 import UserToolBar from "./components/UserUI/UserToolBar";
 import UserModal from "./components/UserUI/UserModal";
+import CameraTool from "./components/EditorUI/Tools/CameraTool.js"
 import {queryUserMaps} from "./utils/queries";
 import {saveMap} from "./utils/mutations";
+import {styles} from "./utils/styles.js";
 
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 
@@ -268,13 +269,18 @@ function App() {
               />
           }
         </section>
-        <h4 style={{ 
-          position:'absolute',
-          bottom:'0px',
-          left:'5px',
-          textAlign:'start',
-
-         }}>{mapName}</h4>
+        <h4 style={{ ...(styles.pos.abs.br) }}>{mapName}</h4>
+        <div style={{ ...(styles.pos.abs.bl) }} >
+          <CameraTool 
+            cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
+            cameraAngle={cameraAngle} setCameraAngle={setCameraAngle}
+            cameraSwivel={cameraSwivel} setCameraSwivel={setCameraSwivel}
+            cameraDistance={cameraDistance} setCameraDistance={setCameraDistance}
+            cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
+            frustum={frustum} setFrustum={setFrustum}
+            cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
+          />
+        </div>
       </UserAuthContextProvider>
     </>
   );

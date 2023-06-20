@@ -103,24 +103,8 @@ function MapObjects(props) {
     }
 
     function handleKeyDown( e ) {
-        let swivel = cameraSwivel;
         switch( e.key ) {
-            case 'q':
-                swivel += swivelIncr;
-                if( swivel >= 8 ) {
-                    swivel = swivel - 8;
-                }
-                setCameraSwivel( swivel );
-                setCameraPosition( camFocusToPos( cameraAngle, swivel ) );
-                break;
-            case 'e':
-                swivel -= swivelIncr;
-                if( swivel < 0 ) {
-                    swivel = swivel + 8;
-                }
-                setCameraSwivel( swivel );
-                setCameraPosition( camFocusToPos( cameraAngle, swivel ) );
-                break;
+            
                 default:
         }
     }
