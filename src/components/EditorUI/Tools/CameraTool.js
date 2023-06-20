@@ -49,7 +49,7 @@ const CameraTool = ( props ) => {
         <div className="p-1" >
             <Stack direction='vertical' className="p-2 justify-content-center"  style={{ ...(styles.surface.secondary)}}>
 
-                <Stack direction='horizontal' className="mb-2 justify-content-between">
+                <Stack direction='horizontal' className="mb-3 justify-content-between">
                     <OverlayTrigger
                         placement={'top'}
                         overlay={
