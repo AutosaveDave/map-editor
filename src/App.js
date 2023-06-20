@@ -34,11 +34,12 @@ function App() {
   const [mapLength, setMapLength] = useState(10);
   const [mapHeight, setMapHeight] = useState(10);
   const [wallThickness, setWallThickness] = useState(0.1);
-  const [cameraPosition, setCameraPosition] = useState( [-2, -2, 10] );
+  
   const [cameraAngle, setCameraAngle] = useState(1);          // Angle of declination
   const [cameraSwivel, setCameraSwivel] = useState(7);        // Rotation around z-axis
   const [cameraDistance, setCameraDistance] = useState(20);
   const [cameraFocus, setCameraFocus] = useState([4,4,0]);    // Panel coords for where the camera is centered
+  const [cameraPosition, setCameraPosition] = useState( camFocusToPos( 1, 7 ) );
   const [frustum, setFrustum] = useState( 16 );
   const [cameraZoom, setCameraZoom] = useState( 1 );
   const [panels, setPanels] = useState( [] );
@@ -59,6 +60,14 @@ function App() {
 
     window.addEventListener('resize', handleResize);
   });
+
+  function camFocusToPos( angle, swivel ) {  // Returns approriate camera position
+    return ( [                // based on camera angle, swivel, and distance
+        cameraFocus[0] + cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.sin( swivel*Math.PI/4 ),
+        cameraFocus[1] - cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.cos( swivel*Math.PI/4 ),
+        cameraFocus[2] + cameraDistance * Math.cos( angle*Math.PI/4 )
+    ] );
+  }
 
   async function saveCurrentMap( user ) {
     const panelObjects = [];
@@ -269,7 +278,7 @@ function App() {
               />
           }
         </section>
-        <h4 style={{ ...(styles.pos.abs.br) }}>swivel: {cameraSwivel} / {mapName}</h4>
+        <h4 style={{ ...(styles.pos.abs.br) }} >{cameraFocus[0]}, {cameraFocus[1]} / swivel: {cameraSwivel} / {mapName}</h4>
         <div style={{ ...(styles.pos.abs.bl) }} >
           <CameraTool 
             cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
@@ -277,8 +286,10 @@ function App() {
             cameraSwivel={cameraSwivel} setCameraSwivel={setCameraSwivel}
             cameraDistance={cameraDistance} setCameraDistance={setCameraDistance}
             cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
+            camFocusToPos={camFocusToPos}
             frustum={frustum} setFrustum={setFrustum}
             cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
+            mapWidth={mapWidth} mapLength={mapLength}
           />
         </div>
       </UserAuthContextProvider>

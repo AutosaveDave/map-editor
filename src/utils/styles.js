@@ -12,6 +12,7 @@ import arrowImageUR from "../assets/icons/arrow-up-right.svg";
 import arrowImageR from "../assets/icons/arrow-right.svg";
 import arrowImageDR from "../assets/icons/arrow-down-right.svg";
 import arrowImageD from "../assets/icons/arrow-down.svg";
+import cameraImage from "../assets/icons/camera-reels.svg";
 
 
 export const styles = { 
@@ -119,17 +120,21 @@ export const styles = {
                 backgroundSize:'70%', 
                 backgroundRepeat:'no-repeat',
             },
+            camTool: {
+                backgroundImage:`url(${cameraImage})`,
+                backgroundPosition:'center', 
+                backgroundSize:'25%', 
+                backgroundRepeat:'no-repeat',
+            },
             moveCamImage: [
                 {
                     backgroundImage:`url(${arrowImageUL})`, 
-                    
                     backgroundPosition:'center', 
                     backgroundSize:'70%', 
                     backgroundRepeat:'no-repeat',
                 },
                 {
                     backgroundImage:`url(${arrowImageU})`, 
-                    
                     backgroundPosition:'center', 
                     backgroundSize:'70%', 
                     backgroundRepeat:'no-repeat',

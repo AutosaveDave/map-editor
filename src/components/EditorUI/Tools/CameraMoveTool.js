@@ -9,48 +9,81 @@ import {styles} from '../../../utils/styles.js';
 const CameraMoveTool = ( props ) => {
     const { camFocusToPos,
         cameraPosition, setCameraPosition,
-        cameraSwivel,
+        cameraSwivel, setCameraSwivel,
         cameraFocus, setCameraFocus,
-        cameraAngle
+        cameraAngle,
+        mapWidth, mapLength
     } = props;
 
     function MoveCameraButton( props ) {
         // dIndex is the location       0   1   2
-        // of the button on a           3   4   5
+        // of the button on a           3  (4)  5
         // 3x3 grid, like --->          6   7   8
         const { dIndex } = props;
 
         function handleClick ( e ) {
+            let dx = 0;
+            let dy = 0;
             switch( dIndex ) {
-                case 0:
-
+                case 0:     // Up-Left
+                    if( cameraSwivel === 1 ) { dx = -1; }
+                    else if( cameraSwivel === 3 ) { dy = -1; }
+                    else if( cameraSwivel === 5 ) { dx = 1; }
+                    else if( cameraSwivel === 7 ) { dy = 1; }
                     break;
-                case 1:
-
+                case 1:     // Up
+                    if( cameraSwivel === 0 ) { dy = 1; }
+                    else if( cameraSwivel === 2 ) { dx = -1; }
+                    else if( cameraSwivel === 4 ) { dy = -1; }
+                    else if( cameraSwivel === 6 ) { dx = 1; }
                     break;
-                case 2:
-
+                case 2:     // Up-Right
+                    if( cameraSwivel === 1 ) { dy = 1; }
+                    else if( cameraSwivel === 3 ) { dx = -1; }
+                    else if( cameraSwivel === 5 ) { dy = -1; }
+                    else if( cameraSwivel === 7 ) { dx = 1; }
                     break;
-                case 3:
-
+                case 3:     // Left
+                    if( cameraSwivel === 0 ) { dx = -1; }
+                    else if( cameraSwivel === 2 ) { dy = -1; }
+                    else if( cameraSwivel === 4 ) { dx = 1; }
+                    else if( cameraSwivel === 6 ) { dy = 1; }
                     break;
-                case 4:
-
+                case 5:     // Right
+                    if( cameraSwivel === 0 ) { dx = 1; }
+                    else if( cameraSwivel === 2 ) { dy = 1; }
+                    else if( cameraSwivel === 4 ) { dx = -1; }
+                    else if( cameraSwivel === 6 ) { dy = -1; }
                     break;
-                case 5:
-
+                case 6:     // Down-Left
+                    if( cameraSwivel === 1 ) { dy = -1; }
+                    else if( cameraSwivel === 3 ) { dx = 1; }
+                    else if( cameraSwivel === 5 ) { dy = 1; }
+                    else if( cameraSwivel === 7 ) { dx = -1; }
                     break;
-                case 6:
-
+                case 7:     // Down
+                    if( cameraSwivel === 0 ) { dy = -1; }
+                    else if( cameraSwivel === 2 ) { dx = 1; }
+                    else if( cameraSwivel === 4 ) { dy = 1; }
+                    else if( cameraSwivel === 6 ) { dx = -1; }
                     break;
-                case 7:
-
-                    break;
-                case 8:
-
+                case 8:     // Down-Right
+                    if( cameraSwivel === 1 ) { dx = 1; }
+                    else if( cameraSwivel === 3 ) { dy = 1; }
+                    else if( cameraSwivel === 5 ) { dx = -1; }
+                    else if( cameraSwivel === 7 ) { dy = -1; }
                     break;
                 default:
             }
+            let camFocus = cameraFocus;
+            if( camFocus[0] + dx >= 0  && camFocus[0] + dx <= mapWidth ) {
+                camFocus[0] += dx;
+            }
+            if( camFocus[1] + dy >= 0  && camFocus[1] + dy <= mapLength ) {
+                camFocus[1] += dy;
+            }
+            setCameraFocus(camFocus);
+            setCameraPosition( camFocusToPos( cameraAngle, cameraSwivel ) );
         }
 
         const camSwivelOdd = !( cameraSwivel / 2 === Math.floor( cameraSwivel / 2 ) );
@@ -81,7 +114,7 @@ const CameraMoveTool = ( props ) => {
 
     return (
         <>
-            <Container className="d-inline-block m-2 p-0" style={{position:'relative',aspectRatio:1,height:'100px'}} >
+            <Container className="d-inline-block p-0" style={{ ...(styles.surface.secondary), ...(styles.bgImage.camTool),position:'relative',aspectRatio:1,height:'100px'}} >
                 <Row xs={{ cols: 3 }} style={{height:'33%', width:'100%'}}>
                     <Col >
                         <MoveCameraButton dIndex={ 0 }/>
