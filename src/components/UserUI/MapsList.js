@@ -27,7 +27,7 @@ function MapsList( props ) {
         if( selected === mapIndex ) {
             return styles.button.primary;
         }
-        return styles.button.secondary;
+        return styles.button.tertiary;
     }
 
     function MapListItem( props ) {
@@ -39,13 +39,13 @@ function MapsList( props ) {
         } = props;
 
         return (
-            <Container fluid={true} className="">
+            <Container className="">
                 <Button className="w-100 p-1 m-1" 
                     style={{ ...(listItemStyle(selectedMap,mapId)) }}
                     onClick={(e) => { e.preventDefault(); handleMapClick(mapId); } }
                 >
                     <Stack direction='horizontal' className="">
-                        <Stack className="text-start justify-content-between" fluid={true}>
+                        <Stack className="text-start justify-content-between" >
                                     <div className="">
                                         <h5 className="mt-0">{name}</h5>
                                     </div>
@@ -53,7 +53,7 @@ function MapsList( props ) {
                                         <p className="mb-0" style={{ verticalAlign:'end' }}>{descr}</p>
                                     </div>
                         </Stack>
-                        <Stack className="text-end justify-content-between" fluid={true} >
+                        <Stack className="text-end justify-content-between"  >
                                     <div className="">
                                         <p className="m-0 p-0 mb-1">{createdOn} 💡</p>
                                     </div>
@@ -62,7 +62,7 @@ function MapsList( props ) {
                                             <Row className="w-100 justify-content-end p-0 m-0" >
                                                 { colorPalette.map( ( buttonColor, i ) => {
                                                     return (
-                                                        <>
+                                                        
                                                         <Col className={'d-inline-block h-100 p-1 m-0'} xs={1} 
                                                             key={`map-palette-${name}-${i}`}
                                                             style={ { 
@@ -72,7 +72,7 @@ function MapsList( props ) {
                                                             } }
                                                         >
                                                         </Col>  
-                                                        </>
+                                                        
                                                     );
                                                 })}
                                             </Row>
@@ -147,9 +147,12 @@ function MapsList( props ) {
                                 </Tooltip>
                             }
                         >
-                            <Button className="p-2 m-0"
+                            <Button className="mt-4 mr-4"
                                 onClick={ () => { setPage("Create New Map") } }
-                                style={{...(styles.button.primary)}}
+                                style={{...(styles.button.primary),
+                                    position:'absolute',
+                                    right:'36px', top:'0px',
+                                }}
                             >Create</Button>
                         </OverlayTrigger>
                     </div>

@@ -24,11 +24,10 @@ const MapConfigForm = ( props ) => {
         <h4 className="mb-1 ">Map Settings</h4>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form style={{minWidth:'250px', maxWidth:'720px', }}>
-          <Form.Group className="mb-1 py-2 text-start" controlId="formMapName">
+          <Form.Group className="mb-1 py-2 text-start" >
             <Form.Label htmlFor="mapNameInput">Map Name</Form.Label>
             <Form.Control
               value={mapName}
-              id='mapNameInput'
               type="text"
               placeholder="Map Name"
               onChange={(e) => setMapName(e.target.value)}
@@ -36,12 +35,11 @@ const MapConfigForm = ( props ) => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-1 text-start py-2" controlId="formMapDescr">
+          <Form.Group className="mb-1 text-start py-2" >
             <Form.Label htmlFor="mapDescrInput">Map Description</Form.Label>
             <Form.Control
               value={mapDescr}
               as="textarea"
-              id='mapDescrInput'
               placeholder="Map Description"
               onChange={(e) => setMapDescr(e.target.value)}
               style={{minHeight:'100px', ...(styles.input.secondary)}}
@@ -52,7 +50,6 @@ const MapConfigForm = ( props ) => {
             <Form.Label htmlFor="mapGroundColorInput">Ground Color</Form.Label>
             <Form.Control
               type="color"
-              id="mapGroundColorInput"
               value={groundColor}
               title="Ground Color"
               onChange={(e) => setGroundColor(e.target.value)}

@@ -188,7 +188,7 @@ function App() {
   return (
     <>
       <UserAuthContextProvider setSavedMaps={setSavedMaps}>
-        <section style={{height:"100vh", width:"100vw"}} >
+        <section style={{height:"100vh", width:"100vw", overflow:'hidden'}} >
           <UserToolBar className="bg-secondary"
             canvHeightRatio={canvHeightRatio} 
             currentColor={currentColor} 
@@ -279,7 +279,7 @@ function App() {
               />
           }
         </section>
-        <h4 style={{ ...(styles.pos.abs.br) }} >{mapName}</h4>
+        <h5 style={{ ...(styles.pos.abs.br) }} >{mapName}</h5>
         <div style={{ ...(styles.pos.abs.bl) }} >
           <CameraTool 
             cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}

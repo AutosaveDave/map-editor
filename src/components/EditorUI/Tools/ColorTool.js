@@ -38,7 +38,7 @@ function ColorTool( props ) {
 
     return (
         <>
-                <Container fluid className="m-0 py-0 px-1 h-100 align-middle" style={{...(styles.surface.secondary)}} >
+                <Container className="m-0 py-0 px-1 h-100 align-middle" style={{...(styles.surface.secondary)}} >
                     <Row className="w-100 h-100 m-0 p-0 align-middle" >
                         <Col className="h-100 p-0 m-0 align-middle text-center" xs={2} >
                             <div className="w-100">
@@ -115,16 +115,17 @@ function ColorTool( props ) {
                                                 border='border border-dark border-3';
                                             }
                                             return (
-                                            <>
+                                            
                                                 <Col className={`d-inline-block h-100 text-left p-1 m-0 ${border}`} xs={3} sm={2} md={1}
                                                     onClick={ () => { setCurrentColor(buttonColor) } }
+                                                    key={`palette-btn-${buttonColor}`}
                                                     style={ { 
                                                         backgroundColor: `${buttonColor}`,
                                                         borderWidth:3
                                                     } }
                                                 >
                                                 </Col>
-                                            </>
+                                            
                                         );
                                         })}
                                     </Row>

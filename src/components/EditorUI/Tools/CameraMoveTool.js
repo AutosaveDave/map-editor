@@ -126,7 +126,7 @@ const CameraMoveTool = ( props ) => {
                         <MoveCameraButton dIndex={ 2 } />
                     </Col>
                 </Row>
-                <Row fluid xs={{ cols: 3 }} style={{height:'33%', width:'100%'}}>
+                <Row xs={{ cols: 3 }} style={{height:'33%', width:'100%'}}>
                     <Col >
                         <MoveCameraButton dIndex={ 3 } />
                     </Col>

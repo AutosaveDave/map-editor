@@ -14,10 +14,18 @@ const PlaneTool = ( props ) => {
     } = props;
 
     const axisMax = [ mapWidth, mapLength, mapHeight ];
-
+    const axisNames = [ 'X','Y','Z' ];
     return (
         <>
-            
+            <OverlayTrigger
+                key={'tooltip-grid'}
+                placement={'left'}
+                overlay={
+                    <Tooltip id={`tooltip-grid`} >
+                        Move Grid
+                    </Tooltip>
+                }
+            >
                 <Button className=""
                     onClick={(e) => {
                         const val = gridValue-1;
@@ -34,12 +42,22 @@ const PlaneTool = ( props ) => {
                         width:'26px',
                     }}
                 />
+            </OverlayTrigger>
 
+            <OverlayTrigger
+                key={'tooltip-grid-range'}
+                placement={'left'}
+                overlay={
+                    <Tooltip id={`tooltip-grid-range`}  >
+                        Move Grid
+                    </Tooltip>
+                }
+            >
                 <Form.Control
                     className="plane-tool"
                     type="range"
                     value={gridValue}
-                    min={0}
+                    min={ 0 }
                     max={ axisMax[ gridAxis ] }
                     step={1}
                     onChange={(e) => setGridValue(e.target.value)}
@@ -47,6 +65,16 @@ const PlaneTool = ( props ) => {
                         backgroundColor:styles.colors.lightTeal,
                     }}
                 />
+            </OverlayTrigger>
+            <OverlayTrigger
+                key={'tooltip-grid3'}
+                placement={'left'}
+                overlay={
+                    <Tooltip id={`tooltip-grid3`} >
+                        Move Grid
+                    </Tooltip>
+                }
+            >
                 <Button className=""
                     
                     onClick={(e) => {
@@ -64,6 +92,50 @@ const PlaneTool = ( props ) => {
                         width:'26px',
                     }}
                 />
+            </OverlayTrigger>
+                <OverlayTrigger
+                    key={'tooltip-axis'}
+                    placement={'left'}
+                    overlay={
+                        <Tooltip id={`tooltip-axis`} >
+                            Switch Current Axis
+                        </Tooltip>
+                    }
+                >
+                    <Button className=""
+                        
+                        onClick={(e) => {
+                            const val = (gridAxis + 1) % 3;
+                            setGridAxis(val);
+                        }}
+                        style={{
+                            ...(styles.button.tertiary),
+                            ...(styles.bgImage.axis),
+                            aspectRatio: 1,
+                            position:'absolute',
+                            bottom:'-68px',
+                            right:0,
+                            width:'36px',
+                            textAlign:'center',
+                            verticalAlign:'text-bottom',
+                        }}
+                    >
+                        <h2 className=""
+                            style={{
+                                position:'absolute',
+                                width:'auto',
+                                height:'auto',
+                                top:'-2px',
+                                bottom:0,
+                                right:0,
+                                left:0,
+                                textAlign:'center',
+                                fontWeight:'bold',
+                                color:styles.colors.vanilla,
+                            }}
+                        >{ axisNames[ gridAxis ] }</h2>
+                    </Button>
+                </OverlayTrigger>
         </>
     )
 

@@ -15,6 +15,7 @@ import arrowImageD from "../assets/icons/arrow-down.svg";
 import cameraImage from "../assets/icons/camera-reels.svg";
 import caretImageDown from "../assets/icons/caret-down.svg";
 import caretImageUp from "../assets/icons/caret-up.svg";
+import gridImage from "../assets/icons/grid-3x3.svg";
 
 const colors = {
     black:'#000000',
@@ -35,7 +36,7 @@ export const styles = {
         primary: {
             backgroundColor: colors.vanilla,
             color: colors.black,
-            borderColor: colors.orange,
+            borderColor: colors.maroon,
             borderWidth:'2px',
         },
         secondary: {
@@ -152,6 +153,13 @@ export const styles = {
             backgroundSize:'70%', 
             backgroundRepeat:'no-repeat',
         },
+        axis: {
+            backgroundImage:`url(${gridImage})`,
+            backgroundBlendMode:'hard-light', 
+            backgroundPosition:'center', 
+            backgroundSize:'70%', 
+            backgroundRepeat:'no-repeat',
+        },
         moveCamImage: [
             {
                 backgroundImage:`url(${arrowImageUL})`, 
@@ -227,7 +235,7 @@ export const styles = {
                 width:'30px',
                 top:'20vh',
                 bottom:'15vh',
-                right:'0px',
+                right:'8px',
                 textAlign:'end',
             }
         }

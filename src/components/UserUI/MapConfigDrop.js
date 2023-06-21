@@ -51,7 +51,7 @@ function MapConfigDrop( props ) {
           }}
         />
       </OverlayTrigger>
-      <Dropdown.Menu className="m-1" style={{ ...(styles.surface.secondary), width:dropWidth()}}>
+      <Dropdown.Menu className="" style={{ ...(styles.surface.secondary), width:dropWidth()}}>
         <Container>
           <Stack>
             <MapConfigForm selectedMap={selectedMap}

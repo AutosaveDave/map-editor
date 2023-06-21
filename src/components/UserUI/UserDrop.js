@@ -78,18 +78,22 @@ function UserDrop( props ) {
                 />
             </OverlayTrigger>
 
-            <Dropdown.Menu className="m-2"
+            <Dropdown.Menu className="m-0"
                 style={{ 
                     width: dropWidth(),
-                    ...(styles.surface.secondary)
+                    ...(styles.button.secondary),
+                    
                 }}
             >
                 <Stack>
-                    <div style={{textAlign:'center'}}>
+
+                    <div className="w-100" style={{textAlign:'center'}}>
                         <h4 >{uiPage}</h4>
                         <h6 >{user.email}</h6>
                     </div>
-                    <div>
+
+                    <hr className='m=0 p-0' style={{ border:`4px solid ${styles.colors.maroon}`}}/>
+                    <div >
                         <UserInterface user={user}  uiPage={uiPage} setPage={setPage} 
                             currentColor={currentColor} aspectRatio={aspectRatio}
                             gridAxis={gridAxis} setGridAxis={setGridAxis}
@@ -127,10 +131,10 @@ function UserDrop( props ) {
                                     >Back</Button> 
                                 }
                             </div>
-                            <div className="d-inline-block px-3 h-100" xs={1}>
+                            <div className="d-inline-block px-3 mx-4 pb-2 h-100" xs={1}>
                                 <LogoutButton 
                                     clearData={clearData} setPage={setPage}
-                                    className="d-inline-block m-3 justify-content-center"
+                                    className="d-inline-block justify-content-center"
                                 />
                             </div>
                             
