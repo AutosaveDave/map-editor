@@ -6,6 +6,7 @@ import MapObjects from "./components/MapObjects/MapObjects.js";
 import UserToolBar from "./components/UserUI/UserToolBar";
 import UserModal from "./components/UserUI/UserModal";
 import CameraTool from "./components/EditorUI/Tools/CameraTool.js"
+import PlaneTool from "./components/EditorUI/Tools/PlaneTool.js"
 import {queryUserMaps} from "./utils/queries";
 import {saveMap} from "./utils/mutations";
 import {styles} from "./utils/styles.js";
@@ -290,6 +291,13 @@ function App() {
             frustum={frustum} setFrustum={setFrustum}
             cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
             mapWidth={mapWidth} mapLength={mapLength}
+          />
+        </div>
+        <div style={{ ...(styles.pos.abs.rs), width:'30px',  }} >
+          <PlaneTool 
+            gridAxis={gridAxis} setGridAxis={setGridAxis}
+            gridValue={gridValue} setGridValue={setGridValue}
+            mapWidth={mapWidth} mapLength={mapLength} mapHeight={mapHeight}
           />
         </div>
       </UserAuthContextProvider>

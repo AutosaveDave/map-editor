@@ -95,11 +95,7 @@ function UserToolBar( props ) {
                                             style={{
                                                 height:'85%',
                                                 aspectRatio:'1',
-                                                backgroundImage:`url(${saveIcon})`, 
-                                                backgroundBlendMode:'lighten',
-                                                backgroundPosition:'center', 
-                                                backgroundSize:'60%', 
-                                                backgroundRepeat:'no-repeat',
+                                                ...(styles.bgImage.save),
                                                 position:'relative',
                                                 align:'middle',
                                                 ...(styles.button.secondary)
