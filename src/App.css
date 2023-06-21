@@ -45,17 +45,17 @@
 }
 
 .plane-tool {
-  transform-origin: left bottom;
-  transform: rotate(90deg);
+  writing-mode: vertical-rl;
+  -webkit-appearance: slider-vertical;
   position:absolute;
-  width:65vh;
-  height:auto;
-  top:-22px;
+  direction: vertical;
+  height:65vh;
+  top:0;
   bottom:0;
-  left:5px;
+  left:1px;
   right:0;
-  padding:0;
 }
+
 
 @keyframes App-logo-spin {
   from {

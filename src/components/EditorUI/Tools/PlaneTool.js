@@ -15,6 +15,11 @@ const PlaneTool = ( props ) => {
 
     const axisMax = [ mapWidth, mapLength, mapHeight ];
     const axisNames = [ 'X','Y','Z' ];
+
+    function currentGridVal() {
+        return gridValue+0;
+    }
+
     return (
         <>
             <OverlayTrigger
@@ -26,11 +31,11 @@ const PlaneTool = ( props ) => {
                     </Tooltip>
                 }
             >
-                <Button className=""
-                    onClick={(e) => {
-                        const val = gridValue-1;
-                        if(val >= 0)
-                            setGridValue(val);
+                <Button 
+                    onClick={ (e) => {
+                        let gv = currentGridVal();
+                        let gmax = axisMax[gridAxis];
+                        setGridValue( (gv + 1) % (gmax + 1) );
                     }}
                     style={{
                         ...(styles.button.secondary),
@@ -56,11 +61,15 @@ const PlaneTool = ( props ) => {
                 <Form.Control
                     className="plane-tool"
                     type="range"
+                    orientation='vertical'
+                    direction='vertical'
                     value={gridValue}
                     min={ 0 }
                     max={ axisMax[ gridAxis ] }
                     step={1}
-                    onChange={(e) => setGridValue(e.target.value)}
+                    onChange={(e) => { 
+                        let gv = e.currentTarget.value;
+                        setGridValue(gv); } }
                     style={{
                         backgroundColor:styles.colors.lightTeal,
                     }}
@@ -76,11 +85,10 @@ const PlaneTool = ( props ) => {
                 }
             >
                 <Button className=""
-                    
                     onClick={(e) => {
-                        const val = gridValue + 1;
-                        if(val <= axisMax[gridAxis])
-                            setGridValue(val);
+                        let gv = gridValue;
+                        let gmax = axisMax[gridAxis];
+                        setGridValue( (gv - 1 + gmax+1) % (gmax + 1) );
                     }}
                     style={{
                         ...(styles.button.secondary),
