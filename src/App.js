@@ -313,11 +313,12 @@ function App() {
             mapWidth={mapWidth} mapLength={mapLength}
           />
         </div>
-        <div style={{ ...(styles.pos.abs.rs), width:'30px',  }} >
+        <div style={{ ...(styles.pos.abs.rs), top:`${toolBarHeight() + 32}px`, bottom: `${toolBarHeight() + 32 + 48 }px` }} >
           <PlaneTool 
             gridAxis={gridAxis} setGridAxis={setGridAxis}
             gridValue={gridValue} setGridValue={setGridValue}
             mapWidth={mapWidth} mapLength={mapLength} mapHeight={mapHeight}
+            toolBarHeight={toolBarHeight}
           />
         </div>
       </UserAuthContextProvider>

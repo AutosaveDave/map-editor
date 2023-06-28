@@ -11,13 +11,14 @@ const PlaneTool = ( props ) => {
         gridAxis, setGridAxis,
         gridValue, setGridValue,
         mapWidth, mapLength, mapHeight,
+        toolBarHeight
     } = props;
 
     const axisMax = [ mapWidth, mapLength, mapHeight ];
     const axisNames = [ 'X','Y','Z' ];
 
     function currentGridVal() {
-        return gridValue+0;
+        return gridValue;
     }
 
     return (

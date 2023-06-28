@@ -131,8 +131,8 @@ export const styles = {
         addColor: {
             backgroundImage:`url(${addColorImage})`,
             backgroundBlendMode:'difference' , 
-            backgroundPositionY:'52%', 
-            backgroundPositionX:'56%',
+            backgroundPositionY:'50%', 
+            backgroundPositionX:'50%',
             backgroundSize:'70%', 
             backgroundRepeat:'no-repeat',
         },
@@ -234,8 +234,6 @@ export const styles = {
                 position:'fixed',
                 height:'auto',
                 width:'30px',
-                top:'15vh',
-                bottom:'25vh',
                 right:'8px',
                 textAlign:'end',
             }
