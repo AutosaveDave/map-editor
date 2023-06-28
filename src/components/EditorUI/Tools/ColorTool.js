@@ -9,7 +9,7 @@ import {styles} from '../../../utils/styles.js';
 import addIcon from '../../../assets/icons/plus-circle.svg';
 
 function ColorTool( props ) {
-    const { currentColor, setCurrentColor, colorPalette, setColorPalette } = props;
+    const { currentColor, setCurrentColor, colorPalette, setColorPalette, toolBarHeight } = props;
 
     const [paletteSize,setPaletteSize] = useState(0);
 
@@ -41,7 +41,7 @@ function ColorTool( props ) {
                 <Container className="m-0 py-0 px-1 h-100 align-middle" style={{...(styles.surface.secondary)}} >
                     <Row className="w-100 h-100 m-0 p-0 align-middle" >
                         <Col className="h-100 p-0 m-0 align-middle text-center" xs={2} >
-                            <div className="w-100">
+                            <div className="w-100 h-100">
                                 <OverlayTrigger
                                     key={'bottom'}
                                     placement={'bottom'}
@@ -57,10 +57,14 @@ function ColorTool( props ) {
                                         value={currentColor}
                                         onChange={(e) => setCurrentColor(e.target.value)}
                                         style={{
+                                            position:'relative',
+                                            height:`${ toolBarHeight() - 6 }px`,
+                                            top:'3px',
                                             backgroundColor:currentColor,
                                             borderColor:currentColor,
                                             borderWidth:'3px',
-                                            borderStyle:'outset'}}
+                                            borderStyle:'outset'
+                                        }}
                                     />
                                 </OverlayTrigger>
                             </div>
@@ -77,20 +81,17 @@ function ColorTool( props ) {
                                     }
                                 >
                                     <Button 
-                                        className="d-inline-block align-middle text-center text-align-middle" 
+                                        className="p-0" 
                                         variant="primary" 
                                         onClick={handleAddColor}
                                         style={{
-                                            height:'70%',
-                                            aspectRatio:'1',
-                                            backgroundImage:`url(${addIcon})`,
-                                            backgroundBlendMode:'difference' , 
-                                            backgroundPosition:'center', 
-                                            backgroundSize:'70%', 
-                                            backgroundRepeat:'no-repeat',
-                                            borderRadius:'50%',
                                             position:'relative',
-                                            top:'15%',
+                                            
+                                            height:`${toolBarHeight()-10}px`,
+                                            width:`${toolBarHeight()-10}px`,
+                                            top:'5px',
+                                            ...(styles.bgImage.addColor),
+                                            borderRadius:'50%',
                                             ...(styles.button.primary)
                                         }}
                                     />

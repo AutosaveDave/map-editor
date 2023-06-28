@@ -112,7 +112,9 @@ function UserToolBar( props ) {
                             currentColor={currentColor} 
                             setCurrentColor={setCurrentColor}
                             colorPalette={colorPalette}
-                            setColorPalette={setColorPalette}/>
+                            setColorPalette={setColorPalette}
+                            toolBarHeight={toolBarHeight}
+                        />
                     </Col>
                     <Col xs={2} className="h-100 px-0 py-0 align-middle" style={{ textAlign:'right' }}>
                         { user && 
