@@ -20,7 +20,7 @@ function UserToolBar( props ) {
 
     const { user } = useUserAuth();
 
-    const { canvHeightRatio, 
+    const { toolBarHeight,
         currentColor, 
         setCurrentColor, 
         colorPalette, 
@@ -53,8 +53,8 @@ function UserToolBar( props ) {
 
     return (
         <>
-            <Container fluid={true} className="w-100 m-0 px-1 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%`, ...(styles.surface.primary) }}>
-                <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${100-canvHeightRatio}%` }}>
+            <Container fluid={true} className="w-100 m-0 px-1 p-0 align-middle" style={{ height:`${toolBarHeight()}px`, ...(styles.surface.primary) }}>
+                <Row className="w-100 h-100 m-0 p-0 align-middle" style={{ height:`${toolBarHeight()}px` }}>
                     <Col xs={3} className="h-100 px-0" style={{ textAlign:'left' }}>
                     { (user && !(selectedMap==="")) && 
                         <div className="justify-content-left h-100 p-0" >

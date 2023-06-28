@@ -46,7 +46,6 @@ export async function createNewMap( data, name, descr ) {
       groundColor: "#119944",
       currentColor: "#EE9900",
       colorPalette: [],
-      canvHeightRatio: 94,
     },
     camera: {
       position: [-2,-2,10],

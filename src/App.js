@@ -16,14 +16,31 @@ import { UserAuthContextProvider } from "./context/UserAuthContext";
 
 function App() {
 
+  const toolBarHeight = () => {
+    let h = 36;
+    if( window.innerHeight >= 660) {
+      h = 40;
+    } else if( window.innerHeight >= 890) {
+      h = 44;
+    } else if( window.innerHeight >= 1020) {
+      h = 48;
+    } else if( window.innerHeight >= 1200) {
+      h = 52;
+    }
+    return h;
+  }
+
+  const canvasHeight = () => {
+    return window.innerHeight - toolBarHeight();
+  }
+
   const canvHR = 94;  // default canvas "height ratio" (percent of window height taken by canvas)
 
   const [showUserModal, setShowUserModal] = useState(false);
 
   const [currentColor, setCurrentColor] = useState("#EE9900");
   const [colorPalette, setColorPalette] = useState([]);
-  const [canvHeightRatio, setCanvHeightRatio] = useState(canvHR);
-  const [aspectRatio, setAspectRatio] = useState( window.innerWidth / (window.innerHeight * canvHR/100) );
+  const [aspectRatio, setAspectRatio] = useState( window.innerWidth / canvasHeight() );
 
   const [mapName, setMapName] = useState("Unititled");
   const [mapDescr, setMapDescr] = useState("No description.");
@@ -56,7 +73,7 @@ function App() {
   // Create listener for window resize & handle resizing
   React.useEffect(() => {
     function handleResize() {
-      setAspectRatio(window.innerWidth / (window.innerHeight * canvHeightRatio/100));
+      setAspectRatio(window.innerWidth / canvasHeight() );
     }
 
     window.addEventListener('resize', handleResize);
@@ -105,7 +122,6 @@ function App() {
         zoom: cameraZoom,
       },
       mapConfig: {
-        canvHeightRatio: canvHeightRatio,
         colorPalette: colorPalette,
         currentColor: currentColor,
         currentId: currentId,
@@ -144,7 +160,6 @@ function App() {
       panelsArray.push(panelArray);
     })
     setPanels(panelsArray);
-    setCanvHeightRatio(mapData.mapConfig.canvHeightRatio);
     setColorPalette(mapData.mapConfig.colorPalette);
     setCurrentColor(mapData.mapConfig.currentColor);
     setCurrentId(mapData.mapConfig.currentId);
@@ -197,7 +212,7 @@ function App() {
       <UserAuthContextProvider setSavedMaps={setSavedMaps}>
         <section style={{height:"100vh", width:"100vw", overflow:'hidden'}} >
           <UserToolBar className="bg-secondary"
-            canvHeightRatio={canvHeightRatio} 
+            toolBarHeight={toolBarHeight}
             currentColor={currentColor} 
             setCurrentColor={setCurrentColor} 
             setShowUserModal={setShowUserModal}
@@ -232,7 +247,7 @@ function App() {
             uiPage={uiPage} setUiPage={setUiPage}
             clearData={clearData}
           />
-          <Canvas shadows style={{height:`${canvHeightRatio}%`, width:"100%"}}>
+          <Canvas shadows style={{height:`${canvasHeight()}px`, width:"100%"}}>
             <MapObjects 
               currentColor={currentColor} aspectRatio={aspectRatio}
               gridAxis={gridAxis} setGridAxis={setGridAxis}
@@ -255,7 +270,7 @@ function App() {
           </Canvas>
           { showUserModal &&
             <UserModal setShowUserModal={setShowUserModal}
-              canvHeightRatio={canvHeightRatio} 
+              toolBarHeight={toolBarHeight}
               currentColor={currentColor} aspectRatio={aspectRatio}
               gridAxis={gridAxis} setGridAxis={setGridAxis}
               gridValue={gridValue} setGridValue={setGridValue}
@@ -274,12 +289,10 @@ function App() {
               panels={panels} setPanels={setPanels}
               currentId={currentId} setCurrentId={setCurrentId}
               savedMaps={savedMaps} setSavedMaps={setSavedMaps}
-              
               loadMap={loadMap} 
               currentMapRef={currentMapRef} setCurrentMapRef={setCurrentMapRef}
               mapName={mapName} setMapName={setMapName}
               mapDescr={mapDescr} setMapDescr={setMapDescr}
-
               uiPage={uiPage} setUiPage={setUiPage}
               selectedMap={selectedMap} setSelectedMap={setSelectedMap}
               clearData={clearData}

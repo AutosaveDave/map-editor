@@ -39,7 +39,7 @@ function UserModal( props ) {
         uiPage, setUiPage,
         selectedMap, setSelectedMap,
         selectedMapData, setSelectedMapData,
-        canvHeightRatio,
+        toolBarHeight,
         clearData
     } = props;
 
@@ -57,7 +57,7 @@ function UserModal( props ) {
             className="modal show p-2 m-2"
             style={{ display: 'block', position: 'fixed', }}
         >
-            <Modal.Dialog style={{right: 0, top:`${100-canvHeightRatio}%`, }}>
+            <Modal.Dialog style={{right: 0, top:`${toolBarHeight()}px`, }}>
                 <Modal.Header style={{...(styles.surface.secondary)}}>
                     <Container>
                         <div>
