@@ -64,9 +64,16 @@ function App() {
 
   function camFocusToPos( angle, swivel ) {  // Returns approriate camera position
     return ( [                // based on camera angle, swivel, and distance
-        cameraFocus[0] + cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.sin( swivel*Math.PI/4 ),
-        cameraFocus[1] - cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.cos( swivel*Math.PI/4 ),
-        cameraFocus[2] + cameraDistance * Math.cos( angle*Math.PI/4 )
+      cameraFocus[0] + cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.sin( swivel*Math.PI/4 ),
+      cameraFocus[1] - cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.cos( swivel*Math.PI/4 ),
+      cameraFocus[2] + cameraDistance * Math.cos( angle*Math.PI/4 )
+    ] );
+  }
+  function camFocusToPos2( angle, swivel, camFocus ) {  // Returns approriate camera position
+    return ( [                // based on camera angle, swivel, and distance
+      camFocus[0] + cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.sin( swivel*Math.PI/4 ),
+      camFocus[1] - cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.cos( swivel*Math.PI/4 ),
+      camFocus[2] + cameraDistance * Math.cos( angle*Math.PI/4 )
     ] );
   }
 
@@ -225,7 +232,7 @@ function App() {
             uiPage={uiPage} setUiPage={setUiPage}
             clearData={clearData}
           />
-          <Canvas style={{height:`${canvHeightRatio}%`, width:"100%"}}>
+          <Canvas shadows style={{height:`${canvHeightRatio}%`, width:"100%"}}>
             <MapObjects 
               currentColor={currentColor} aspectRatio={aspectRatio}
               gridAxis={gridAxis} setGridAxis={setGridAxis}
@@ -287,7 +294,7 @@ function App() {
             cameraSwivel={cameraSwivel} setCameraSwivel={setCameraSwivel}
             cameraDistance={cameraDistance} setCameraDistance={setCameraDistance}
             cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
-            camFocusToPos={camFocusToPos}
+            camFocusToPos2={camFocusToPos2}
             frustum={frustum} setFrustum={setFrustum}
             cameraZoom={cameraZoom} setCameraZoom={setCameraZoom}
             mapWidth={mapWidth} mapLength={mapLength}

@@ -36,6 +36,7 @@ const Panel = ( props ) => {
     return (
         <mesh ref={box} rotation={[xRotation, yRotation, zRotation]} position={[x,y,z]}
             onContextMenu={ handleRightClick }
+            castShadow receiveShadow
         >
             <boxGeometry attach="geometry" args={[width, length, depth]} />
             <meshStandardMaterial attach="material" color={color} />

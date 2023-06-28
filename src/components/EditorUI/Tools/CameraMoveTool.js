@@ -7,13 +7,23 @@ import Button from 'react-bootstrap/Button';
 import {styles} from '../../../utils/styles.js';
 
 const CameraMoveTool = ( props ) => {
-    const { camFocusToPos,
+    const { camFocusToPos2,
         cameraPosition, setCameraPosition,
         cameraSwivel, setCameraSwivel,
         cameraFocus, setCameraFocus,
         cameraAngle,
         mapWidth, mapLength
     } = props;
+
+    function handleCenterClick(e) {
+        const camFocus = [
+            Math.floor(mapWidth/2), 
+            Math.floor(mapLength/2),
+            cameraFocus[2]
+        ];
+        setCameraFocus(camFocus);
+        setCameraPosition( camFocusToPos2( cameraAngle, cameraSwivel, camFocus ) );
+    }
 
     function MoveCameraButton( props ) {
         // dIndex is the location       0   1   2
@@ -83,7 +93,7 @@ const CameraMoveTool = ( props ) => {
                 camFocus[1] += dy;
             }
             setCameraFocus(camFocus);
-            setCameraPosition( camFocusToPos( cameraAngle, cameraSwivel ) );
+            setCameraPosition( camFocusToPos2( cameraAngle, cameraSwivel, camFocus ) );
         }
 
         const camSwivelOdd = !( cameraSwivel / 2 === Math.floor( cameraSwivel / 2 ) );
@@ -114,7 +124,7 @@ const CameraMoveTool = ( props ) => {
 
     return (
         <>
-            <Container className="d-inline-block p-0" style={{ ...(styles.surface.secondary), ...(styles.bgImage.camTool),position:'relative',aspectRatio:1,height:'100px'}} >
+            <Container className="d-inline-block p-0" style={{ ...(styles.surface.secondary),position:'relative',aspectRatio:1,height:'100px'}} >
                 <Row xs={{ cols: 3 }} style={{height:'33%', width:'100%'}}>
                     <Col >
                         <MoveCameraButton dIndex={ 0 }/>
@@ -131,7 +141,18 @@ const CameraMoveTool = ( props ) => {
                         <MoveCameraButton dIndex={ 3 } />
                     </Col>
                     <Col >
-                        <div />
+                        <Button className=""
+                        onClick={handleCenterClick}
+                            style={{
+                                position:'relative',
+                                aspectRatio:1,
+                                height:'100%',
+                                borderRadius:'50%',
+                                
+                                ...(styles.bgImage.camTool),
+                                ...(styles.button.tertiary),
+                            }}
+                        />
                     </Col>
                     <Col >
                         <MoveCameraButton dIndex={ 5 } />

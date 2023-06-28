@@ -138,7 +138,7 @@ export const styles = {
         camTool: {
             backgroundImage:`url(${cameraImage})`,
             backgroundPosition:'center', 
-            backgroundSize:'25%', 
+            backgroundSize:'70%', 
             backgroundRepeat:'no-repeat',
         },
         gridValUp: {
@@ -233,8 +233,8 @@ export const styles = {
                 position:'fixed',
                 height:'auto',
                 width:'30px',
-                top:'20vh',
-                bottom:'15vh',
+                top:'15vh',
+                bottom:'25vh',
                 right:'8px',
                 textAlign:'end',
             }

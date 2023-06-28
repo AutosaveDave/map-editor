@@ -18,7 +18,7 @@ const CameraTool = ( props ) => {
         frustum, setFrustum,
         cameraZoom, setCameraZoom, 
         mapWidth, mapLength,
-        camFocusToPos
+        camFocusToPos2
     } = props;
 
     const swivelIncr = 1;
@@ -32,7 +32,7 @@ const CameraTool = ( props ) => {
             swivel = swivel - 8;
         }
         setCameraSwivel( swivel );
-        setCameraPosition( camFocusToPos( cameraAngle, swivel ) );
+        setCameraPosition( camFocusToPos2( cameraAngle, swivel, cameraFocus ) );
     }
     function handleRotateCCW(e) {
         let swivel = cameraSwivel;
@@ -41,7 +41,7 @@ const CameraTool = ( props ) => {
             swivel = swivel + 8;
         }
         setCameraSwivel( swivel );
-        setCameraPosition( camFocusToPos( cameraAngle, swivel ) );
+        setCameraPosition( camFocusToPos2( cameraAngle, swivel, cameraFocus ) );
     }
 
     return (
@@ -80,7 +80,7 @@ const CameraTool = ( props ) => {
                 </Stack>
                     <CameraMoveTool 
                         cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
-                        camFocusToPos={camFocusToPos}
+                        camFocusToPos2={camFocusToPos2}
                         cameraSwivel={cameraSwivel}
                         cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
                         cameraAngle={cameraAngle}

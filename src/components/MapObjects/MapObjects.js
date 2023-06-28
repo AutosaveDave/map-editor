@@ -134,9 +134,10 @@ function MapObjects(props) {
                 rotation-x={cameraAngle*Math.PI/4}
                 ref={scene}
             />
-        
-            <ambientLight intensity={0.1} />
-            <pointLight color="white" intensity={0.8} position={[-1, -5, 12]} />
+            <directionalLight  instensity={0.35} castShadow position={ [ -20, -40, 30 ] } shadow-mapSize={[2048, 2048]}>
+                <orthographicCamera attach="shadow-camera" args={[-30, 30, 30, -30]} />
+            </directionalLight>
+            <ambientLight intensity={0.1} /> 
             <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, groundColor ]} />
             <EditorGrid
                 gridAxis={gridAxis} setGridAxis={setGridAxis}

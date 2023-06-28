@@ -7,7 +7,7 @@ const GroundPlane = ( {args} ) => {
     const plane = useRef();
 
     return (
-        <mesh ref={plane} position={[width/2,length/2,0]} >
+        <mesh receiveShadow ref={plane} position={[width/2,length/2,0]} >
             <planeGeometry  attach="geometry" args={[width, length]} />
             <meshStandardMaterial attach="material" color={groundColor} />
         </mesh>
