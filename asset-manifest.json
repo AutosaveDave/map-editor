@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/map-editor/static/css/main.44f86412.css",
-    "main.js": "/map-editor/static/js/main.f39670be.js",
+    "main.css": "/map-editor/static/css/main.1488f42a.css",
+    "main.js": "/map-editor/static/js/main.38e013d2.js",
     "static/media/gear.svg": "/map-editor/static/media/gear.bc2cf009c9ee7a0e8f42dcfab810f164.svg",
     "index.html": "/map-editor/index.html",
     "static/media/camera-reels.svg": "/map-editor/static/media/camera-reels.d5f246fc48b40db57569f533034d8e67.svg",
@@ -21,11 +21,11 @@
     "static/media/caret-down.svg": "/map-editor/static/media/caret-down.04b16f134d434805778777f2fa4dc33f.svg",
     "static/media/caret-up.svg": "/map-editor/static/media/caret-up.07027626309b1cc51b285f3dbf27be2a.svg",
     "static/media/arrow-up-left.svg": "/map-editor/static/media/arrow-up-left.e621a67ba828abdc3ad76f259a7fa2f1.svg",
-    "main.44f86412.css.map": "/map-editor/static/css/main.44f86412.css.map",
-    "main.f39670be.js.map": "/map-editor/static/js/main.f39670be.js.map"
+    "main.1488f42a.css.map": "/map-editor/static/css/main.1488f42a.css.map",
+    "main.38e013d2.js.map": "/map-editor/static/js/main.38e013d2.js.map"
   },
   "entrypoints": [
-    "static/css/main.44f86412.css",
-    "static/js/main.f39670be.js"
+    "static/css/main.1488f42a.css",
+    "static/js/main.38e013d2.js"
   ]
 }
