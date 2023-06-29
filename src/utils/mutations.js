@@ -69,5 +69,6 @@ export async function saveMap( data, mapRef, map ) {
   const db = getFirestore( app );
 
   const result = await updateDoc( doc( collection( db, "Maps" ), mapRef ), mapData )
-    return result;
+    .then(()=>{return mapData});
+  return result;
 }

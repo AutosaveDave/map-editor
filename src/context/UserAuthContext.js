@@ -14,7 +14,7 @@ const userAuthContext = createContext();
 const auth = getAuth(app);
 
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(false);
 
   async function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -51,7 +51,7 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut }}
+      value={{ user, auth, logIn, signUp, logOut }}
     >
       {children}
     </userAuthContext.Provider>

@@ -23,6 +23,19 @@ function MapsList( props ) {
 
     const [mapListLoading, setMapListLoading] = useState(false);
 
+    useEffect( () => {   
+        async function getMaps() {
+            setMapListLoading(true);
+            const result = await getUserMaps().then( (maps) => { 
+                setMapListLoading(false);
+                return maps;
+            } );
+            return result;
+        }     
+        if(user)
+        getMaps();
+    },[]);
+
     function listItemStyle( selected, mapIndex ) {
         if( selected === mapIndex ) {
             return styles.button.primary;
@@ -41,7 +54,7 @@ function MapsList( props ) {
         return (
             <Container className="">
                 <Button className="w-100 p-1 m-1" 
-                    style={{ ...(listItemStyle(selectedMap,mapId)) }}
+                    style={{ ...(listItemStyle(selectedMap, mapId)) }}
                     onClick={(e) => { e.preventDefault(); handleMapClick(mapId); } }
                 >
                     <Stack direction='horizontal' className="">
@@ -115,18 +128,6 @@ function MapsList( props ) {
                 </>
             }
     </>); }
-
-    async function getMaps() {
-        setMapListLoading(true);
-        const result = await getUserMaps().then( (maps) => { 
-            setMapListLoading(false);
-            return maps;
-        } );
-        return result;
-    }
-    useEffect( () => {        
-        getMaps();
-    },[]);
 
     return (
         <Container fluid className="justify-content-center"  >

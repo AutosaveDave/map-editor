@@ -33,11 +33,12 @@ function UserInterface( props ) {
                 } );
                 setSavedMaps(userMaps);
                 console.log("queryUserMaps result");
-                console.log(userMaps);
+                console.log(user);
                 return userMaps;
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
+                console.log(user);
             })
             return result;
       }

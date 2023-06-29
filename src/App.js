@@ -133,7 +133,16 @@ function App() {
         wallThickness: wallThickness,
       },
     };
-    return await saveMap( user, selectedMap, mapSaveData );
+
+    return await saveMap( user, selectedMap, mapSaveData )
+      .then( ( mapInfo ) => {
+        let newSavedMaps = savedMaps;
+        Object.entries(mapInfo).forEach( entry => {
+          const [key, value] = entry;
+          newSavedMaps[selectedMap][key] = value;
+        });
+        setSavedMaps(newSavedMaps);
+      });
   }
 
   function loadMap( mapData ) {
