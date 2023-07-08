@@ -1,21 +1,19 @@
 // Component for floor and wall objects on map
 import React, { useRef } from "react";
 import Panel from "./Panel";
+import { useMapPanels } from "../../context/MapPanelsContext";
 
-const AllPanels = ( props ) => {
+export default function AllPanels() {
     const allPanels = useRef();
-    const { panels, setPanels } = props;
+    const { panels } = useMapPanels();
     
     return (
         <>
             <group ref={allPanels}>
             { panels.map( ( thisPanel, i ) => (
-                <Panel thisPanel={thisPanel} panels={panels} setPanels={setPanels} key={`panel${i}`} />
+                <Panel thisPanel={thisPanel} key={`panel${i}`} />
             ))}
             </group>
         </>
     );
-
 }
-
-export default AllPanels;

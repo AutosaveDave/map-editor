@@ -3,17 +3,16 @@ import {styles} from '../../utils/styles.js';
 import { Form, Alert, Spinner } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext.js";
+import { useUi } from "../../context/UiContext.js";
 
-const Login = ( props ) => {
+export default function Login() {
 
-  const { setShowUserModal, setPage } = props;
-
+  const { logIn } = useUserAuth();
+  const { setShowUserModal, setUiPage } = useUi();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
-  const { logIn } = useUserAuth();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +22,7 @@ const Login = ( props ) => {
       await logIn(email, password)
         .then( () => {
           setLoggingIn(false);
-          setPage("Account");
+          setUiPage("Account");
         });
       setShowUserModal(false);
     } catch (err) {
@@ -63,9 +62,8 @@ const Login = ( props ) => {
               </div>
             }
             { !loggingIn && 
-              <Button className="" type="Submit" style={{...(styles.button.secondary),}}>
-              Log In
-            </Button>
+              <Button type="Submit" style={{...(styles.button.secondary)}}
+              >Log In</Button>
             }
           </div>
         </Form>
@@ -74,5 +72,3 @@ const Login = ( props ) => {
     </>
   );
 };
-
-export default Login;

@@ -1,18 +1,14 @@
 import React from 'react';
-import { Form, Stack } from 'react-bootstrap';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
-import Button from 'react-bootstrap/Button';
+import { Form, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import {styles} from '../../../utils/styles.js';
+import { useMapEditor } from '../../../context/MapEditorContext.js';
+import { useMapConfig } from '../../../context/MapConfigContext.js';
 
-const PlaneTool = ( props ) => {
+export default function PlaneTool() {
 
-    const { 
-        gridAxis, setGridAxis,
-        gridValue, setGridValue,
-        mapWidth, mapLength, mapHeight,
-        toolBarHeight
-    } = props;
+    const { gridAxis, setGridAxis,
+            gridValue, setGridValue } = useMapEditor();
+    const { mapWidth, mapLength, mapHeight } = useMapConfig();
 
     const axisMax = [ mapWidth, mapLength, mapHeight ];
     const axisNames = [ 'X','Y','Z' ];
@@ -149,5 +145,3 @@ const PlaneTool = ( props ) => {
     )
 
 }
-
-export default PlaneTool;

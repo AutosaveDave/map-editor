@@ -3,14 +3,12 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import userIcon from '../../assets/icons/person-circle.svg';
-import {styles} from '../../utils/styles.js';
-import { useUserAuth } from "../../context/UserAuthContext";
+import { styles } from '../../utils/styles.js';
+import { useUi } from '../../context/UiContext';
 
-const UserButton = ( props ) => {
+export default function UserButton() {
 
-  const { setShowUserModal, canvHeightRatio } = props;
-
-  const { user } = useUserAuth();
+  const { setShowUserModal } = useUi();
 
   function handleClick() {
     setShowUserModal(true);
@@ -27,24 +25,22 @@ const UserButton = ( props ) => {
             </Tooltip>
         }
       >
-      <Button className="d-inline-block text-center" onClick={handleClick} 
-        style={{
-          height:'94%',
-          aspectRatio:'1',
-          backgroundImage:`url(${userIcon})`, 
-          backgroundPosition:'center', 
-          backgroundSize:'70%', 
-          backgroundRepeat:'no-repeat',
-          borderRadius:'50%',
-          position:'relative',
-          top:'3%',
-          right:'3px',
-          ...(styles.button.tertiary)
-        }}
-      />
-    </OverlayTrigger>
+        <Button className="d-inline-block text-center" onClick={handleClick} 
+          style={{
+            height:'94%',
+            aspectRatio:'1',
+            backgroundImage:`url(${userIcon})`, 
+            backgroundPosition:'center', 
+            backgroundSize:'70%', 
+            backgroundRepeat:'no-repeat',
+            borderRadius:'50%',
+            position:'relative',
+            top:'3%',
+            right:'3px',
+            ...(styles.button.tertiary)
+          }}
+        />
+      </OverlayTrigger>
     </>
   );
-};
-
-export default UserButton;
+}

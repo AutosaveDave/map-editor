@@ -1,19 +1,20 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import { useUserAuth } from "../../context/UserAuthContext";
+import { useUserData } from "../../context/UserDataContext";
+import { useUi } from "../../context/UiContext";
 import {styles} from '../../utils/styles.js';
 
-const LogoutButton = ( props ) => {
+export default function LogoutButton() {
 
-  const { clearData, setPage } = props;
+  const { setUiPage } = useUi();
+  const { clearData } = useUserData();
   const { logOut, user } = useUserAuth();
   
-
   function handleClick() {
     clearData(true);
     logOut();
-    setPage("Account");
-
+    setUiPage("Account");
   }
 
   if (!user) {
@@ -23,6 +24,7 @@ const LogoutButton = ( props ) => {
       </>
     );
   }
+
   return (
     <>
       <Button variant="primary" onClick={handleClick}
@@ -31,5 +33,3 @@ const LogoutButton = ( props ) => {
     </>
   );
 };
-
-export default LogoutButton;

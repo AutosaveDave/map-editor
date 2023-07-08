@@ -16,6 +16,7 @@ import cameraImage from "../assets/icons/camera-reels.svg";
 import caretImageDown from "../assets/icons/caret-down.svg";
 import caretImageUp from "../assets/icons/caret-up.svg";
 import gridImage from "../assets/icons/grid-3x3.svg";
+import refreshImage from "../assets/icons/refresh-icon.svg";
 
 const colors = {
     black:'#000000',
@@ -100,6 +101,12 @@ export const styles = {
         },
         save: {
             backgroundImage:`url(${saveImage})`, 
+            backgroundPosition:'center', 
+            backgroundSize:'60%', 
+            backgroundRepeat:'no-repeat',
+        },
+        refresh: {
+            backgroundImage:`url(${refreshImage})`, 
             backgroundPosition:'center', 
             backgroundSize:'60%', 
             backgroundRepeat:'no-repeat',

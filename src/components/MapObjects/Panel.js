@@ -1,36 +1,21 @@
 // Component for floor and wall objects on map
 import React, { useRef, useState } from "react";
+import { useMapPanels } from "../../context/MapPanelsContext";
 
-const Panel = ( props ) => {
+export default function Panel( props ) {
     const [ x, y, z, 
         width, length, depth, 
         xRotation, yRotation, zRotation, 
         color, material, panel_id 
     ] = props.thisPanel;
 
-    const panels = props.panels;
-    const setPanels = props.setPanels;
-
-    function deletePanel( id ) {
-        
-        const newPanels = [];
-        newPanels.push( ...panels );
-        for( let a = 0 ; a < newPanels.length ; a+=1 ) {
-            if( newPanels[ a ][ newPanels[ a ].length - 1 ] === id ) {
-                newPanels.splice( a, 1 );   // delete panel from array
-                a = newPanels.length;
-            }
-        }
-        setPanels( newPanels );
-    }
+    const { deletePanel } = useMapPanels();
 
     function handleRightClick( e ) {
         e.nativeEvent.preventDefault();
         e.stopPropagation();
         deletePanel(panel_id);
-        
     }
-    
     const box = useRef();
 
     return (
@@ -43,5 +28,3 @@ const Panel = ( props ) => {
         </mesh>
     );
 };
-
-export default Panel;

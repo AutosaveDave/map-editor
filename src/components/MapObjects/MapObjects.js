@@ -1,45 +1,34 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { OrthographicCamera, Sky } from "@react-three/drei";
 import AllPanels from "./AllPanels";
 import EditorGrid from "../EditorUI/EditorGrid";
 import GroundPlane from "./GroundPlane";
+import { useMapCamera } from '../../context/MapCameraContext';
+import { useColorTool } from '../../context/ColorToolContext';
+import { useSizing } from '../../context/SizingContext';
+import { useMapEditor } from '../../context/MapEditorContext';
+import { useMapConfig } from '../../context/MapConfigContext';
+import { useMapPanels } from '../../context/MapPanelsContext';
+import { useMapInfo } from '../../context/MapInfoContext';
 
-function MapObjects(props) {
+function MapObjects() {
 
-    const { currentColor, aspectRatio,
-        gridAxis, setGridAxis,
-        gridValue, setGridValue,
-        tileSize, setTileSize,
-        mapWidth, mapLength, mapHeight,
-        wallThickness, setWallThickness,
-        cameraPosition, setCameraPosition,
-        cameraAngle, setCameraAngle,
-        cameraSwivel, setCameraSwivel,
-        cameraDistance, setCameraDistance,
-        cameraFocus, setCameraFocus,
-        frustum, setFrustum,
-        cameraZoom, setCameraZoom,
-        panels, setPanels,
-        currentId, setCurrentId,
-        groundColor
-        } = props;
+    const { cameraPosition, cameraAngle, 
+            cameraSwivel, frustum, cameraZoom } = useMapCamera();
+    const { currentColor } = useColorTool();
+    const { aspectRatio } = useSizing();
+    const { gridAxis, setGridAxis,
+            switchGridAxis,
+            gridValue, setGridValue,
+            wallThickness, setWallThickness } = useMapEditor();
+    const { tileSize, mapWidth, 
+            mapLength, mapHeight } = useMapConfig();
+    const { panels, setPanels, addPanel } = useMapPanels();
+    const { groundColor } = useMapInfo();
 
-    const swivelIncr = 1;
+    
 
-    useEffect( () => {
-        document.addEventListener('keydown', handleKeyDown)
-    });
-
-    function nextId() {
-        const cid = currentId;
-        setCurrentId( cid + 1 );
-        return cid + 1;
-    }
-
-    function switchGridAxis() {
-        if( gridAxis < 2 ) { setGridAxis( gridAxis + 1 ); }
-        else { setGridAxis( 0 ); }
-      }
+    
     
       function handleWheel( e ) {
         let limit = mapHeight;
@@ -69,45 +58,7 @@ function MapObjects(props) {
         }
       }
 
-    
-
     const scene = useRef();
-
-    
-    
-    function addPanel( args ) {
-        const [ axis,
-                x, y, z,
-                w, l, h,
-                color,
-                material, panel_id
-        ] = [ ...args, nextId() ];
-        setPanels( [ ...panels, 
-                    [ x, y, z,
-                      w, l, h,
-                      0, 0, 0,
-                      color,
-                      material, panel_id ] ] );
-    }
-
-    function sortPanels() {
-        
-    }
-
-    function camFocusToPos( angle, swivel ) {  // Returns approriate camera position
-        return [                // based on camera angle, swivel, and distance
-            cameraFocus[0] + cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.sin( swivel*Math.PI/4 ),
-            cameraFocus[1] - cameraDistance * Math.cos( angle*Math.PI/4 ) * Math.cos( swivel*Math.PI/4 ),
-            cameraFocus[2] + cameraDistance * Math.cos( angle*Math.PI/4 )
-        ];
-    }
-
-    function handleKeyDown( e ) {
-        switch( e.key ) {
-            
-                default:
-        }
-    }
 
     return (
         <>
@@ -138,17 +89,9 @@ function MapObjects(props) {
                 <orthographicCamera attach="shadow-camera" args={[-30, 30, 30, -30]} />
             </directionalLight>
             <ambientLight intensity={0.1} /> 
-            <GroundPlane args={[mapWidth*tileSize, mapLength*tileSize, groundColor ]} />
-            <EditorGrid
-                gridAxis={gridAxis} setGridAxis={setGridAxis}
-                gridValue={gridValue} setGridValue={setGridValue}
-                tileSize={tileSize}
-                mapWidth={mapWidth} mapLength={mapLength} mapHeight={mapHeight}
-                addPanel={addPanel}
-                currentColor={currentColor} 
-                wallThickness={wallThickness} setWallThickness={setWallThickness}
-            />
-            <AllPanels panels={panels} setPanels={setPanels} />
+            <GroundPlane/>
+            <EditorGrid/>
+            <AllPanels/>
             <Sky/>
         </group>
         

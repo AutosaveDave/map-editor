@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Form, Alert, Button, Spinner } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext";
+import { useUi } from "../../context/UiContext";
 import {styles} from '../../utils/styles.js';
 
-import { auth } from "../../firebase-config";
+export default function SignupForm() {
 
-
-const SignupForm = ( props ) => {
-
-  const { setShowUserModal, setPage } = props;
+  const { setShowUserModal, setPage } = useUi();
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -31,10 +29,8 @@ const SignupForm = ( props ) => {
       setError(err.message);
       setSigningUp(false);
     } 
-    
   };
   
-
   return (
     <>
       <div className="p-1 box m-1" style={{textAlign: 'center'}}>
@@ -49,7 +45,6 @@ const SignupForm = ( props ) => {
               style={{...(styles.input.secondary)}}
             />
           </Form.Group>
-
           <Form.Group className="mb-1" controlId="formBasicPassword">
             <Form.Control
               type="password"
@@ -58,7 +53,6 @@ const SignupForm = ( props ) => {
               style={{...(styles.input.secondary)}}
             />
           </Form.Group>
-
           <div className="d-grid gap-1 justify-content-center">
             { signingUp && 
               <>
@@ -72,12 +66,9 @@ const SignupForm = ( props ) => {
                 Sign up
               </Button>
             }
-            
           </div>
         </Form>
       </div>
     </>
   );
 };
-
-export default SignupForm;

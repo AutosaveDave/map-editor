@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import { Form, Alert} from "react-bootstrap";
-import { useUserAuth } from "../../context/UserAuthContext";
+import { useMapInfo } from "../../context/MapInfoContext";
+import { useMapConfig } from "../../context/MapConfigContext";
 import {styles} from '../../utils/styles.js';
 
+export default function MapConfigForm() {
 
-const MapConfigForm = ( props ) => {
+  const { mapName, setMapName,
+          mapDescr, setMapDescr } = useMapInfo();
 
-    const { 
-        selectedMap,
-        mapName, setMapName,
-        mapDescr, setMapDescr,
-        groundColor, setGroundColor,
-    } = props;
-
-  const auth = useUserAuth();
+  const { groundColor, setGroundColor } = useMapConfig();
 
   const [error, setError] = useState("");
-  const [awaitingSave, setAwaitingSave] = useState(false);
 
   return (
     <>
@@ -65,6 +60,4 @@ const MapConfigForm = ( props ) => {
       </div>
     </>
   );
-};
-
-export default MapConfigForm;
+}

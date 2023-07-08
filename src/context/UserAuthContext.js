@@ -7,7 +7,6 @@ import {
   signOut
 } from "firebase/auth";
 import {addNewUser} from "../utils/mutations";
-import {queryUserMaps} from "../utils/queries";
 import app from "../firebase-config"
 
 const userAuthContext = createContext();
@@ -29,9 +28,8 @@ export function UserAuthContextProvider({ children }) {
               return result;
             })
             .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              // ..
+              console.log(error.message);
+              console.log(error.code);
             });
   }
   function logOut() {

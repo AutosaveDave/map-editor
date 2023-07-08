@@ -1,29 +1,23 @@
 import React from 'react';
 import Stack from 'react-bootstrap/Stack';
-import { Container, Row, Col } from 'react-bootstrap';
 import CameraMoveTool from './CameraMoveTool.js';
+import { useMapCamera } from '../../../context/MapCameraContext.js';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
 import {styles} from '../../../utils/styles.js';
 
-const CameraTool = ( props ) => {
+export default function CameraTool() {
 
     const {
-        cameraPosition, setCameraPosition,
-        cameraAngle, setCameraAngle,
+        setCameraPosition,
+        cameraAngle,
         cameraSwivel, setCameraSwivel,
-        cameraDistance, setCameraDistance,
-        cameraFocus, setCameraFocus,
-        frustum, setFrustum,
-        cameraZoom, setCameraZoom, 
-        mapWidth, mapLength,
+        cameraFocus,
         camFocusToPos2
-    } = props;
+    } = useMapCamera();
 
     const swivelIncr = 1;
-
-    
 
     function handleRotateCW(e) {
         let swivel = cameraSwivel;
@@ -47,8 +41,9 @@ const CameraTool = ( props ) => {
     return (
         <>
         <div className="p-1" >
-            <Stack direction='vertical' className="p-2 justify-content-center"  style={{ ...(styles.surface.secondary)}}>
-
+            <Stack direction='vertical' className="p-2 justify-content-center" 
+                    style={{ ...(styles.surface.secondary)}}
+            >
                 <Stack direction='horizontal' className="mb-3 justify-content-between">
                     <OverlayTrigger
                         placement={'top'}
@@ -78,20 +73,9 @@ const CameraTool = ( props ) => {
                         />
                     </OverlayTrigger>
                 </Stack>
-                    <CameraMoveTool 
-                        cameraPosition={cameraPosition} setCameraPosition={setCameraPosition}
-                        camFocusToPos2={camFocusToPos2}
-                        cameraSwivel={cameraSwivel}
-                        cameraFocus={cameraFocus} setCameraFocus={setCameraFocus}
-                        cameraAngle={cameraAngle}
-                        mapWidth={mapWidth} mapLength={mapLength}
-                    />
-
+                    <CameraMoveTool />
             </Stack>
-
         </div>
         </>
-    )
+    );
 }
-
-export default CameraTool;

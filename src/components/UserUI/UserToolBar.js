@@ -1,55 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import ColorTool from "../EditorUI/Tools/ColorTool.js";
 import UserDrop from "./UserDrop.js";
 import UserButton from "./UserButton.js";
 import MapConfigDrop from './MapConfigDrop.js';
+import SaveMapButton from './SaveMapButton.js';
 import { useUserAuth } from '../../context/UserAuthContext.js';
-import saveIcon from '../../assets/icons/save2.svg';
+import { useUserData } from '../../context/UserDataContext.js';
+import { useSizing } from '../../context/SizingContext.js';
 import {styles} from '../../utils/styles.js';
 
-
-function UserToolBar( props ) {
+export default function UserToolBar() {
 
     const { user } = useUserAuth();
 
-    const { toolBarHeight,
-        currentColor, 
-        setCurrentColor, 
-        colorPalette, 
-        setColorPalette,
-        mapName, setMapName,
-        mapDescr, setMapDescr,
-        saveCurrentMap,
-        groundColor, setGroundColor,
-        uiPage, setUiPage,
-        setPanels,
-        selectedMap, setSelectedMap,
-        savedMaps, setSavedMaps,
-        loadMap,
-        clearData,
-        setShowUserModal,
-    } = props;
+    const { selectedMap } = useUserData();
 
-    const [savingMap, setSavingMap] = useState(false);
-
-    function handleSave() {
-        if( !savingMap ){
-            setSavingMap( true );
-            saveCurrentMap( user )
-                .then( () => { setSavingMap( false ); })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }
-    }
+    const { toolBarHeight } = useSizing();
 
     return (
         <>
@@ -59,90 +29,21 @@ function UserToolBar( props ) {
                     { (user && !(selectedMap==="")) && 
                         <div className="justify-content-left h-100 p-0" >
                             <Stack direction='horizontal' gap={1} className="p-0 m-0 h-100">
-                            
-                                    <MapConfigDrop mapName={mapName} setMapName={setMapName}
-                                        mapDescr={mapDescr} setMapDescr={setMapDescr}
-                                        selectedMap={selectedMap}
-                                        groundColor={groundColor} setGroundColor={setGroundColor}
-                                        saveCurrentMap={saveCurrentMap}
-                                    />
-                               
-                                { savingMap && 
-                                    <OverlayTrigger
-                                        key={'bottom'}
-                                        placement={'bottom'}
-                                        overlay={
-                                            <Tooltip id={`tooltip-saving`} >
-                                                Saving Map...
-                                            </Tooltip>
-                                        }
-                                    >
-                                        <Spinner className="d-inline-block text-align-left mx-0" variant="warning"/>
-                                    </OverlayTrigger>
-                                }
-                                { !savingMap && 
-                                    <OverlayTrigger
-                                        key={'bottom'}
-                                        placement={'bottom'}
-                                        overlay={
-                                            <Tooltip id={`tooltip-save-map`} >
-                                                Save Map
-                                            </Tooltip>
-                                        }
-                                    >
-                                        <Button className="d-inline-block "
-                                            onClick={handleSave}
-                                            style={{
-                                                height:'85%',
-                                                aspectRatio:'1',
-                                                ...(styles.bgImage.save),
-                                                position:'relative',
-                                                align:'middle',
-                                                ...(styles.button.secondary)
-                                            }}
-                                        />
-                                    </OverlayTrigger>
-                                }
+                                <MapConfigDrop/>
+                                <SaveMapButton/>
                             </Stack>
                         </div>
                     }
                     </Col>
                     <Col xs={7} className="h-100 py-0 m-0 px-1 align-middle text-center">
-                        <ColorTool 
-                            currentColor={currentColor} 
-                            setCurrentColor={setCurrentColor}
-                            colorPalette={colorPalette}
-                            setColorPalette={setColorPalette}
-                            toolBarHeight={toolBarHeight}
-                        />
+                        <ColorTool/>
                     </Col>
                     <Col xs={2} className="h-100 px-0 py-0 align-middle" style={{ textAlign:'right' }}>
                         { user && 
-                            <UserDrop 
-                                user={user} 
-                                currentColor={currentColor} setPanels={setPanels}
-                                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
-                                savedMaps={savedMaps} setSavedMaps={setSavedMaps}
-                                loadMap={loadMap}
-                                mapName={mapName} setMapName={setMapName}
-                                mapDescr={mapDescr} setMapDescr={setMapDescr}
-                                clearData={clearData}
-                                uiPage={uiPage} setUiPage={setUiPage}
-                            />
+                            <UserDrop/>
                         }
                         { !user &&
-                            <UserButton 
-                                user={user} 
-                                currentColor={currentColor} setPanels={setPanels}
-                                selectedMap={selectedMap} setSelectedMap={setSelectedMap}
-                                savedMaps={savedMaps} setSavedMaps={setSavedMaps}
-                                loadMap={loadMap}
-                                mapName={mapName} setMapName={setMapName}
-                                mapDescr={mapDescr} setMapDescr={setMapDescr}
-                                clearData={clearData}
-                                uiPage={uiPage} setUiPage={setUiPage}
-                                setShowUserModal={setShowUserModal}
-                            />
+                            <UserButton/>
                         }
                         
                     </Col>
@@ -151,5 +52,3 @@ function UserToolBar( props ) {
         </>
     );
 }
-
-export default UserToolBar;

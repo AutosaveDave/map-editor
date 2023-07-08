@@ -1,76 +1,29 @@
 import React, { useState } from "react";
-
 import { Form, Alert, Button, Spinner } from "react-bootstrap";
 import {styles} from '../../utils/styles.js';
-import { useUserAuth } from "../../context/UserAuthContext";
-import { createNewMap } from "../../utils/mutations";
+import { useUserData } from "../../context/UserDataContext.js";
+import { useUi } from "../../context/UiContext.js";
 
 
-const NewMapForm = ( props ) => {
+export default function NewMapForm() {
 
-    const { 
-        setSelectedMap, 
-        savedMaps,
-        getUserMaps,
-        loadMap,
-        setPage,
-        mapName, setMapName,
-        mapDescr, setMapDescr,
-        setPanels, clearData
-    } = props;
-
-  const auth = useUserAuth();
-
+  const { setUiPage } = useUi();
+  const { createMap, clearData, loadMap } = useUserData();
   const [newName, setNewName] = useState("");
   const [newDescr, setNewDescr] = useState("");
   const [error, setError] = useState("");
   const [awaitingCreate, setAwaitingCreate] = useState(false);
 
-  async function refreshMaps( newId ) {
-    const result = await getUserMaps()
-      .then( maps => {
-        let selectedId = "";
-        Object.entries(maps).map( ( [key, value] ) => {
-          if( key === newId ) {
-            selectedId = key;
-          }
-          return "";
-        });
-        if( selectedId )
-          setSelectedMap(selectedId);
-        return maps[selectedId];
-      })
-      .catch( error => {
-        console.log(error);
-      });
-      return result;
-  }
-
-  async function createMap() {
-    const result = await createNewMap( auth, newName, newDescr )
-        .then( data => {
-            const newPath = data._key.path.segments;
-            const newId = newPath[newPath.length-1];
-            return refreshMaps(newId);
-        })
-        .catch( (error) => {
-            console.log(error);
-        });
-      return result;
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
     setAwaitingCreate(true);
-    createMap()
+    createMap( newName, newDescr )
       .then( result => {
         setAwaitingCreate(false);
         clearData(false);
-        console.log(result);
         loadMap(result);
-        setPage('Account');
+        setUiPage('Account');
       })
       .catch( (err) => {
         setAwaitingCreate(false);
@@ -118,5 +71,3 @@ const NewMapForm = ( props ) => {
     </>
   );
 };
-
-export default NewMapForm;

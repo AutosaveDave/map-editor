@@ -1,19 +1,18 @@
 import React from 'react';
-import Stack from 'react-bootstrap/Stack';
-import { Container, Row, Col } from 'react-bootstrap';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import {styles} from '../../../utils/styles.js';
+import { useMapCamera } from '../../../context/MapCameraContext.js';
+import { useMapConfig } from '../../../context/MapConfigContext.js';
 
-const CameraMoveTool = ( props ) => {
+export default function CameraMoveTool() {
     const { camFocusToPos2,
-        cameraPosition, setCameraPosition,
-        cameraSwivel, setCameraSwivel,
+        setCameraPosition,
+        cameraSwivel, 
         cameraFocus, setCameraFocus,
-        cameraAngle,
-        mapWidth, mapLength
-    } = props;
+        cameraAngle
+    } = useMapCamera();
+
+    const { mapWidth, mapLength } = useMapConfig();
 
     function handleCenterClick(e) {
         const camFocus = [
@@ -174,5 +173,3 @@ const CameraMoveTool = ( props ) => {
     )
 
 }
-
-export default CameraMoveTool;
