@@ -11,18 +11,6 @@ export default function MapsListItems() {
     const { savedMaps, getUserMaps } = useUserData();
     const { mapListLoading, setMapListLoading, triggerUi } = useUi();
 
-    // const getMaps = async () => {
-    //     setMapListLoading(true);
-    //     return await getUserMaps()
-    //         .then(() => {
-    //             setMapListLoading(false);
-    //         });
-    // }
-
-    // useEffect( () => {
-    //     getMaps();
-    // },[]);
-
     if( !isEmpty(savedMaps) ) {
         const maps = Object.entries( savedMaps );
         return ( <>

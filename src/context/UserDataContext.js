@@ -140,11 +140,8 @@ export function UserDataContextProvider( { children } ) {
   }
 
   function loadMap( mapData ) {
-    
-    console.log(mapData)
     setMapName(mapData.name);
     setMapDescr(mapData.descr);
-    // setCurrentMapRef(savedMapRefs[mapIndex]);
     setCameraAngle(mapData.camera.angle);
     setCameraDistance(mapData.camera.distance);
     setCameraFocus(mapData.camera.focus);
@@ -189,7 +186,6 @@ export function UserDataContextProvider( { children } ) {
       setSavedMaps({});
       setSelectedMap('');
     }
-    
     setGridAxis(0);
     setGridValue(0);
     setTileSize(1);
@@ -207,8 +203,6 @@ export function UserDataContextProvider( { children } ) {
     setPanels([]);
     setGroundColor("#119944");
     setCurrentId(0);
-    
-
     return allData;
   }
 

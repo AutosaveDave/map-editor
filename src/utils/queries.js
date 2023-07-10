@@ -8,9 +8,5 @@ export async function queryUserMaps( user ) {
     
     const mapsQuerySnapshot = await getDocs(mapsQuery);
     const results = mapsQuerySnapshot.docs;
-    console.log('mapsQuerySnapshot')
-    console.log(mapsQuerySnapshot)
-    console.log('query results:');
-    console.log(results);
     return results;
 }

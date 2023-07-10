@@ -14,17 +14,14 @@ export async function addNewUser( data ) {
     accountCreated: Timestamp.now(),
   };
 
-  await setDoc( doc( collection( db, "Users" ) ), docData, {merge:false} )
-    .then(() => {
-        console.log("Document has been added successfully");
-    })
+  return await setDoc( doc( collection( db, "Users" ) ), docData, {merge:false} )
+    .then(res => res)
     .catch(error => {
         console.log(error);
     })
 }
 
 export async function createNewMap( data, name, descr ) {
-  console.log(data);
   const email = data.user.email;
 
   const db = getFirestore( app );
@@ -62,10 +59,8 @@ export async function createNewMap( data, name, descr ) {
 }
 
 export async function saveMap( data, mapRef, map ) {
-  //const { email } = data.email;
   const mapData = {...map, lastEdited:Timestamp.now()};
   const db = getFirestore( app );
-
   const result = await updateDoc( doc( collection( db, "Maps" ), mapRef ), mapData )
     .then(()=>{return mapData});
   return result;
