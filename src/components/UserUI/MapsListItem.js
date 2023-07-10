@@ -3,7 +3,7 @@ import { Stack, Container, Button, Row, Col } from 'react-bootstrap';
 import { useUserData } from "../../context/UserDataContext.js";
 import {styles} from '../../utils/styles.js';
 
-export default function MapListItem( props ) {
+export default function MapsListItem( props ) {
     const { 
         mapId, 
         name, descr, 

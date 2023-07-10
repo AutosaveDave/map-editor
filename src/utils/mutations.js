@@ -57,10 +57,8 @@ export async function createNewMap( data, name, descr ) {
       zoom: 1,
     },
   };
-  const result = await addDoc( collection( db, "Maps" ) , mapData )
-    .then( (res) => res );
-    
-  return result;
+  return await addDoc( collection( db, "Maps" ) , mapData )
+    .then( (res) => { return { mapData:mapData, data:res }; } );
 }
 
 export async function saveMap( data, mapRef, map ) {

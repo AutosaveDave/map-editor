@@ -6,7 +6,7 @@ import {styles} from '../../utils/styles.js';
 
 export default function SignupForm() {
 
-  const { setShowUserModal, setPage } = useUi();
+  const { setShowUserModal, setUiPage } = useUi();
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -22,7 +22,7 @@ export default function SignupForm() {
       await signUp(email, password)
         .then( () => { 
           setSigningUp(false);
-          setPage("Account");
+          setUiPage("Account");
           setShowUserModal(false);
         });
     } catch (err) {

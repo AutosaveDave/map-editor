@@ -4,11 +4,13 @@ import { Form, Alert, Spinner } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext.js";
 import { useUi } from "../../context/UiContext.js";
+import { useUserData } from "../../context/UserDataContext.js";
 
 export default function Login() {
 
   const { logIn } = useUserAuth();
   const { setShowUserModal, setUiPage } = useUi();
+  const {  } = useUserData();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

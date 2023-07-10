@@ -7,13 +7,15 @@ import {styles} from '../../utils/styles.js';
 
 export default function LogoutButton() {
 
-  const { setUiPage } = useUi();
-  const { clearData } = useUserData();
+  const { setUiPage, triggerUi } = useUi();
+  const { clearData, triggerUserData } = useUserData();
   const { logOut, user } = useUserAuth();
   
   function handleClick() {
-    clearData(true);
+    clearData( true, true );
     logOut();
+    triggerUi();
+    triggerUserData();
     setUiPage("Account");
   }
 

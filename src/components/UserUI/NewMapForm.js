@@ -21,7 +21,7 @@ export default function NewMapForm() {
     createMap( newName, newDescr )
       .then( result => {
         setAwaitingCreate(false);
-        clearData(false);
+        clearData(false, false);
         loadMap(result);
         setUiPage('Account');
       })
@@ -59,7 +59,7 @@ export default function NewMapForm() {
               <Spinner variant="warning" className=""/>
             }
             { !awaitingCreate && 
-              <Button style={{...(styles.button.secondary)}} type="Submit">
+              <Button style={{...(styles.button.primary)}} type="Submit">
                 Create Map
               </Button>
             }

@@ -1,22 +1,22 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { queryUserMaps } from "../utils/queries";
-import { useUserAuth } from "./UserAuthContext";
 import { createNewMap } from "../utils/mutations";
 import { useMapCamera } from "./MapCameraContext";
 import { saveMap } from "../utils/mutations";
+import { useUserAuth } from "./UserAuthContext";
 import { useColorTool } from "./ColorToolContext";
 import { useMapInfo } from "./MapInfoContext";
 import { useMapPanels } from "./MapPanelsContext";
 import { useMapEditor } from "./MapEditorContext";
 import { useMapConfig } from "./MapConfigContext";
-
+import { useUi } from "./UiContext";
+import { isEmpty } from "lodash";
 
 const userDataContext = createContext(null);
 
 export function UserDataContextProvider( { children } ) {
 
-  const auth = useUserAuth();
-  const { user } = auth;
+  const auth = useUserAuth();  
 
   const { cameraAngle, setCameraAngle,
           cameraSwivel, setCameraSwivel,
@@ -29,6 +29,8 @@ export function UserDataContextProvider( { children } ) {
 
   const { currentColor, setCurrentColor,
           colorPalette, setColorPalette } = useColorTool();
+
+  const { setMapListLoading, triggerUi } = useUi();
   
   const { mapName, setMapName,
           mapDescr, setMapDescr } = useMapInfo();
@@ -49,43 +51,47 @@ export function UserDataContextProvider( { children } ) {
   const [savedMaps, setSavedMaps] = useState({});
   const [selectedMap, setSelectedMap] = useState('');
 
-  useEffect( () => {   
-    async function getMaps() {
-        const result = await getUserMaps().then( (maps) => { 
-            return maps;
-        } );
-        return result;
-    }     
-    if(user)
-        getMaps();
-  },[]);
+  const [userDataFlip, setUserDataFlip] = useState(0);
 
-  async function refreshMaps( newId ) {
-    const result = await getUserMaps()
-      .then( maps => {
-        let selectedId = "";
-        Object.entries(maps).map( ( [key, value] ) => {
-          if( key === newId ) {
-            selectedId = key;
-          }
-          return "";
-        });
-        if( selectedId )
-          setSelectedMap(selectedId);
-        return maps[selectedId];
-      })
-      .catch( error => {
-        console.log(error);
-      });
-      return result;
+  function triggerUserData() {   // Triggers re-renders for changes to savedMaps
+    const flip = ( userDataFlip + 1 ) % 2;
+    setUserDataFlip(flip);
+  }
+
+  function sortSavedMaps() {
+    if( !isEmpty(savedMaps) ) {
+      const mapsArray = Object.keys(savedMaps);
+      mapsArray.sort( ( a, b ) => 
+        savedMaps[b].lastEdited.seconds - savedMaps[a].lastEdited.seconds 
+      );
+      let mapsObj = {};
+      for( let i = 0 ; i < mapsArray.length ; i += 1 ) {
+        mapsObj[ mapsArray[i] ] = ( savedMaps[ mapsArray[i] ] );
+      }
+      setSavedMaps(mapsObj);
+      triggerUserData();
+      triggerUi();
+    }
+  }
+
+  const addMapToSavedMaps = ( mapData, newId ) => {
+    let result = {};
+    result[newId] = mapData;
+    result = { ...result, ...savedMaps };
+    setSavedMaps(result);
+    return result;
   }
 
   async function createMap( newName, newDescr ) {
     const result = await createNewMap( auth, newName, newDescr )
-        .then( data => {
-            const newPath = data._key.path.segments;
-            const newId = newPath[newPath.length-1];
-            return refreshMaps(newId);
+        .then( res => {
+          const { mapData, data } = res;
+          const newPath = data._key.path.segments;
+          const newId = newPath[newPath.length-1];
+          const maps = addMapToSavedMaps( mapData, newId );
+          setSelectedMap( newId );
+          loadMap( maps[ newId ] );
+          return maps[ newId ];
         })
         .catch( (error) => {
             console.log(error);
@@ -94,27 +100,29 @@ export function UserDataContextProvider( { children } ) {
   }
 
   async function getUserMaps() {
-    const userMaps = {};
-    const result = await queryUserMaps( user )
+    let userMaps = {};
+    return await queryUserMaps( auth.user )
         .then( data => {
             data.forEach( thisResult => { 
                 const pathSegs = thisResult._document.key.path.segments;
                 userMaps[ `${pathSegs[ pathSegs.length - 1 ]}` ] = { ...(thisResult.data()) };
             } );
-            if( Object.keys(userMaps).length === 0 ) {
-              return userMaps;
-            }
-          }).then( userMaps => {
             setSavedMaps(userMaps);
-            console.log("queryUserMaps result");
-            console.log(user);
+            triggerUserData();
             return userMaps;
+        })
+        .then( (userMaps) => {
+          if( isEmpty(userMaps) )
+            return createMap("Untitled", "No description yet.");
+          const selectId = Object.keys(userMaps)[0];
+          setSelectedMap( selectId ); // Select first map on sign-in
+          loadMap( userMaps[ selectId ] );
+          return userMaps;
         })
         .catch((error) => {
             console.log(error);
-            console.log(user);
-        })
-        return result;
+            console.log(auth.user);
+        });
   }
 
   async function saveCurrentMap( user ) {
@@ -127,6 +135,7 @@ export function UserDataContextProvider( { children } ) {
           newSavedMaps[selectedMap][key] = value;
         });
         setSavedMaps(newSavedMaps);
+        triggerUi();
       });
   }
 
@@ -176,6 +185,10 @@ export function UserDataContextProvider( { children } ) {
       setMapName("");
       setMapDescr("");
     }
+    if(allData){
+      setSavedMaps({});
+      setSelectedMap('');
+    }
     
     setGridAxis(0);
     setGridValue(0);
@@ -194,6 +207,7 @@ export function UserDataContextProvider( { children } ) {
     setPanels([]);
     setGroundColor("#119944");
     setCurrentId(0);
+    
 
     return allData;
   }
@@ -239,13 +253,31 @@ export function UserDataContextProvider( { children } ) {
     };
   }
 
+  useEffect( () => {
+    const getMaps = async () => {
+      setMapListLoading(true);
+      return await getUserMaps()
+          .then(() => {
+              setMapListLoading(false);
+          });
+    }
+    if(auth.user) {
+      getMaps()
+        .then( () => {
+          triggerUserData();
+          triggerUi();
+        });
+    }
+  },[auth.user]);
+
   return (
     <userDataContext.Provider
       value= {{ savedMaps, setSavedMaps, 
                 selectedMap, setSelectedMap,
                 clearData, saveCurrentMap,
                 loadMap, getUserMaps,
-                createMap 
+                createMap, triggerUserData,
+                sortSavedMaps
       }}
     >
       {children}

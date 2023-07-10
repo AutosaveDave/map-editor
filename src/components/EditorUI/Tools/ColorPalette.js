@@ -24,7 +24,7 @@ export default function ColorPalette() {
             <Container fluid className="h-100 w-100 p-0 m-0">
                 <Row className="w-100 h-50 m-0 p-0 align-middle" >
                     {colorPalette.map( (buttonColor) => (
-                        <ColorPaletteButton buttonColor={buttonColor}/>
+                        <ColorPaletteButton buttonColor={buttonColor} key={`palette-btn-${buttonColor}`}/>
                     ))}
                 </Row>
             </Container>

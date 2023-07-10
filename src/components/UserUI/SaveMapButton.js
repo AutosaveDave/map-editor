@@ -8,7 +8,7 @@ export default function SaveMapButton( props ) {
 
     const { user } = useUserAuth();
 
-    const { saveCurrentMap } = useUserData();
+    const { saveCurrentMap, sortSavedMaps } = useUserData();
 
     const [savingMap, setSavingMap] = useState(false);
 
@@ -16,7 +16,7 @@ export default function SaveMapButton( props ) {
         if( !savingMap ){
             setSavingMap( true );
             saveCurrentMap( user )
-                .then( () => { setSavingMap( false ); })
+                .then( () => { setSavingMap( false ); sortSavedMaps(); })
                 .catch((error) => { console.log(error); });
         }
     }

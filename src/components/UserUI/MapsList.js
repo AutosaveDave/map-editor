@@ -4,6 +4,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { styles } from '../../utils/styles.js';
 import { useUi } from "../../context/UiContext.js";
+
 import MapsListItems from './MapsListItems.js';
 
 export default function MapsList() {
