@@ -4,13 +4,11 @@ import { Form, Alert, Spinner } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext.js";
 import { useUi } from "../../context/UiContext.js";
-import { useUserData } from "../../context/UserDataContext.js";
 
 export default function Login() {
 
   const { logIn } = useUserAuth();
   const { setShowUserModal, setUiPage } = useUi();
-  const {  } = useUserData();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -39,7 +37,7 @@ export default function Login() {
         <h4 className="mb-1 ">Login</h4>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-1" controlId="formBasicEmail">
+          <Form.Group className="mb-1" controlId="formLoginBasicEmail">
             <Form.Control
               type="email"
               placeholder="Email address"
@@ -48,7 +46,7 @@ export default function Login() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-1" controlId="formBasicPassword">
+          <Form.Group className="mb-1" controlId="formLoginBasicPassword">
             <Form.Control
               type="password"
               placeholder="Password"

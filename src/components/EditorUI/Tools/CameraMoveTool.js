@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import {styles} from '../../../utils/styles.js';
 import { useMapCamera } from '../../../context/MapCameraContext.js';
 import { useMapConfig } from '../../../context/MapConfigContext.js';
+import { MoveCameraIcon } from '../../icons/Icons.js';
 
 export default function CameraMoveTool() {
     const { camFocusToPos2,
@@ -101,16 +102,19 @@ export default function CameraMoveTool() {
         if( (camSwivelOdd && dIndexEven) || (!camSwivelOdd && !dIndexEven) ) {
             return ( 
                 <>
-                    <Button className="" 
+                    <Button className="p-1 align-content-middle" variant="tertiary"
                         style={{ 
                             position:'relative',
                             aspectRatio:1,
                             height:'100%',
-                            ...(styles.button.secondary),
-                            ...(styles.bgImage.moveCamImage[dIndex]), 
+                            
+                            //...(styles.button.secondary),
+                            //...(styles.bgImage.moveCamImage[dIndex]), 
                         }} 
                         onClick={ handleClick }
-                    />
+                    >
+                        <MoveCameraIcon dIndex={dIndex} size="100%" />
+                    </Button>
                 </>
             );
         }

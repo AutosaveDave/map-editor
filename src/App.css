@@ -1,3 +1,5 @@
+
+
 .App {
   text-align: center;
 }
@@ -56,6 +58,53 @@
   right:0;
 }
 
+.btn-primary {
+  background-color: #ffca3a !important;
+  border-color: #ffca3a !important;
+  color: rgb(0, 0, 60) !important;
+}
+.btn-primary:hover {
+  background-color: #ffe174 !important;
+  border-color: #ffe174 !important;
+  color: rgb(0, 0, 60) !important;
+}
+
+.btn-secondary {
+  background-color: #8ac926 !important;
+  border-color: #8ac926 !important;
+  color: black !important;
+}
+.btn-secondary:hover {
+  background-color: #d8f74e !important;
+  border-color: #d8f74e !important;
+  color: rgb(0, 0, 108) !important;
+}
+
+.btn-tertiary {
+  background-color: #6a4c93 !important;
+  border-color: #6a4c93 !important;
+  color: #ffe174 !important;
+}
+.btn-tertiary:hover {
+  background-color: #9175ff !important;
+  border-color: #9175ff !important;
+  color: #ffca3a !important;
+}
+
+.btn-danger {
+  background-color: #ff595e !important;
+  border-color: #ff595e !important;
+  color: black !important;
+}
+.btn-danger:hover {
+  background-color: #ff6643 !important;
+  border-color: #ff6643 !important;
+  color: white !important;
+}
+
+svg {
+  vertical-align: baseline !important;
+}
 
 @keyframes App-logo-spin {
   from {

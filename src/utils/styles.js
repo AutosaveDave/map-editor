@@ -108,7 +108,7 @@ export const styles = {
         refresh: {
             backgroundImage:`url(${refreshImage})`, 
             backgroundPosition:'center', 
-            backgroundSize:'60%', 
+            backgroundSize:'80%', 
             backgroundRepeat:'no-repeat',
         },
         mapConfig: {
@@ -246,4 +246,4 @@ export const styles = {
             }
         }
     },
-};
+}

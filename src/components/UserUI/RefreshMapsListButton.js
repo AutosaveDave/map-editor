@@ -1,23 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import { useUserAuth } from "../../context/UserAuthContext";
+import { useUi } from "../../context/UiContext";
 import { useUserData } from "../../context/UserDataContext";
 import { styles } from '../../utils/styles.js';
+import { RefreshIcon } from '../icons/Icons.js';
 
-export default function SaveMapButton() {
+export default function RefreshMapsListButton() {
 
     const { user } = useUserAuth();
+    const { triggerUi, mapListLoading, setMapListLoading } = useUi();
+    const { getUserMaps, triggerUserData } = useUserData();
 
-    const { saveCurrentMap, sortSavedMaps } = useUserData();
+    const refreshMaps = async () => {
+        setMapListLoading(true);
+        return await getUserMaps()
+            .then((res) => {
+                setMapListLoading(false);
+                triggerUi();
+                return res;
+            });
+      }
 
-    const [savingMap, setSavingMap] = useState(false);
-
-    function handleSave() {
-        if( !savingMap ){
-            setSavingMap( true );
-            saveCurrentMap( user )
-                .then( () => { setSavingMap( false ); sortSavedMaps(); })
-                .catch((error) => { console.log(error); });
+    function handleRefresh() {
+        if( !mapListLoading ){
+            refreshMaps()
+                .then( () => {
+                    triggerUserData();
+                    triggerUi();
+                });
         }
     }
 
@@ -27,40 +38,41 @@ export default function SaveMapButton() {
   
     return (
         <>
-            { savingMap && 
+            { mapListLoading && 
                 <OverlayTrigger
                     key={'bottom'}
                     placement={'bottom'}
                     overlay={
                         <Tooltip id={`tooltip-saving`} >
-                            Saving Map...
+                            Loading Maps...
                         </Tooltip>
                     }
                 >
                     <Spinner className="d-inline-block text-align-left mx-0" variant="warning"/>
                 </OverlayTrigger>
             }
-            { !savingMap && 
+            { !mapListLoading && 
                 <OverlayTrigger
                     key={'bottom'}
                     placement={'bottom'}
                     overlay={
                         <Tooltip id={`tooltip-save-map`} >
-                            Save Map
+                            Refresh List
                         </Tooltip>
                     }
                 >
-                    <Button className="d-inline-block "
-                        onClick={handleSave}
+                    <Button className="p-1" variant="secondary"
+                        onClick={handleRefresh}
                         style={{
-                            height:'85%',
+                            height:'38px',
                             aspectRatio:'1',
-                            ...(styles.bgImage.save),
-                            position:'relative',
+                            position:'absolute',
+                            left:'36px', top:'24px',
                             align:'middle',
-                            ...(styles.button.secondary)
                         }}
-                    />
+                    >
+                        <RefreshIcon size="100%" />
+                    </Button>
                 </OverlayTrigger>
             }
         </>

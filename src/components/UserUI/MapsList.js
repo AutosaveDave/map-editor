@@ -6,6 +6,7 @@ import { styles } from '../../utils/styles.js';
 import { useUi } from "../../context/UiContext.js";
 
 import MapsListItems from './MapsListItems.js';
+import RefreshMapsListButton from "./RefreshMapsListButton.js";
 
 export default function MapsList() {
     
@@ -34,6 +35,8 @@ export default function MapsList() {
                                 }}
                             >Create</Button>
                         </OverlayTrigger>
+                        
+                        <RefreshMapsListButton/>
                     </div>
                 </Stack>
                 <div className="" style={{overflowY:'auto', maxHeight:'60vh'}}>
