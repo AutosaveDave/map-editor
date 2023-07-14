@@ -79,7 +79,7 @@ export function MapEditorContextProvider( { children } ) {
               lines.push( [ a * tileSize, gridValue * tileSize, 0,
                       a * tileSize, gridValue * tileSize, mapHeight * tileSize ] );
           }
-          for( let b = 0 ; b <= mapLength ; b += 1 ) {
+          for( let b = 0 ; b <= mapHeight ; b += 1 ) {
               lines.push( [ 0, gridValue * tileSize, b * tileSize,
                       mapWidth * tileSize, gridValue * tileSize, b * tileSize ] );
           }

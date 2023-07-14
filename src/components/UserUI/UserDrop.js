@@ -63,7 +63,7 @@ export default function UserDrop() {
                 <Dropdown.Menu className="m-0"
                     style={{ 
                         width: dropWidth(),
-                        ...(styles.button.secondary),
+                        ...(styles.surface.secondary),
                     }}
                 >
                     <Stack>

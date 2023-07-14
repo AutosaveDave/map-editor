@@ -21,11 +21,11 @@ import refreshImage from "../assets/icons/refresh-icon.svg";
 const colors = {
     black:'#000000',
     white:'#FFFFFF',
-    orange:'#F49E4C',
+    orange:'#222222',
     vanilla:'#F5EE9E',
-    maroon:'#89023E',
-    lightTeal:'#3B8EA5',
-    darkTeal:'#2D728F',
+    maroon:'#171717',
+    lightTeal:'#1E1E1E',
+    darkTeal:'#171717',
     navy:'#000055',
 }
 

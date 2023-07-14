@@ -19,18 +19,18 @@ export default function MapsListItem( props ) {
         loadMap(savedMaps[thisMapRef]);
     }
 
-    function listItemStyle( selected, mapIndex ) {
+    function listItemVariant( selected, mapIndex ) {
         if( selected === mapIndex ) {
-            return styles.button.primary;
+            return 'primary';
         }
-        return styles.button.tertiary;
+        return 'tertiary';
     }
 
     return (
         <Container className="">
             <Button className="w-100 p-1 m-1" 
-                style={{ ...(listItemStyle(selectedMap, mapId)) }}
-                onClick={(e) => { e.preventDefault(); handleMapClick(mapId); } }
+                variant={ listItemVariant( selectedMap, mapId ) }
+                onClick={(e) => { e.preventDefault(); handleMapClick( mapId ); } }
             >
                 <Stack direction='horizontal' className="">
                     <Stack className="text-start justify-content-between" >

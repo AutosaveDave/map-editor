@@ -2,13 +2,14 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import userIcon from '../../assets/icons/person-circle.svg';
-import { styles } from '../../utils/styles.js';
+import { useSizing } from "../../context/SizingContext";
 import { useUi } from '../../context/UiContext';
+import { UserIcon } from "../icons/Icons";
 
 export default function UserButton() {
 
   const { setShowUserModal } = useUi();
+  const { toolBarHeight } = useSizing();
 
   function handleClick() {
     setShowUserModal(true);
@@ -26,20 +27,22 @@ export default function UserButton() {
         }
       >
         <Button className="d-inline-block text-center" onClick={handleClick} 
+          variant='danger'
           style={{
-            height:'94%',
-            aspectRatio:'1',
-            backgroundImage:`url(${userIcon})`, 
-            backgroundPosition:'center', 
-            backgroundSize:'70%', 
-            backgroundRepeat:'no-repeat',
-            borderRadius:'50%',
+            height:`${toolBarHeight()-2}px`,
+            width:`${toolBarHeight()-2}px`,
+            aspectRatio:1,
             position:'relative',
-            top:'3%',
-            right:'3px',
-            ...(styles.button.tertiary)
+            top:'1px',
+            right:'0px',
+            alignContent:'middle',
+            align:'center',
+            verticalAlign:'middle',
+            padding:'3px'
           }}
-        />
+        >
+          <UserIcon size='100%'/>
+        </Button>
       </OverlayTrigger>
     </>
   );

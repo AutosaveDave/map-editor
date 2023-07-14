@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useUserData } from "../../context/UserDataContext";
-import { styles } from '../../utils/styles.js';
+import { useSizing } from "../../context/SizingContext";
 import { SaveIcon } from "../icons/Icons";
 
 export default function SaveMapButton() {
@@ -10,7 +10,7 @@ export default function SaveMapButton() {
     const { user } = useUserAuth();
 
     const { saveCurrentMap, sortSavedMaps } = useUserData();
-
+    const { toolBarHeight } = useSizing();
     const [savingMap, setSavingMap] = useState(false);
 
     function handleSave() {
@@ -55,7 +55,8 @@ export default function SaveMapButton() {
                         variant='secondary'
                         onClick={handleSave}
                         style={{
-                            height:'85%',
+                            height:`${ toolBarHeight() - 6 }px`,
+                            width:`${ toolBarHeight() - 6 }px`,
                             aspectRatio:'1',
                             alignContent:'middle',
                             align:'center',
