@@ -72,7 +72,7 @@
 .btn-secondary {
   background-color: #8ac926 !important;
   border-color: #8ac926 !important;
-  color: black !important;
+  color: rgb(0, 0, 60) !important;
 }
 .btn-secondary:hover {
   background-color: #d8f74e !important;
@@ -102,9 +102,27 @@
   color: white !important;
 }
 
-svg {
-  vertical-align: baseline !important;
+.toolbar-dropdown {
+  display:inline-block !important;
+  justify-content:space-between !important;
 }
+
+.toolbar-dropdown::after {
+  height:100%;
+  margin-left:6px;
+  vertical-align: -50% !important;
+}
+
+svg {
+  vertical-align: baseline;
+  stroke: currentColor;
+  stroke-width: 0.5;
+  overflow:visible;
+}
+.caretsvg {
+  vertical-align: top !important;
+}
+
 
 @keyframes App-logo-spin {
   from {

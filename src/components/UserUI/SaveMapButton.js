@@ -3,6 +3,7 @@ import { Button, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useUserData } from "../../context/UserDataContext";
 import { styles } from '../../utils/styles.js';
+import { SaveIcon } from "../icons/Icons";
 
 export default function SaveMapButton() {
 
@@ -50,17 +51,20 @@ export default function SaveMapButton() {
                         </Tooltip>
                     }
                 >
-                    <Button className="d-inline-block "
+                    <Button className=" "
+                        variant='secondary'
                         onClick={handleSave}
                         style={{
                             height:'85%',
                             aspectRatio:'1',
-                            ...(styles.bgImage.save),
-                            position:'relative',
-                            align:'middle',
-                            ...(styles.button.secondary)
+                            alignContent:'middle',
+                            align:'center',
+                            verticalAlign:'middle',
+                            padding:'5px'
                         }}
-                    />
+                    >
+                        <SaveIcon size='100%'/>
+                    </Button>
                 </OverlayTrigger>
             }
         </>

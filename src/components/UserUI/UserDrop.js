@@ -4,11 +4,12 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
-import userIcon from '../../assets/icons/person-circle.svg';
+import { UserIcon } from '../icons/Icons';
 import { useUserAuth } from "../../context/UserAuthContext";
 import LogoutButton from "./LogoutButton.js";
 import UserInterface from './UserInterface.js';
 import { useUi } from '../../context/UiContext';
+import { useSizing } from '../../context/SizingContext';
 import {styles} from '../../utils/styles.js';
 
 export default function UserDrop() {
@@ -16,6 +17,7 @@ export default function UserDrop() {
     const { user } = useUserAuth();
 
     const { uiPage, setUiPage } = useUi();
+    const { toolBarHeight } = useSizing();
 
     const dropWidth = () => {
         if( window.innerWidth <= 576 ) return '100vw';
@@ -38,20 +40,24 @@ export default function UserDrop() {
                         </Tooltip>
                     }
                 >
-                    <Dropdown.Toggle className="text-end m-0 py-1 px-2" variant="primary" id="dropdown-basic"
+                    <Dropdown.Toggle className="toolbar-dropdown justify-text-end m-0 p-1" 
+                        variant="primary" 
+                        id="dropdown-basic"
                         style={{ 
+                            position:'relative',
+                            top:'3px',
                             maxWidth:'80px',
                             minWidth:'52px',
-                            backgroundImage: `url(${userIcon})`, 
-                            backgroundBlendMode:'difference',
-                            backgroundRepeat:'no-repeat',
-                            backgroundSize:'auto 70%',
-                            backgroundPositionY: 'center',
-                            backgroundPositionX:'20%',
-                            backgroundOrigin:'padding-box',
-                            ...(styles.button.primary)
+                            height:`${ toolBarHeight() - 6 }px`,
                         }}
-                    />
+                    >
+                        <div className='d-inline-flex align-start' 
+                            style={{position:'relative', alignSelf:'start', 
+                                    left:0, aspectRatio:1,height:'100%'}}
+                        >
+                            <UserIcon size='100%'/>
+                        </div>
+                    </Dropdown.Toggle>
                 </OverlayTrigger>
 
                 <Dropdown.Menu className="m-0"

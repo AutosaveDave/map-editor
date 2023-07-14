@@ -5,10 +5,13 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import MapConfigForm from "./MapConfigForm.js";
-import gearIcon from "../../assets/icons/gear.svg";
-import {styles} from '../../utils/styles.js';
+import { GearIcon } from '../icons/Icons.js';
+import { styles } from '../../utils/styles.js';
+import { useSizing } from '../../context/SizingContext.js';
 
 export default function MapConfigDrop() {
+
+  const { toolBarHeight } = useSizing();
 
   const dropWidth = () => {
     if( window.innerWidth <= 576 ) return '100vw';
@@ -20,7 +23,7 @@ export default function MapConfigDrop() {
   }
 
   return (
-    <Dropdown className="justify-content-between m-0 p-0" >
+    <Dropdown className="" >
       <OverlayTrigger
         key={'bottom'}
         placement={'bottom'}
@@ -30,20 +33,21 @@ export default function MapConfigDrop() {
             </Tooltip>
         }
       >
-        <Dropdown.Toggle className="text-end m-0 py-1 px-2" id="dropdown-basic"
+        <Dropdown.Toggle className="toolbar-dropdown justify-text-end m-0 p-1" id="dropdown-basic"
+          variant="primary"
           style={{ 
             maxWidth:'80px',
             minWidth:'52px',
-            backgroundImage: `url(${gearIcon})`, 
-            backgroundBlendMode: 'difference',
-            backgroundRepeat:'no-repeat',
-            backgroundSize:'auto 70%',
-            backgroundPositionY: 'center',
-            backgroundPositionX:'20%',
-            backgroundOrigin:'padding-box',
-            ...(styles.button.primary)
+            height:`${ toolBarHeight() - 6 }px`,
           }}
-        />
+        >
+          <div className='d-inline-flex align-start' 
+              style={{position:'relative', alignSelf:'start', 
+                      left:0, aspectRatio:1,height:'100%'}}
+          >
+            <GearIcon size="100%" />
+          </div>
+        </Dropdown.Toggle>
       </OverlayTrigger>
       <Dropdown.Menu className="" style={{ ...(styles.surface.secondary), width:dropWidth()}}>
         <Container>

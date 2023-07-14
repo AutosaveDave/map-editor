@@ -6,6 +6,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import ColorPalette from './ColorPalette';
 import { useColorTool } from '../../../context/ColorToolContext';
 import { useSizing } from '../../../context/SizingContext';
+import { AddIcon } from '../../icons/Icons';
 import {styles} from '../../../utils/styles.js';
 
 export default function ColorTool() {
@@ -61,19 +62,21 @@ export default function ColorTool() {
                             }
                         >
                             <Button 
-                                className="p-0" 
+                                className="p-1 my-1" 
                                 variant="primary" 
                                 onClick={handleAddColor}
                                 style={{
-                                    position:'relative',
+                                    marginTop:'5px',
+                                    marginBottom:'5px',
                                     height:`${toolBarHeight()-10}px`,
                                     width:`${toolBarHeight()-10}px`,
-                                    top:'5px',
-                                    ...(styles.bgImage.addColor),
+                                    aspectRatio:1,
+
                                     borderRadius:'50%',
-                                    ...(styles.button.primary)
                                 }}
-                            />
+                            >
+                                <AddIcon size='100%'/>
+                            </Button>
                         </OverlayTrigger>
                     </div>
                 </Col>

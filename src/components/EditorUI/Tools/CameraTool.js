@@ -6,6 +6,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
 import {styles} from '../../../utils/styles.js';
+import { RotateCCWIcon, RotateCWIcon } from '../../icons/Icons.js';
 
 export default function CameraTool() {
 
@@ -53,10 +54,15 @@ export default function CameraTool() {
                             </Tooltip>
                         }
                     >
-                        <Button className="p-3 " 
-                            style={{ ...(styles.button.primary), ...(styles.bgImage.rotateCCW) }}
+                        <Button className="d-inline-block p-1 " variant="secondary"
+                            style={{
+                                aspectRatio:1,
+                                height:'32px',
+                            }}
                             onClick={ handleRotateCCW } 
-                        />
+                        >
+                            <RotateCCWIcon />
+                        </Button>
                     </OverlayTrigger>
                     
                     <OverlayTrigger
@@ -67,10 +73,15 @@ export default function CameraTool() {
                             </Tooltip>
                         }
                     >
-                        <Button className="p-3 " 
-                            style={{ ...(styles.button.primary), ...(styles.bgImage.rotateCW) }}
-                            onClick={ handleRotateCW } 
-                        />
+                        <Button className="d-inline-block p-1" onClick={ handleRotateCW } 
+                            variant="secondary"
+                            style={{
+                                aspectRatio:1,
+                                height:'32px',
+                            }}
+                        >
+                            <RotateCWIcon size="100%" />
+                        </Button>
                     </OverlayTrigger>
                 </Stack>
                     <CameraMoveTool />

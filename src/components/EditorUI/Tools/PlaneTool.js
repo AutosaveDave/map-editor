@@ -3,6 +3,7 @@ import { Form, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import {styles} from '../../../utils/styles.js';
 import { useMapEditor } from '../../../context/MapEditorContext.js';
 import { useMapConfig } from '../../../context/MapConfigContext.js';
+import { CaretDownIcon, CaretUpIcon } from '../../icons/Icons.js';
 
 export default function PlaneTool() {
 
@@ -28,22 +29,28 @@ export default function PlaneTool() {
                     </Tooltip>
                 }
             >
-                <Button 
+                <Button variant="tertiary"
                     onClick={ (e) => {
                         let gv = currentGridVal();
                         let gmax = axisMax[gridAxis];
                         setGridValue( (gv + 1) % (gmax + 1) );
                     }}
                     style={{
-                        ...(styles.button.secondary),
-                        ...(styles.bgImage.gridValUp),
                         position:'absolute',
                         bottom:'100%',
-                        right:0,
+                        right:'1px',
                         aspectRatio: 1,
                         width:'26px',
+                        height:'26px',
+                        alignContent:'middle',
+                        align:'center',
+                        padding:'5px'
                     }}
-                />
+                >
+                    <div className="d-inline-block h-100 w-100" style={{verticalAlign:'top'}} >
+                        <CaretUpIcon size='100%'/>
+                    </div>
+                </Button>
             </OverlayTrigger>
 
             <OverlayTrigger
@@ -82,21 +89,28 @@ export default function PlaneTool() {
                 }
             >
                 <Button className=""
+                variant="tertiary"
                     onClick={(e) => {
                         let gv = gridValue;
                         let gmax = axisMax[gridAxis];
                         setGridValue( (gv - 1 + gmax+1) % (gmax + 1) );
                     }}
                     style={{
-                        ...(styles.button.secondary),
-                        ...(styles.bgImage.gridValDown),
                         aspectRatio: 1,
                         position:'absolute',
                         top:'100%',
-                        right:0,
+                        right:'1px',
                         width:'26px',
+                        height:'26px',
+                        alignContent:'middle',
+                        align:'center',
+                        padding:'5px'
                     }}
-                />
+                >
+                    <div className="d-inline-block h-100 w-100" style={{verticalAlign:'top'}} >
+                        <CaretDownIcon size='100%'/>
+                    </div>
+                </Button>
             </OverlayTrigger>
                 <OverlayTrigger
                     key={'tooltip-axis'}
