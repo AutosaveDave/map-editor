@@ -74,9 +74,9 @@ export default function UserDrop() {
                                     direction='horizontal' 
                             >
                                 <RefreshMapsListButton/>
-                                <Container style={{overflow:'hidden'}}>
-                                    <h4 className="w-100" style={{overflow:'hidden'}}>{uiPage}</h4>
-                                    <h6 className="w-100" style={{overflow:'hidden'}}>{user.email}</h6>
+                                <Container style={{overflowX:'hidden'}}>
+                                    <h4 className="w-100" >{uiPage}</h4>
+                                    <h6 className="w-100" >{user.email}</h6>
                                 </Container>
                                 <NewMapMenuButton/>
                             </Stack>

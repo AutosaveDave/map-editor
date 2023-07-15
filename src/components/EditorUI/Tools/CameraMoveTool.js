@@ -107,9 +107,6 @@ export default function CameraMoveTool() {
                             position:'relative',
                             aspectRatio:1,
                             height:'100%',
-                            
-                            //...(styles.button.secondary),
-                            //...(styles.bgImage.moveCamImage[dIndex]), 
                         }} 
                         onClick={ handleClick }
                     >
