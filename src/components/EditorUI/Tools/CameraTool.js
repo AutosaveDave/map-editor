@@ -43,7 +43,7 @@ export default function CameraTool() {
         <>
         <div className="p-1" >
             <Stack direction='vertical' className="p-2 justify-content-center" 
-                    style={{ ...(styles.surface.secondary)}}
+                    style={{ ...(styles.surface.primary)}}
             >
                 <Stack direction='horizontal' className="mb-3 justify-content-between">
                     <OverlayTrigger

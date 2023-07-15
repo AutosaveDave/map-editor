@@ -122,13 +122,12 @@ export default function PlaneTool() {
                     }
                 >
                     <Button className=""
-                        
+                        variant="secondary"
                         onClick={(e) => {
                             const val = (gridAxis + 1) % 3;
                             setGridAxis(val);
                         }}
                         style={{
-                            ...(styles.button.tertiary),
                             ...(styles.bgImage.axis),
                             aspectRatio: 1,
                             position:'absolute',
@@ -150,7 +149,7 @@ export default function PlaneTool() {
                                 left:0,
                                 textAlign:'center',
                                 fontWeight:'bold',
-                                color:styles.colors.vanilla,
+                                color:styles.colors.black,
                             }}
                         >{ axisNames[ gridAxis ] }</h2>
                     </Button>

@@ -29,8 +29,7 @@ export default function LogoutButton() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleClick}
-        style={{...(styles.button.tertiary)}}
+      <Button variant="tertiary" onClick={handleClick}
       >Logout</Button>
     </>
   );

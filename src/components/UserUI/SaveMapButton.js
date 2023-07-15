@@ -51,7 +51,7 @@ export default function SaveMapButton() {
                         </Tooltip>
                     }
                 >
-                    <Button className=" "
+                    <Button className=""
                         variant='secondary'
                         onClick={handleSave}
                         style={{

@@ -80,6 +80,10 @@
   color: rgb(0, 0, 108) !important;
 }
 
+.spinner-border {
+  color: #8ac926 !important;
+}
+
 .btn-tertiary {
   background-color: #6a4c93 !important;
   border-color: #6a4c93 !important;

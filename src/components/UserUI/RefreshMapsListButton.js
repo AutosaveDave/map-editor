@@ -9,7 +9,7 @@ import { RefreshIcon } from '../icons/Icons.js';
 export default function RefreshMapsListButton() {
 
     const { user } = useUserAuth();
-    const { triggerUi, mapListLoading, setMapListLoading } = useUi();
+    const { triggerUi, uiPage, mapListLoading, setMapListLoading } = useUi();
     const { getUserMaps, triggerUserData } = useUserData();
 
     const refreshMaps = async () => {
@@ -32,24 +32,29 @@ export default function RefreshMapsListButton() {
         }
     }
 
-    if( !user ) {
+    if( !user || !(uiPage === "Account") )
         return ( <> <div/> </> );
-    }
   
     return (
         <>
             { mapListLoading && 
-                <OverlayTrigger
-                    key={'bottom'}
-                    placement={'bottom'}
-                    overlay={
-                        <Tooltip id={`tooltip-saving`} >
-                            Loading Maps...
-                        </Tooltip>
-                    }
-                >
-                    <Spinner className="d-inline-block text-align-left mx-0" variant="warning"/>
-                </OverlayTrigger>
+                <div style={{
+                    height:'38px',
+                    aspectRatio:'1',
+                    align:'middle',
+                }}>
+                    <OverlayTrigger
+                        key={'bottom'}
+                        placement={'bottom'}
+                        overlay={
+                            <Tooltip id={`tooltip-saving`} >
+                                Loading Maps...
+                            </Tooltip>
+                        }
+                    >
+                        <Spinner className="d-inline-block" variant="warning"/>
+                    </OverlayTrigger>
+                </div>
             }
             { !mapListLoading && 
                 <OverlayTrigger
@@ -66,8 +71,6 @@ export default function RefreshMapsListButton() {
                         style={{
                             height:'38px',
                             aspectRatio:'1',
-                            position:'absolute',
-                            left:'36px', top:'24px',
                             align:'middle',
                         }}
                     >

@@ -18,7 +18,7 @@ export default function ColorTool() {
     return (
         <>
         <Container className="m-0 py-0 px-1 h-100 align-middle" 
-                    style={{...(styles.surface.secondary)}} 
+                    style={{...(styles.surface.tertiary)}} 
         >
             <Row className="w-100 h-100 m-0 p-0 align-middle" >
                 <Col className="h-100 p-0 m-0 align-middle text-center" xs={2} >
@@ -71,7 +71,6 @@ export default function ColorTool() {
                                     height:`${toolBarHeight()-10}px`,
                                     width:`${toolBarHeight()-10}px`,
                                     aspectRatio:1,
-
                                     borderRadius:'50%',
                                 }}
                             >

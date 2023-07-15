@@ -127,7 +127,7 @@ export default function CameraMoveTool() {
 
     return (
         <>
-            <Container className="d-inline-block p-0" style={{ ...(styles.surface.secondary),position:'relative',aspectRatio:1,height:'100px'}} >
+            <Container className="d-inline-block p-0" style={{ ...(styles.surface.primary),position:'relative',aspectRatio:1,height:'100px'}} >
                 <Row xs={{ cols: 3 }} style={{height:'33%', width:'100%'}}>
                     <Col >
                         <MoveCameraButton dIndex={ 0 }/>

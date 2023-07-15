@@ -1,9 +1,5 @@
 import React from 'react';
-import Stack from 'react-bootstrap/Stack';
-import Dropdown from 'react-bootstrap/Dropdown';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
-import Button from 'react-bootstrap/Button';
+import { Stack, Container, Dropdown, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import { UserIcon } from '../icons/Icons';
 import { useUserAuth } from "../../context/UserAuthContext";
 import LogoutButton from "./LogoutButton.js";
@@ -11,21 +7,24 @@ import UserInterface from './UserInterface.js';
 import { useUi } from '../../context/UiContext';
 import { useSizing } from '../../context/SizingContext';
 import {styles} from '../../utils/styles.js';
+import NewMapMenuButton from './NewMapMenuButton';
+import RefreshMapsListButton from './RefreshMapsListButton';
 
 export default function UserDrop() {
 
     const { user } = useUserAuth();
 
     const { uiPage, setUiPage } = useUi();
-    const { toolBarHeight } = useSizing();
+    const { toolBarHeight, canvasHeight, dropWidth } = useSizing();
 
-    const dropWidth = () => {
-        if( window.innerWidth <= 576 ) return '100vw';
-        if( window.innerWidth <= 768 ) return '90vw';
-        if( window.innerWidth <= 992 ) return '65vw';
-        if( window.innerWidth <= 1200 ) return '50vw';
-        if( window.innerWidth <= 1400 ) return '40vw';
-        return '25vw';
+    const uiHeaderHeight = 62; // in px
+    const uiFooterHeight = 45; // in px
+
+    const uiHeight = () => {
+        const result = canvasHeight() - 32 - uiHeaderHeight - uiFooterHeight;
+        if( result >= 16 )
+            return result;
+        return 0;
     }
     
     if(user) {
@@ -60,39 +59,50 @@ export default function UserDrop() {
                     </Dropdown.Toggle>
                 </OverlayTrigger>
 
-                <Dropdown.Menu className="m-0"
+                <Dropdown.Menu className=""
                     style={{ 
                         width: dropWidth(),
                         ...(styles.surface.secondary),
+                        height:`${canvasHeight()-10}px`,
+                        borderRadius:'15px',
+                        marginTop:'4px'
                     }}
                 >
-                    <Stack>
-                        <div className="w-100" style={{textAlign:'center'}}>
-                            <h4 >{uiPage}</h4>
-                            <h6 >{user.email}</h6>
-                        </div>
-                        <hr className='m=0 p-0' style={{ border:`4px solid ${styles.colors.maroon}`}}/>
-                        { user && 
-                            <div >
+                    <Stack className="h-100 ">
+                        <Container className="w-100 px-3" style={{height:`${uiHeaderHeight}px`, textAlign:'center'}}>
+                            <Stack className="justify-content-between" 
+                                    direction='horizontal' 
+                            >
+                                <RefreshMapsListButton/>
+                                <Container style={{overflow:'hidden'}}>
+                                    <h4 className="w-100" style={{overflow:'hidden'}}>{uiPage}</h4>
+                                    <h6 className="w-100" style={{overflow:'hidden'}}>{user.email}</h6>
+                                </Container>
+                                <NewMapMenuButton/>
+                            </Stack>
+                        </Container>
+                        { user && ( uiHeight() > 0 ) && 
+                            <div style={{height:`${uiHeight()}px`}}>
                                 <UserInterface/>
                             </div>
                         }
-                        <div>
-                            <Stack xs={3} className='justify-content-between align-items-middle' direction='horizontal'>
+                        <Container className="pt-2" style={{height:`${uiFooterHeight}px`}}>
+                            <Stack xs={3} className='justify-content-between align-items-middle h-100' 
+                                    direction='horizontal'
+                            >
                                 <div className="d-inline-block px-3 h-100" xs={1}>
                                     { !( uiPage === "Account" ) &&
                                         <Button className="" 
-                                            variant="primary" 
+                                            variant="tertiary" 
                                             onClick={ () => setUiPage("Account") } 
-                                            style={{...(styles.button.tertiary)}}
                                         >Back</Button> 
                                     }
                                 </div>
-                                <div className="d-inline-block px-3 mx-4 pb-2 h-100" xs={1}>
+                                <div className="d-inline-block px-3  h-100" xs={1}>
                                     <LogoutButton className="d-inline-block justify-content-center"/>
                                 </div>
                             </Stack>
-                        </div>
+                        </Container>
                     </Stack>
                 </Dropdown.Menu>
             </Dropdown>

@@ -21,11 +21,11 @@ import refreshImage from "../assets/icons/refresh-icon.svg";
 const colors = {
     black:'#000000',
     white:'#FFFFFF',
-    orange:'#222222',
+    orange:'#444444',
     vanilla:'#F5EE9E',
     maroon:'#171717',
-    lightTeal:'#1E1E1E',
-    darkTeal:'#171717',
+    lightTeal:'#222222',
+    darkTeal:'#1B1B1B',
     navy:'#000055',
 }
 
@@ -163,7 +163,6 @@ export const styles = {
         },
         axis: {
             backgroundImage:`url(${gridImage})`,
-            backgroundBlendMode:'hard-light', 
             backgroundPosition:'center', 
             backgroundSize:'70%', 
             backgroundRepeat:'no-repeat',

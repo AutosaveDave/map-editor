@@ -31,13 +31,13 @@ export default function MapsListItems() {
                 ) ) }
                 </>
             }
-            { mapListLoading &&
+            {/* { mapListLoading &&
                 <>
                 <div className="w-100 h-100 text-center">
                     <Spinner style={{ color: styles.colors.navy }}/>
                 </div>
                 </>
-            }
+            } */}
         </> );
     }
     return  (

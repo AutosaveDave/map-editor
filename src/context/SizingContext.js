@@ -21,6 +21,15 @@ export function SizingContextProvider( { children } ) {
       const canvasHeight = () => {
         return window.innerHeight - toolBarHeight();
       }
+
+      const dropWidth = () => {
+        if( window.innerWidth <= 576 ) return '100vw';
+        if( window.innerWidth <= 768 ) return '90vw';
+        if( window.innerWidth <= 992 ) return '65vw';
+        if( window.innerWidth <= 1200 ) return '50vw';
+        if( window.innerWidth <= 1400 ) return '40vw';
+        return '25vw';
+    }
       
       const [aspectRatio, setAspectRatio] = useState( window.innerWidth / canvasHeight() );
     
@@ -34,7 +43,7 @@ export function SizingContextProvider( { children } ) {
 
   return (
     <sizingContext.Provider
-        value= {{ aspectRatio, toolBarHeight, canvasHeight }} 
+        value= {{ aspectRatio, toolBarHeight, canvasHeight, dropWidth }} 
     >
       {children}
     </sizingContext.Provider>
